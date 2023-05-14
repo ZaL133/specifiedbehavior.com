@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title - Specified Behavior</title>
+
+
+    <!-- Meta Description -->
+    <meta name="description" content="@ViewBag.MetaDescription" />
+
+    <!-- Meta Keywords -->
+    <meta name="keywords" content="@ViewBag.MetaKeywords" />
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="@ViewBag.Title" />
+    <meta property="og:description" content="@ViewBag.MetaDescription" />
+    <meta property="og:image" content="@ViewBag.MetaImage" />
+    <meta property="og:url" content="@ViewBag.MetaUrl" />
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@ViewBag.Title" />
+    <meta name="twitter:description" content="@ViewBag.MetaDescription" />
+    @if (ViewBag.MetaImage != null)
+    {
+        <meta name="twitter:image" content="@ViewBag.MetaImage" />
+    }
+    
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+
+    <!-- Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-ZMBY3P7BJ7');
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Specified Behavior</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/AI/AIBasics">AI Basics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Blog">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Resources">Resources</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/About">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+
+    <div class="container mt-5">
+        @RenderBody()
+    </div>
+
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Specified Behavior</p>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/js/site.js"></script>
+</body>
+</html>

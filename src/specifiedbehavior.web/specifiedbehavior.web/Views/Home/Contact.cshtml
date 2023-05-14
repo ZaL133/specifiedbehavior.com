@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Contact Us";
+    ViewBag.MetaDescription = "Get in touch with us at Specified Behavior. We'd love to hear from you!";
+    ViewBag.MetaKeywords = "Contact, Specified Behavior";
+    ViewBag.MetaUrl = "URL to this page";
+}
+
+<div class="container py-5">
+    <h1 class="mb-4">Contact Us</h1>
+    <div class="row">
+        <div class="col-lg-7">
+            <h3>Get in touch</h3>
+            <p>We'd love to hear from you! Please send us a message using the form below and we'll get back to you as soon as possible.</p>
+            <form>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Your name">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" rows="3" placeholder="Your message"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div class="col-lg-5">
+            <h3>Contact Information</h3>
+            <p><strong>Name:</strong> Zeph</p>
+            <p><strong>Email:</strong> <a href="mailto:specifiedbehavior@gmail.com">specifiedbehavior@gmail.com</a></p>
+        </div>
+    </div>
+</div>
