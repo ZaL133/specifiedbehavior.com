@@ -1,0 +1,48 @@
+﻿@model specifiedbehavior.web.Models.BlogPost
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Title" class="control-label"></label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Content" class="control-label"></label>
+        <textarea asp-for="Content" class="form-control" id="mytextarea"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="SEOTitle" class="control-label"></label>
+        <input asp-for="SEOTitle" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SEODescription" class="control-label"></label>
+        <input asp-for="SEODescription" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SEOKeywords" class="control-label"></label>
+        <input asp-for="SEOKeywords" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.tiny.cloud/1/g4xa6lw2qgbcxyq8k16nptdoxypwzm68ypwiw0n2n8lqqgjs/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

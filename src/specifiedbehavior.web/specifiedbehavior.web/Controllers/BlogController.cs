@@ -13,5 +13,11 @@ namespace specifiedbehavior.web.Controllers
         {
             return View();
         }
+
+        public IActionResult PlayingWithD3JS()
+        {
+
+            return View();
+        }
     }
 }
