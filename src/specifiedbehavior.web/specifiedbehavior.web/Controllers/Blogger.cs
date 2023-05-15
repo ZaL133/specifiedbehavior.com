@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using specifiedbehavior.web.Models;
 using specifiedbehavior.web.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace YourNamespace.Controllers
 {
@@ -75,6 +76,25 @@ namespace YourNamespace.Controllers
             }
             return View(blogPost);
         }
+
+        // GET: Blog/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var blogPost = await _context.BlogPosts
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (blogPost == null)
+            {
+                return NotFound();
+            }
+
+            return View(blogPost);
+        }
+
 
         // GET: Blog/Delete/5
         public IActionResult Delete(int? id)

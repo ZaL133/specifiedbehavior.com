@@ -1,0 +1,29 @@
+﻿@model specifiedbehavior.web.Models.BlogPost
+
+@{
+    ViewData["Title"] = "Blog Post Details";
+}
+
+<h1>@Html.DisplayFor(model => model.Title)</h1>
+
+<div>
+    <h4>Content</h4>
+    <div>@Html.Raw(Model.Content)</div>
+</div>
+<div>
+    <h4>SEO Title</h4>
+    <div>@Html.DisplayFor(model => model.SEOTitle)</div>
+</div>
+<div>
+    <h4>SEO Description</h4>
+    <div>@Html.DisplayFor(model => model.SEODescription)</div>
+</div>
+<div>
+    <h4>SEO Keywords</h4>
+    <div>@Html.DisplayFor(model => model.SEOKeywords)</div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
