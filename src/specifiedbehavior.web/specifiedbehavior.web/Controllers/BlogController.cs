@@ -1,23 +1,43 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using specifiedbehavior.web.Data;
+using specifiedbehavior.web.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace specifiedbehavior.web.Controllers
 {
     public class BlogController : Controller
     {
-        public IActionResult Index()
+        private readonly ApplicationDbContext _context;
+
+        public BlogController(ApplicationDbContext context)
         {
-            return View();
+            _context = context;
         }
 
-        public IActionResult ComparingGoogleBardWithChatGPT()
+        // GET: BlogView
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var posts = await _context.BlogPosts.ToListAsync();
+            return View(posts);
         }
 
-        public IActionResult PlayingWithD3JS()
+        // GET: BlogView/Post/5
+        public async Task<IActionResult> Post(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            return View();
+            var post = await _context.BlogPosts.FirstOrDefaultAsync(m => m.Id == id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            return View(post);
         }
     }
 }

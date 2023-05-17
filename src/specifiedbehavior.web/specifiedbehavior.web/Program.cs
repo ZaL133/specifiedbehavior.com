@@ -1,7 +1,12 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using specifiedbehavior.web.Data;
+using specifiedbehavior.web.Middleware;
 
 namespace specifiedbehavior.web
 {
@@ -13,7 +18,7 @@ namespace specifiedbehavior.web
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+            builder.Services.Configure<ApiKeyMiddlewareOptions>(builder.Configuration.GetSection("ApiKeys"));
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
@@ -29,14 +34,19 @@ namespace specifiedbehavior.web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
+
+            app.UseMiddleware<ApiKeyMiddleware>(Options.Create<ApiKeyMiddlewareOptions>(new ApiKeyMiddlewareOptions { Paths = new string[] {
+                "/Blogger"
+            }}
+            ));
 
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
             app.UseEndpoints(endpoints =>
             {

@@ -61,7 +61,7 @@ namespace YourNamespace.Controllers
         // POST: Blog/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, BlogPost blogPost)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,Author,MetaTitle,MetaDescription,MetaKeywords")] BlogPost blogPost)
         {
             if (id != blogPost.Id)
             {
@@ -70,12 +70,48 @@ namespace YourNamespace.Controllers
 
             if (ModelState.IsValid)
             {
-                _context.Update(blogPost);
-                _context.SaveChanges();
+                try
+                {
+                    // Load the existing entity from the database
+                    var existingPost = await _context.BlogPosts.FirstOrDefaultAsync(m => m.Id == id);
+
+                    if (existingPost == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Copy the updated properties from the model to the existing entity
+                    existingPost.Title = blogPost.Title;
+                    existingPost.Content = blogPost.Content;
+                    existingPost.SEOTitle = blogPost.SEOTitle;
+                    existingPost.SEODescription = blogPost.SEODescription;
+                    existingPost.SEOKeywords = blogPost.SEOKeywords;
+
+                    // Save the existing entity with the updated properties
+                    _context.Update(existingPost);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!BlogPostExists(blogPost.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View(blogPost);
         }
+
+        private bool BlogPostExists(int id)
+        {
+            return _context.BlogPosts.Any(e => e.Id == id);
+        }
+
 
         // GET: Blog/Details/5
         public async Task<IActionResult> Details(int? id)

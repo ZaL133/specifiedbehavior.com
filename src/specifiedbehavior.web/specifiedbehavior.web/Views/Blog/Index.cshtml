@@ -1,17 +1,23 @@
-﻿@{
+﻿@using specifiedbehavior.web.Extensions
+@model IEnumerable<specifiedbehavior.web.Models.BlogPost>
 
-    ViewBag.Title = "Blog";
-    ViewBag.MetaDescription = "Specified behavior blog";
-    ViewBag.MetaKeywords = "AI, Specified Behavior, About, GPT-4, Bard, Blog";
-    ViewBag.MetaUrl = "https://specifiedbehavior.com/blog";
+@{
+    ViewData["Title"] = "Blog";
 }
 
-<main>
-    <h1>Blog</h1>
+<h1>Blog</h1>
 
-    <ul>
-        <li><strong>2023-05-14</strong> <a href="/blog/PlayingWithD3JS">Playing with D3JS</a></li>
-        <li><strong>2023-05-13</strong> <a href="/blog/ComparingGoogleBardWithChatGPT">Comparing Google Bard with ChatGPT</a></li>
-    </ul>
-    
-</main>
+<div class="row">
+    @foreach (var post in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">@post.DateCreated.ToString("yyyy-MM-dd") - <a asp-action="Post" asp-route-id="@post.Id">@post.Title</a></h5>
+                    <p class="card-text">@post.Content.StripHtmlTags().Substring(0, Math.Min(post.Content.Length, 200))...</p>
+                    <a asp-action="Post" asp-route-id="@post.Id" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
