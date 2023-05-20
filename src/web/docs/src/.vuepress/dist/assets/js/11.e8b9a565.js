@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[11],{296:function(t,s,i){"use strict";i.r(s);var l=i(14),n=Object(l.a)({},(function(){var t=this._self._c;return t("div",{staticClass:"two-column-layout"},[t("div",{staticClass:"column"},[this._t("left")],2),this._v(" "),t("div",{staticClass:"column"},[this._t("right")],2)])}),[],!1,null,null,null);s.default=n.exports}}]);
