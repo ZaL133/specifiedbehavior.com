@@ -1,0 +1,19 @@
+{
+  "name": "specifiedbehavior.com",
+  "version": "0.0.1",
+  "description": "site about AI",
+  "main": "index.js",
+  "authors": {
+    "name": "Zeph",
+    "email": "specifiedbehavior@gmail.com"
+  },
+  "repository": "git/specifiedbehavior.com",
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.5.3"
+  }
+}
