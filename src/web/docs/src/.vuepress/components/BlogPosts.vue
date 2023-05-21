@@ -1,8 +1,8 @@
 <template>
-    <div class="post-container">hi
+    <div class="post-container">
       <router-link v-for="page in pages" :to="page.path">
         <div class="post-card">
-          <img class="article-image" src="../public/images/comparing-google-bard-and-chatgpt.png" />
+          <img class="article-image" v-bind:src="page.frontmatter.thumbnail" />
           <div class="page-detail">
             <div class="page-title">{{ page.title }}</div>
             <div class="page-description">{{ page.frontmatter.description }}</div>
@@ -41,7 +41,8 @@
   export default {
     data() {
       return {
-        pages: []
+        pages: [],
+        thumbnail: ""
       }
     },
     mounted() {

@@ -1,4 +1,5 @@
 const { description } = require('../../package')
+const { googleAnalyticsPlugin } = import('@vuepress/plugin-google-analytics');
 
 module.exports = {
   /**
@@ -40,6 +41,10 @@ module.exports = {
       {
         text: 'Resources',
         link: '/resources'
+      },
+      {
+        text: 'blog',
+        link: '/blog/'
       }
     ],
     sidebar: {
@@ -62,5 +67,11 @@ module.exports = {
   plugins: [
     '@vuepress/plugin-back-to-top',
     '@vuepress/plugin-medium-zoom',
+    '@vuepress/google-analytics', 
+    import('@vuepress/plugin-google-analytics').then(({ default: pluginGoogleAnalytics }) => {
+      return pluginGoogleAnalytics({
+        'id': 'G-ZMBY3P7BJ7'
+      });
+    })
   ]
 }

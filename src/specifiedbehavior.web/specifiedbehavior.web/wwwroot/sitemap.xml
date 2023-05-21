@@ -31,17 +31,17 @@
 		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>http://www.specifiedbehavior.com/blog</loc>
+		<loc>http://www.specifiedbehavior.com/experiments</loc>
 		<changefreq>weekly</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
-		<loc>http://www.specifiedbehavior.com/blog/comparinggooglebardwithchatgpt</loc>
+		<loc>http://www.specifiedbehavior.com/experiments/comparinggooglebardwithchatgpt</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
-		<loc>http://www.specifiedbehavior.com/blog/playingwithd3js</loc>
+		<loc>http://www.specifiedbehavior.com/experiments/playingwithd3js</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.8</priority>
 	</url>
