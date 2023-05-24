@@ -15,3 +15,24 @@
   margin: 0;
   background-color: rgba(27,31,35,0.05);
 }
+
+.col-wrapper
+    @media (min-width: 992px)
+      &
+        display flex
+
+.col-full
+    width 100%
+
+    @media (min-width: 992px)
+      &
+        flex 0 0 100%
+        max-width 100%
+
+.col-half
+    width 100%
+
+    @media (min-width: 992px)
+      &
+        flex 0 0 50%
+        max-width 50%

@@ -68,6 +68,16 @@ module.exports = {
     '@vuepress/plugin-back-to-top',
     '@vuepress/plugin-medium-zoom',
     '@vuepress/google-analytics', 
+    ['container',{
+          type: 'col-wrapper',
+          defaultTitle: ''
+        }
+    ],
+    ['container',{
+      type: 'col-half',
+      defaultTitle: ''
+    }
+    ],      
     import('@vuepress/plugin-google-analytics').then(({ default: pluginGoogleAnalytics }) => {
       return pluginGoogleAnalytics({
         'id': 'G-ZMBY3P7BJ7'

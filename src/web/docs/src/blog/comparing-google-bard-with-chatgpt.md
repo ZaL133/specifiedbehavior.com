@@ -19,6 +19,8 @@ So I offered it the following prompt:
 
 The results were... underwhelming
 
+## Google Bard
+
 <div class="ai-response"><p>Sure, I can help you create an engaging website about your exploration of the uses of AI. Here are some things to keep in mind:</p><ul>
             <li><strong>Start with a clear purpose.</strong> What do you want your website to achieve? Are you trying to educate people about AI, share your own research, or simply connect with other people who are interested in AI? Once you know your purpose, you can start to plan your website content and design.</li>
             <li><strong>Choose a visually appealing design.</strong> Your website's design should be both visually appealing and easy to use. Use clear fonts, plenty of white space, and high-quality images. You can also use videos and animations to make your website more engaging.</li>
@@ -32,11 +34,15 @@ The results were... underwhelming
 
 I then offered the same challenge to ChatGPT... WOW
 
+## ChatGPT
+
 <div class="ai-response"><p>Of course, I'd be happy to help you brainstorm a layout and content for your website. Given your specific interest in AI and the use of models like GPT-3 and GPT-4 (also known as "Bard"), you could arrange the website in the following way:</p><p><strong>1. Homepage:</strong></p><ul><li>Brief introduction about the website's purpose</li><li>A brief introduction about yourself and your passion for AI technology</li><li>Highlight recent posts or featured content</li><li>A call-to-action to encourage visitors to engage with the content (such as signing up for a newsletter, checking out the latest post, or contacting you for inquiries)</li></ul><p><strong>2. About:</strong></p><ul><li>A more detailed biography about your background in AI or interest in the field</li><li>Your motivations and objectives in exploring AI technology</li></ul><p><strong>3. AI Basics:</strong></p><ul><li>A section dedicated to explaining the basics of AI for beginners</li><li>It could include sub-sections about machine learning, deep learning, natural language processing, etc.</li></ul><p><strong>4. Bard Experiments:</strong></p><ul><li>This could be the heart of your website where you document your experiments with AI like Bard.</li><li>You could include text-based experiments, visualizations, or even interactive sections where users can engage with AI-powered features.</li><li>Each experiment could have its own blog post, detailing the purpose, process, and results.</li></ul><p><strong>5. Other AI Projects:</strong></p><ul><li>A portfolio of other AI-related projects you've worked on or are interested in</li><li>This could include both descriptions and demonstrations of each project</li></ul><p><strong>6. Resources:</strong></p><ul><li>A compilation of resources for learning more about AI, such as books, online courses, research papers, and links to other relevant websites or tools.</li></ul><p><strong>7. Blog:</strong></p><ul><li>Regularly updated content on your latest thoughts about AI, news in the field, or deeper dives into specific topics of interest.</li><li>This could also include guest posts from other AI enthusiasts or experts.</li></ul><p><strong>8. Contact/Engagement:</strong></p><ul><li>A page for visitors to reach out to you for further discussions, collaborations, or inquiries.</li><li>This could also include a form to sign up for a newsletter or to follow your site for updates.</li></ul><p>To make your website engaging, you could include interactive elements (like quizzes, polls, or AI chatbots), use visual aids (such as infographics or videos), tell stories from your personal journey with AI, and encourage visitor engagement through comments, forums, or social media shares.</p><p>Remember to keep your website user-friendly, with intuitive navigation, mobile-friendly design, and clear, concise language. Regularly updating your content will also help to keep visitors returning to your site.</p><p>Let me know if you need help with anything specific like writing an introductory post or explaining a complex AI concept in simpler terms.</p></div>
 
 It would be an understatement to say this was better. This was perfect. And it gave the impression that it had **ideas!**
 
 Ok, for a goof, lets see what bing comes up with
+
+## Microsoft Edge
 
 <div class="ai-response">
                     <p>Sure! There are many ways to create an engaging website about AI exploration. Here are some tips that might help you:</p>
