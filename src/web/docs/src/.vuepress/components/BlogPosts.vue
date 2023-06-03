@@ -27,14 +27,21 @@
     padding: 10px;
     display: flex;
     align-items: center;
+    position: relative;
   }
   .article-image {
     height: 100%;
+    max-width: 25%;
+    position: absolute;
   }
   .description {
     width: 100%;
     display: flex;
     justify-content: center;
+  }
+
+  .page-detail {
+    margin-left: 33%;
   }
   </style>
   <script>
