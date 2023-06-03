@@ -1,6 +1,6 @@
 const { description } = require('../../package')
 const { googleAnalyticsPlugin } = import('@vuepress/plugin-google-analytics');
-
+console.log(googleAnalyticsPlugin);
 module.exports = {
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title

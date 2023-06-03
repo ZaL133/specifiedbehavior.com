@@ -2,7 +2,7 @@
     <div class="post-container">
       <router-link v-for="page in pages" :to="page.path">
         <div class="post-card">
-          <img class="article-image" v-bind:src="page.frontmatter.thumbnail" />
+          <img class="article-image" v-bind:src="page.frontmatter.thumbnail" v-bind:alt="page.frontmatter.thumbnail_description" />
           <div class="page-detail">
             <div class="page-title">{{ page.title }}</div>
             <div class="page-description">{{ page.frontmatter.description }}</div>
@@ -46,11 +46,13 @@
       }
     },
     mounted() {
+      let p = [];
       this.$site.pages.forEach(page => {
         if (page.frontmatter.type === 'blogpost') {
-          this.pages.push(page)
+          p.push(page)
         }
-      })
+      });
+      this.pages = p.sort((x, y) => x.frontmatter.date < y.frontmatter.date ? 1 : (x.frontmatter.date > y.frontmatter.date ? -1 : 0));
     }
   }
   </script>

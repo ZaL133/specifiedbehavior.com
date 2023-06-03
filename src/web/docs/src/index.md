@@ -1,41 +1,16 @@
-<main>
-    <div class="hero">
-        <h1 class="display-4">Welcome to Specified Behavior!</h1>
-        <p class="lead">This is a project dedicated to exploring the uses of AI, particularly in the realm of chatbots and AI models.</p>
-        <hr class="my-4">
-        <p>Explore AI basics, view experiments, find resources, and more.</p>
-        <a class="btn btn-primary btn-lg" href="/AI/AIBasics" role="button">Learn more</a>
-    </div>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">AI Basics</h5>
-                        <p class="card-text">Learn about the fundamentals of artificial intelligence, from its origins to its latest developments.</p>
-                        <a href="/AI/AIBasics" class="btn btn-primary">Explore AI Basics</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Experiments</h5>
-                        <p class="card-text">Check out our various experiments with AI, such as chatbots, image generation, and more.</p>
-                        <a href="/Experiments" class="btn btn-primary">View Experiments</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Resources</h5>
-                        <p class="card-text">Find a collection of resources for further learning, including books, online courses, and tools.</p>
-                        <a href="/Resources" class="btn btn-primary">See Resources</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</main>
+---
+home: true
+heroImage: /content/img/A-matrix-image-of-artificial-intelligence.png
+heroText: Welcome to Specified Behavior!
+tagline: This is a project dedicated to exploring the uses of AI, particularly in the realm of chatbots and AI models.
+actionText: Blog
+actionLink: /blog/
+features:
+- title: AI Basics
+  details: Learn about the fundamentals of artificial intelligence, from its origins to its latest developments.
+- title: Experiments
+  details: Check out our various experiments with AI, such as chatbots, image generation, and more.
+- title: Resources
+  details: heck out our various experiments with AI, such as chatbots, image generation, and more.
+footer: MIT Licensed | Copyright © 2023 Zeph
+---
