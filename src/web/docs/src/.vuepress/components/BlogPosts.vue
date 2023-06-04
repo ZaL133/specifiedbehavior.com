@@ -1,7 +1,7 @@
 <template>
     <div class="post-container">
       <router-link v-for="page in pages" :to="page.path">
-        <div class="post-card">
+        <div class="post-card custom">
           <img class="article-image" v-bind:src="page.frontmatter.thumbnail" v-bind:alt="page.frontmatter.thumbnail_description" />
           <div class="page-detail">
             <div class="page-title">{{ page.title }}</div>
@@ -28,6 +28,13 @@
     display: flex;
     align-items: center;
     position: relative;
+    font-size: .95em;
+    color:black;
+    text-decoration: none;
+  }
+  .page-title {
+    font-size: 1.25em;
+    margin-bottom: 4px;
   }
   .article-image {
     height: 100%;
@@ -42,6 +49,22 @@
 
   .page-detail {
     margin-left: 33%;
+  }
+
+  @media (max-width: 991px) {
+    .post-card {
+      max-width: unset;
+      width: unset;
+      height: unset;
+      flex-direction: column;
+    }
+    .page-detail {
+      margin-left: unset;
+    }
+    .article-image, .theme-default-content:not(.custom) img, .page-detail {
+      position: relative;
+      max-width: 80vw;
+    }
   }
   </style>
   <script>
