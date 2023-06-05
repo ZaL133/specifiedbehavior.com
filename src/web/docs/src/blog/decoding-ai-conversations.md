@@ -12,7 +12,7 @@ meta:
     content: "An in-depth look at how ChatGPT processes and generates language. Tokenization, attention mechanisms, and the role of the transformer architecture."
   - name: "twitter:image"
     property: "og:image"
-    content: /content/img/blog/ChatGPT-inner-workings.png
+    content: "https://specifiedbehavior.com/content/img/blog/ChatGPT-inner-workings.png"
   - name: "og:url"
     content: "https://specifiedbehavior.com/blog/decoding-ai-conversations.html"
 ---
