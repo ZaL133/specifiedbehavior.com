@@ -5,6 +5,16 @@ author: ChatGPT / Zeph
 type: blogpost
 date: 2023-06-03
 thumbnail: /content/img/blog/ChatGPT-inner-workings.png
+meta:
+  - name: "og:title"
+    content: "Decoding AI Conversations: Understanding How ChatGPT Works"
+  - name: "og:description"
+    content: "An in-depth look at how ChatGPT processes and generates language. Tokenization, attention mechanisms, and the role of the transformer architecture."
+  - name: "twitter:image"
+    property: "og:image"
+    content: /content/img/blog/ChatGPT-inner-workings.png
+  - name: "og:url"
+    content: "https://specifiedbehavior.com/blog/decoding-ai-conversations.html"
 ---
 
 # Unraveling the Mysteries of AI: How Does ChatGPT Understand Our Words?
