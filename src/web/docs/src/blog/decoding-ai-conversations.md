@@ -8,9 +8,9 @@ thumbnail: /content/img/blog/ChatGPT-inner-workings.png
 meta:
   - name: "og:type"
     content: "article"
-  - name: "og:title"
+  - name: "twitter:title"
     content: "Decoding AI Conversations: Understanding How ChatGPT Works"
-  - name: "og:description"
+  - name: "twitter:description"
     content: "An in-depth look at how ChatGPT processes and generates language. Tokenization, attention mechanisms, and the role of the transformer architecture."
   - name: "twitter:image"
     property: "og:image"
