@@ -6,13 +6,14 @@ type: blogpost
 date: 2023-06-03
 thumbnail: /content/img/blog/ChatGPT-inner-workings.png
 meta:
-  - name: "og:type"
+  - property: "og:type"
     content: "article"
-  - name: "og:type"
+  - property: "og:type"
     content: "website"        
-  - name: "og:site_name"
+  - property: "og:site_name"
     content: "Specified Behavior"    
   - name: "twitter:title"
+    property: "og:title"
     content: "Decoding AI Conversations: Understanding How ChatGPT Works"
   - name: "twitter:description"
     content: "An in-depth look at how ChatGPT processes and generates language. Tokenization, attention mechanisms, and the role of the transformer architecture."
