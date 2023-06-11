@@ -6,19 +6,11 @@ type: blogpost
 date: 2023-06-03
 thumbnail: /content/img/blog/ChatGPT-inner-workings.png
 meta:
-  - property: "og:type"
-    content: "website"        
   - property: "og:url"
     content: "https://specifiedbehavior.com/blog/decoding-ai-conversations.html"    
-  - property: "og:site_name"
-    content: "Specified Behavior"    
   - property: "og:image"
     itemprop: "image primaryImageOfPage"
     content: "https://specifiedbehavior.com/content/img/blog/ChatGPT-inner-workings.png"
-  - name: "twitter:card"    
-    content: "summary"
-  - name: "twitter:domain"    
-    content: "specifiedbehavior.com"
   - name: "twitter:title"
     property: "og:title"
     itemprop: "name"

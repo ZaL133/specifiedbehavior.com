@@ -5,6 +5,20 @@ author: Zeph
 type: blogpost
 date: 2023-05-13
 thumbnail: /content/img/blog/comparing-google-bard-and-chatgpt.png
+meta:
+  - property: "og:url"
+    content: "https://specifiedbehavior.com/blog/comparing-google-bard-with-chatgpt.html"    
+  - property: "og:image"
+    itemprop: "image primaryImageOfPage"
+    content: "https://specifiedbehavior.com/content/img/blog/comparing-google-bard-and-chatgpt.png"
+  - name: "twitter:title"
+    property: "og:title"
+    itemprop: "name"
+    content: "Comparing Google Bard with ChatGPT"
+  - name: "twitter:description"
+    property: "og:description"
+    itemprop: "name"
+    content: "Exactly what it says on the box"
 ---
 
 # First impressions: Comparing google bard with ChatGPT

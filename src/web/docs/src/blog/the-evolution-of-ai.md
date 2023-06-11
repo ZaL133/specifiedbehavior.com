@@ -6,19 +6,19 @@ type: blogpost
 date: 2023-06-07
 thumbnail: /content/img/blog/DALL-E_2023-06-07_06.30.51_-_The_Evolution_of_AI.png
 meta:
-  - name: "og:type"
-    content: "article"
-  - name: "og:title"
-    content: "The Evolution of AI: A Deep Dive into ChatGPT"
-  - name: "og:description"
-    content: "Charting the progress of AI from its beginnings, leading up to the creation of ChatGPT"
-  - name: "twitter:image"
-    property: "og:image"
+  - property: "og:url"
+    content: "https://specifiedbehavior.com/blog/the-evolution-of-ai.html"    
+  - property: "og:image"
+    itemprop: "image primaryImageOfPage"
     content: "https://specifiedbehavior.com/content/img/blog/DALL-E_2023-06-07_06.30.51_-_The_Evolution_of_AI.png"
-  - name: "og:url"
-    content: "https://specifiedbehavior.com/blog/the-evolution-of-ai.html"
-  - name: "twitter:card"    
-    content: "summary"
+  - name: "twitter:title"
+    property: "og:title"
+    itemprop: "name"
+    content: "The Evolution of AI: A Deep Dive into ChatGPT"
+  - name: "twitter:description"
+    property: "og:description"
+    itemprop: "name"
+    content: "Charting the progress of AI from its beginnings, leading up to the creation of ChatGPT"
 ---
 
 # The Evolution of AI: A Deep Dive into ChatGPT
