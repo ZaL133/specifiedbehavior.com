@@ -23,6 +23,11 @@ meta:
 
 # The Evolution of AI: A Deep Dive into ChatGPT
 
+<div class='page-hero'>
+  <img src='/content/img/blog/the-evolution-of-ai.png' alt='mask on blue lettered background' />
+</div>
+
+
 AI has come a long way from being a fascinating concept in science fiction to an integral part of our daily lives. One of the most fascinating advances in this field is ChatGPT, an AI capable of understanding and generating human-like text. But how did we get here? Join us on a journey through the evolution of AI, leading up to the creation of ChatGPT.
 
 ## From Dreams to Reality: The Dawn of AI
