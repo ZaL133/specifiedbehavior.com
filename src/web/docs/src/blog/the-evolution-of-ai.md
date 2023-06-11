@@ -4,13 +4,13 @@ description: Charting the progress of AI from its beginnings, leading up to the 
 author: ChatGPT / Zeph
 type: blogpost
 date: 2023-06-07
-thumbnail: /content/img/blog/DALL-E_2023-06-07_06.30.51_-_The_Evolution_of_AI.png
+thumbnail: /content/img/blog/the-evolution-of-ai.png
 meta:
   - property: "og:url"
     content: "https://specifiedbehavior.com/blog/the-evolution-of-ai.html"    
   - property: "og:image"
     itemprop: "image primaryImageOfPage"
-    content: "https://specifiedbehavior.com/content/img/blog/DALL-E_2023-06-07_06.30.51_-_The_Evolution_of_AI.png"
+    content: "https://specifiedbehavior.com/content/img/blog/the-evolution-of-ai.png"
   - name: "twitter:title"
     property: "og:title"
     itemprop: "name"
