@@ -1,6 +1,6 @@
 ---
 title: "AI in Everyday Life"
-description: : Exploring Real-World Applications of ChatGPT
+description: Exploring Real-World Applications of ChatGPT
 author: ChatGPT / Zeph
 type: blogpost
 date: 2023-06-17
