@@ -7,6 +7,7 @@
             <div class="page-title">{{ page.title }}</div>
             <div class="page-description">{{ page.frontmatter.description }}</div>
             <div class="page-author">Author: {{ page.frontmatter.author }}</div>
+            <div class="page-date">{{ new Date(page.frontmatter.date).toLocaleDateString() }}</div>
           </div>
         </div>
       </router-link>
