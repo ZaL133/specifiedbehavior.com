@@ -30,6 +30,13 @@
   </url>
 
   <url>
+    <loc>https://specifiedbehavior.com/blog/prompt-engineering-101.html</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
     <loc>https://specifiedbehavior.com/blog/the-age-of-ai-agents.html</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>yearly</changefreq>
