@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Basics | Specified Behavior</title>
-  <meta name="description" content="Learn about the fundamentals of artificial intelligence — from its origins to neural networks, deep learning, and language models.">
+  <title>AI Basics: What Machine Learning, Neural Networks & LLMs Actually Are | Specified Behavior</title>
+  <meta name="description" content="A clear, jargon-free guide to how AI actually works — covering machine learning, neural networks, deep learning, and large language models like ChatGPT and Claude.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Specified Behavior">
-  <meta property="og:title" content="AI Basics | Specified Behavior">
-  <meta property="og:description" content="Learn about the fundamentals of artificial intelligence — from its origins to neural networks, deep learning, and language models.">
+  <meta property="og:title" content="AI Basics: What Machine Learning, Neural Networks & LLMs Actually Are">
+  <meta property="og:description" content="A clear, jargon-free guide to how AI actually works — covering machine learning, neural networks, deep learning, and large language models like ChatGPT and Claude.">
   <meta property="og:url" content="https://specifiedbehavior.com/ai-basics.html">
   <meta property="og:image" content="https://specifiedbehavior.com/img/og-default.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="AI Basics | Specified Behavior">
-  <meta name="twitter:description" content="Learn about the fundamentals of artificial intelligence — from its origins to neural networks, deep learning, and language models.">
+  <meta name="twitter:title" content="AI Basics: What Machine Learning, Neural Networks & LLMs Actually Are">
+  <meta name="twitter:description" content="A clear, jargon-free guide to how AI actually works — covering machine learning, neural networks, deep learning, and large language models.">
   <link rel="canonical" href="https://specifiedbehavior.com/ai-basics.html">
   <script type="application/ld+json">
   {
@@ -21,7 +21,7 @@
     "@type": "WebPage",
     "url": "https://specifiedbehavior.com/ai-basics.html",
     "name": "AI Basics | Specified Behavior",
-    "description": "Learn about the fundamentals of artificial intelligence — from its origins to neural networks, deep learning, and language models.",
+    "description": "A clear, jargon-free guide to how AI actually works — covering machine learning, neural networks, deep learning, and large language models like ChatGPT and Claude.",
     "isPartOf": { "@id": "https://specifiedbehavior.com/#website" }
   }
   </script>
@@ -31,6 +31,53 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* AI/ML/DL taxonomy diagram */
+    .taxonomy { margin: 1.5rem 0 2rem; }
+    .tax-outer { border: 1px solid rgba(129,140,248,0.3); border-radius: var(--radius); padding: 0.85rem 1rem; background: rgba(129,140,248,0.04); }
+    .tax-middle { border: 1px solid rgba(129,140,248,0.45); border-radius: var(--radius); padding: 0.85rem 1rem; margin-top: 0.6rem; background: rgba(129,140,248,0.07); }
+    .tax-inner { border: 1px solid rgba(129,140,248,0.65); border-radius: var(--radius); padding: 0.75rem 1rem; margin-top: 0.6rem; background: rgba(129,140,248,0.1); }
+    .tax-label { font-weight: 700; color: var(--accent); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.07em; display: inline; margin-right: 0.6rem; }
+    .tax-desc { color: var(--text-muted); font-size: 0.875rem; }
+
+    /* Neural network canvas */
+    #nn-canvas {
+      display: block;
+      width: 100%;
+      max-width: 520px;
+      aspect-ratio: 520 / 270;
+      margin: 1.75rem auto;
+      border-radius: var(--radius);
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+    }
+    .nn-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: -1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Keep exploring cards */
+    .explore-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1.25rem 0;
+    }
+    .explore-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      transition: border-color 0.15s;
+    }
+    .explore-card:hover { border-color: var(--accent); }
+    .explore-card a { color: var(--text); font-weight: 600; font-size: 0.9rem; line-height: 1.4; display: block; margin-bottom: 0.3rem; }
+    .explore-card a:hover { color: var(--accent); text-decoration: none; }
+    .explore-card p { font-size: 0.8rem; color: var(--text-muted); margin: 0; }
+  </style>
 </head>
 <body>
 
@@ -50,31 +97,51 @@
   <div class="container">
     <div class="page-header">
       <h1>AI Basics</h1>
-      <p class="subtitle">The fundamentals of artificial intelligence — concepts, history, and key milestones.</p>
+      <p class="subtitle">What machine learning, neural networks, and large language models actually are — without the jargon.</p>
     </div>
 
     <div class="article-body">
 
       <h2 style="margin-top:0;border-top:none;padding-top:0;">What is AI?</h2>
-      <p>Artificial Intelligence (AI) is a branch of computer science that aims to create machines capable of mimicking human intelligence. This can involve learning, reasoning, problem-solving, perception, and language understanding.</p>
+      <p>Artificial intelligence is software that <em>learns from examples</em> rather than following hand-written rules. A traditional spam filter might be programmed with explicit rules — flag any email containing the word "free." An AI-powered spam filter learns what spam looks like by studying millions of examples, then keeps improving as it sees more. That shift, from writing rules by hand to learning patterns from data, is the core idea behind modern AI.</p>
 
-      <h3>Types of AI</h3>
-      <p>AI can be classified into two main types: <strong>Narrow AI</strong>, designed to perform a specific task (such as facial recognition or internet searches), and <strong>General AI</strong>, which can theoretically perform any intellectual task that a human being can.</p>
+      <p>Most of what people call "AI" today is actually a stack of related ideas. They nest inside each other:</p>
+
+      <div class="taxonomy" role="img" aria-label="Hierarchy diagram: Deep Learning is a subset of Machine Learning, which is a subset of Artificial Intelligence">
+        <div class="tax-outer">
+          <span class="tax-label">Artificial Intelligence</span>
+          <span class="tax-desc">Any system that mimics intelligent behavior — learning, reasoning, problem-solving, perception, language.</span>
+          <div class="tax-middle">
+            <span class="tax-label">Machine Learning</span>
+            <span class="tax-desc">AI that learns patterns from data rather than following explicit rules.</span>
+            <div class="tax-inner">
+              <span class="tax-label">Deep Learning</span>
+              <span class="tax-desc">Machine learning using many-layered neural networks. The engine behind modern image recognition, speech, and language models.</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <h3>Machine Learning</h3>
-      <p>Machine Learning (ML) is a subset of AI. With ML, computers learn by discovering patterns and insights from data rather than following explicitly programmed rules. There are two primary approaches: supervised learning (learning from labeled examples) and unsupervised learning (finding patterns in unlabeled data).</p>
+      <p>Instead of a programmer writing rules, a machine learning model is shown thousands — or millions — of examples and figures out the patterns on its own. Show it 50,000 labeled photos of cats and dogs, and it will learn to tell them apart without anyone writing a rule about ear shape or whiskers. The same approach works for detecting fraud, predicting equipment failure, and recommending what to watch next.</p>
+      <p>There are two main flavors: <strong>supervised learning</strong> (learning from labeled examples — "this is a cat, this is not") and <strong>unsupervised learning</strong> (finding patterns in unlabeled data on its own — used for clustering and anomaly detection).</p>
 
-      <h3>Deep Learning</h3>
-      <p>Deep Learning is a subset of Machine Learning that uses neural networks with many layers — hence the "deep." These layers are responsible for recognizing and extracting features from input data, enabling breakthroughs in image recognition, speech, and language.</p>
+      <h3>Deep Learning &amp; Neural Networks</h3>
+      <p>Deep learning stacks many layers of pattern-matching on top of each other. The first layer might learn edges, the second textures, the third shapes, the fourth faces. Each layer builds on the one below. "Deep" just means the network has many layers — and it turns out depth is what unlocks the really hard problems: understanding images, transcribing speech, and reading language.</p>
+      <p>A <strong>neural network</strong> is the architecture that makes this possible. It's a mesh of simple mathematical units — neurons — organized into layers. Input enters from the left, output exits on the right, and signals pass through every layer in between. During training, the strengths of the connections between neurons are adjusted millions of times until the network reliably produces correct outputs.</p>
 
-      <h3>Neural Networks</h3>
-      <p>An Artificial Neural Network (ANN) is modeled after the human brain and designed to mimic how humans learn. It can adapt to changing input, generating the best possible result without requiring the output criteria to be explicitly redesigned.</p>
+      <canvas id="nn-canvas" width="1040" height="540" aria-label="Animated diagram of a neural network with 3 input nodes, 4 hidden layer nodes, and 2 output nodes, showing signals propagating from left to right"></canvas>
+      <p class="nn-caption">Signals (pulses) propagate from the input layer → through a hidden layer → to output nodes. Each connection weight is adjusted during training.</p>
 
       <h3>Natural Language Processing</h3>
-      <p>Natural Language Processing (NLP) refers to AI methods of communicating with intelligent systems using natural language. AI can interpret, recognize, and generate human language in useful ways — powering everything from search engines to conversational assistants.</p>
+      <p>Natural language processing (NLP) is the branch of AI focused on understanding and generating human language. Early NLP relied on hand-crafted grammars and dictionaries — systems that worked in narrow domains but broke down on informal, messy, real-world text. Modern NLP uses deep learning to treat language as sequences of tokens and learn statistical relationships between them at massive scale. The result is AI that can summarize documents, answer questions, translate between languages, and hold a conversation.</p>
+
+      <h3>Large Language Models</h3>
+      <p>A large language model (LLM) is a deep learning model trained specifically on text — trained to predict the next word given everything that came before. That's a deceptively simple objective. Scaled up with enough data and compute, it produces systems capable of reasoning, writing, coding, and summarizing across virtually any topic. GPT-4, Claude, and Gemini are all LLMs.</p>
+      <p>The underlying architecture — the <strong>transformer</strong>, introduced by Google in 2017 — is what made this possible. Transformers can process long sequences of text in parallel and learn which parts of a sequence are relevant to each other, a mechanism called <em>attention</em>. For a closer look at how this all works under the hood, see <a href="blog/decoding-ai-conversations.html">Decoding AI Conversations</a>. And if you want to use these models more effectively day-to-day, <a href="blog/prompt-engineering-101.html">Prompt Engineering 101</a> covers the practical techniques that make the biggest difference.</p>
 
       <h3>Computer Vision</h3>
-      <p>Computer Vision is the science of enabling computers to recognize and understand images and scenes. It's the foundation of many AI advances, particularly in recognizing patterns and objects in images and video.</p>
+      <p>Computer vision enables machines to interpret images and video. It's one of deep learning's great success stories — the 2012 ImageNet breakthrough (where a deep neural network dramatically outperformed all prior approaches to image classification) is widely credited with igniting the current AI era. Today, computer vision powers medical imaging, autonomous vehicles, manufacturing quality control, and the face unlock on your phone.</p>
 
       <hr>
 
@@ -84,68 +151,79 @@
           <ul class="timeline">
             <li>
               <div class="year">1950</div>
-              <p>Alan Turing proposed the concept of machines that could simulate any human intelligence — widely recognized as the beginning of AI as a field.</p>
+              <p>Alan Turing proposed a test for machine intelligence — widely recognized as the founding moment of AI as a field.</p>
             </li>
             <li>
               <div class="year">1956</div>
-              <p>The term "Artificial Intelligence" was coined at the Dartmouth Conference, the first AI conference.</p>
+              <p>The term "Artificial Intelligence" was coined at the Dartmouth Conference.</p>
             </li>
             <li>
               <div class="year">1960s–70s</div>
-              <p>Early AI research focused on problem-solving and symbolic methods with human-written rules.</p>
+              <p>Early AI used hand-written rules and symbolic logic. Impressive in demos, brittle in the real world.</p>
             </li>
             <li>
               <div class="year">1980s</div>
-              <p>Machine Learning emerged as a new paradigm, focusing on algorithms that could learn from and make predictions based on data.</p>
+              <p>Machine learning emerged: computers learning from data rather than rules. Slow progress due to limited compute and data.</p>
             </li>
             <li>
               <div class="year">1990s</div>
-              <p>Practical achievements in data mining and speech recognition. The web generated vast amounts of training data.</p>
+              <p>Practical wins in data mining and speech recognition. The web started generating vast training data.</p>
             </li>
             <li>
               <div class="year">2011</div>
-              <p>IBM's Watson won Jeopardy!, demonstrating AI's ability to understand and respond to natural language queries.</p>
+              <p>IBM's Watson won Jeopardy! — demonstrating AI capable of understanding natural language at a high level.</p>
             </li>
             <li>
               <div class="year">2012</div>
-              <p>A deep learning breakthrough: Geoffrey Hinton's team won the ImageNet object recognition competition, igniting the deep learning era.</p>
+              <p>A deep learning model won the ImageNet competition by a wide margin. The modern AI era began.</p>
             </li>
             <li>
               <div class="year">2016</div>
-              <p>Google's AlphaGo beat the world champion Go player, a milestone long thought to be decades away.</p>
+              <p>Google's AlphaGo defeated the world champion at Go — a milestone once thought to be decades away.</p>
             </li>
             <li>
-              <div class="year">2018</div>
-              <p>OpenAI released GPT-2, a language model capable of generating coherent, contextually relevant text.</p>
+              <div class="year">2017</div>
+              <p>Google published "Attention Is All You Need," introducing the transformer architecture that now underpins nearly every major AI model.</p>
             </li>
             <li>
               <div class="year">2020</div>
-              <p>OpenAI released GPT-3 — 175 billion parameters, capable of translation, question answering, and creative writing.</p>
+              <p>GPT-3 launched with 175 billion parameters — capable of writing, translation, and code generation at a quality that shocked researchers.</p>
             </li>
             <li>
               <div class="year">2022–2023</div>
-              <p>ChatGPT launched to the public, reaching 100 million users in two months. The AI era for mainstream users had begun.</p>
+              <p>ChatGPT reached 100 million users in two months. AI became a mainstream tool for everyday people.</p>
             </li>
             <li>
               <div class="year">2024–2025</div>
-              <p>AI reasoning models (o1, o3, Claude 3.5) and multimodal systems became widely available, enabling complex problem-solving across images, code, and language.</p>
+              <p>Reasoning models (o1, o3, Claude 3.5+) and multimodal AI became widely available. AI agents began taking actions in the world, not just answering questions.</p>
             </li>
           </ul>
         </div>
 
         <div>
-          <h2 style="margin-top:0;border-top:none;padding-top:0;">Interesting Facts</h2>
-          <ul>
-            <li>AI can learn from experience — this is called machine learning, and it's how Netflix recommends movies you might enjoy.</li>
-            <li>Some AI can recognize and respond to emotions. This is called affective computing, used in customer service bots and accessibility tools.</li>
-            <li>AI is used in healthcare to predict patient outcomes and help doctors make faster, more accurate diagnoses.</li>
-            <li>Despite science fiction, we're still far from AI that truly mimics human intelligence. Current AI excels at specific tasks but struggles with context and generalization.</li>
-            <li>AI can be creative — it has been used to compose music, create visual art, and write stories and poetry.</li>
-            <li>AI is a major driver in autonomous vehicles, processing complex sensor data to navigate city streets in real time.</li>
-            <li>AI helps fight climate change by optimizing energy use, predicting weather for renewable sources, and monitoring deforestation.</li>
-            <li>Large language models like GPT-4 and Claude were trained on hundreds of billions of words from the internet, books, and code.</li>
-            <li>The transformer architecture, introduced by Google in 2017 ("Attention Is All You Need"), is the foundation of virtually every major AI language model today.</li>
-          </ul>
+          <h2 style="margin-top:0;border-top:none;padding-top:0;">Keep Exploring</h2>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1.25rem;">Dig deeper with these posts from the blog:</p>
+
+          <div class="explore-grid">
+            <div class="explore-card">
+              <a href="blog/decoding-ai-conversations.html">Decoding AI Conversations: How ChatGPT Works</a>
+              <p>Tokenization, attention, and the transformer — how language models understand and generate text.</p>
+            </div>
+            <div class="explore-card">
+              <a href="blog/prompt-engineering-101.html">Prompt Engineering 101</a>
+              <p>Seven techniques for getting dramatically better results from any AI model.</p>
+            </div>
+            <div class="explore-card">
+              <a href="blog/the-age-of-ai-agents.html">The Age of AI Agents</a>
+              <p>How AI moved from answering questions to taking actions in the world.</p>
+            </div>
+            <div class="explore-card">
+              <a href="blog/the-evolution-of-ai.html">The Evolution of AI</a>
+              <p>From early rule-based systems to transformers and GPT — the full arc of progress.</p>
+            </div>
+          </div>
+
+          <p style="margin-top:1.5rem;"><a href="resources.html">Browse the full resources list →</a></p>
         </div>
       </div>
 
@@ -161,5 +239,191 @@
 
 <a href="#" class="back-to-top" aria-label="Back to top">↑</a>
 <script src="js/main.js"></script>
+<script>
+(function () {
+  var canvas = document.getElementById('nn-canvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+
+  // Drawing resolution: 520×270 (logical px), scaled for DPR
+  var W = 520, H = 270;
+  var dpr = window.devicePixelRatio || 1;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  ctx.scale(dpr, dpr);
+
+  var LAYERS = [
+    [{x: 78,  y: 75},  {x: 78,  y: 135}, {x: 78,  y: 195}],
+    [{x: 258, y: 48},  {x: 258, y: 108}, {x: 258, y: 168}, {x: 258, y: 228}],
+    [{x: 442, y: 105}, {x: 442, y: 165}]
+  ];
+
+  var CYCLE     = 3400;  // ms per full animation cycle
+  var PULSE_DUR = 920;   // ms for a pulse to travel one layer
+
+  // Phase timings within the cycle (ms from cycle start)
+  var PHASE_L0 = 180;   // fire input→hidden pulses
+  var PHASE_L1 = 1500;  // fire hidden→output pulses
+
+  var cycleStart = null;
+  var pulses = [];
+  var phasesDone = {};
+
+  function addPulses(fromIdx, ts) {
+    var from = LAYERS[fromIdx];
+    var to   = LAYERS[fromIdx + 1];
+    for (var si = 0; si < from.length; si++) {
+      for (var di = 0; di < to.length; di++) {
+        pulses.push({
+          x0: from[si].x, y0: from[si].y,
+          x1: to[di].x,   y1: to[di].y,
+          t0: ts,
+          layerIdx: fromIdx
+        });
+      }
+    }
+  }
+
+  // Returns a 0–1 glow value for a given layer at elapsed time e
+  function layerGlow(li, e) {
+    var onsets = [PHASE_L0, PHASE_L0 + PULSE_DUR * 0.85, PHASE_L1 + PULSE_DUR * 0.85];
+    var t = e - onsets[li];
+    if (t < 0)   return 0;
+    if (t < 300) return t / 300;
+    if (t < 650) return 1;
+    if (t < 1050) return 1 - (t - 650) / 400;
+    return 0;
+  }
+
+  function draw(ts) {
+    if (!cycleStart) cycleStart = ts;
+    var elapsed = ts - cycleStart;
+
+    if (elapsed >= CYCLE) {
+      cycleStart = ts;
+      pulses = [];
+      phasesDone = {};
+      elapsed = 0;
+    }
+
+    if (!phasesDone.l0 && elapsed >= PHASE_L0) {
+      addPulses(0, ts);
+      phasesDone.l0 = true;
+    }
+    if (!phasesDone.l1 && elapsed >= PHASE_L1) {
+      addPulses(1, ts);
+      phasesDone.l1 = true;
+    }
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Background connections
+    ctx.lineWidth = 1;
+    for (var li = 0; li < LAYERS.length - 1; li++) {
+      var layerA = LAYERS[li];
+      var layerB = LAYERS[li + 1];
+      for (var a = 0; a < layerA.length; a++) {
+        for (var b = 0; b < layerB.length; b++) {
+          ctx.beginPath();
+          ctx.strokeStyle = 'rgba(129,140,248,0.09)';
+          ctx.moveTo(layerA[a].x, layerA[a].y);
+          ctx.lineTo(layerB[b].x, layerB[b].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Active pulse trails
+    for (var pi = 0; pi < pulses.length; pi++) {
+      var p = pulses[pi];
+      var prog = (ts - p.t0) / PULSE_DUR;
+      if (prog < 0 || prog > 1) continue;
+
+      var headX = p.x0 + (p.x1 - p.x0) * prog;
+      var headY = p.y0 + (p.y1 - p.y0) * prog;
+      var tailProg = Math.max(0, prog - 0.18);
+      var tailX = p.x0 + (p.x1 - p.x0) * tailProg;
+      var tailY = p.y0 + (p.y1 - p.y0) * tailProg;
+
+      // Lit connection segment behind the pulse
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(129,140,248,0.35)';
+      ctx.lineWidth = 1;
+      ctx.moveTo(p.x0, p.y0);
+      ctx.lineTo(headX, headY);
+      ctx.stroke();
+
+      // Glowing trail
+      var grad = ctx.createLinearGradient(tailX, tailY, headX, headY);
+      grad.addColorStop(0, 'rgba(129,140,248,0)');
+      grad.addColorStop(1, 'rgba(165,180,252,0.9)');
+      ctx.beginPath();
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.75;
+      ctx.moveTo(tailX, tailY);
+      ctx.lineTo(headX, headY);
+      ctx.stroke();
+
+      // Pulse dot
+      ctx.beginPath();
+      ctx.arc(headX, headY, 3, 0, Math.PI * 2);
+      ctx.fillStyle = '#c7d2fe';
+      ctx.fill();
+    }
+
+    // Nodes
+    for (var li2 = 0; li2 < LAYERS.length; li2++) {
+      var glow = layerGlow(li2, elapsed);
+      var layer = LAYERS[li2];
+
+      for (var ni = 0; ni < layer.length; ni++) {
+        var n = layer[ni];
+
+        // Glow halo
+        if (glow > 0.01) {
+          var halo = ctx.createRadialGradient(n.x, n.y, 2, n.x, n.y, 24);
+          halo.addColorStop(0, 'rgba(129,140,248,' + (0.38 * glow).toFixed(3) + ')');
+          halo.addColorStop(1, 'rgba(129,140,248,0)');
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, 24, 0, Math.PI * 2);
+          ctx.fillStyle = halo;
+          ctx.fill();
+        }
+
+        // Node body
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, 10, 0, Math.PI * 2);
+        ctx.fillStyle = '#111827';
+        ctx.fill();
+
+        if (glow > 0.01) {
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, 10, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(129,140,248,' + (0.18 * glow).toFixed(3) + ')';
+          ctx.fill();
+        }
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, 10, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(129,140,248,' + (0.4 + 0.6 * glow).toFixed(3) + ')';
+        ctx.lineWidth = 1.5 + glow * 1.5;
+        ctx.stroke();
+      }
+    }
+
+    // Layer labels
+    ctx.font = '600 11px Inter, system-ui, sans-serif';
+    ctx.fillStyle = 'rgba(156,163,175,0.75)';
+    ctx.textAlign = 'center';
+    ctx.fillText('Input', 78,  252);
+    ctx.fillText('Hidden Layer', 258, 252);
+    ctx.fillText('Output', 442, 252);
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+})();
+</script>
 </body>
 </html>
