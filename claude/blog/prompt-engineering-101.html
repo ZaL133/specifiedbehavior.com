@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Engineering 101 | Specified Behavior</title>
+  <meta name="description" content="How to get dramatically better results from ChatGPT, Claude, and other AI models — with concrete examples of what works and why.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Specified Behavior">
+  <meta property="og:title" content="Prompt Engineering 101: How to Get Better Results from Any AI">
+  <meta property="og:description" content="How to get dramatically better results from ChatGPT, Claude, and other AI models — with concrete examples of what works and why.">
+  <meta property="og:url" content="https://specifiedbehavior.com/blog/prompt-engineering-101.html">
+  <meta property="og:image" content="https://specifiedbehavior.com/img/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Prompt Engineering 101: How to Get Better Results from Any AI">
+  <meta name="twitter:description" content="How to get dramatically better results from ChatGPT, Claude, and other AI models — with concrete examples.">
+  <link rel="canonical" href="https://specifiedbehavior.com/blog/prompt-engineering-101.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Prompt Engineering 101: How to Get Better Results from Any AI",
+    "description": "How to get dramatically better results from ChatGPT, Claude, and other AI models — with concrete examples of what works and why.",
+    "url": "https://specifiedbehavior.com/blog/prompt-engineering-101.html",
+    "datePublished": "2026-03-21",
+    "dateModified": "2026-03-21",
+    "author": { "@type": "Person", "name": "Zeph" },
+    "publisher": { "@type": "Organization", "name": "Specified Behavior", "url": "https://specifiedbehavior.com" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://specifiedbehavior.com/blog/prompt-engineering-101.html" },
+    "isPartOf": { "@id": "https://specifiedbehavior.com/#website" }
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZMBY3P7BJ7');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .prompt-box {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      margin: 0.75rem 0;
+      font-size: 0.9375rem;
+    }
+    .prompt-box .label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.4rem;
+    }
+    .prompt-box.bad .label  { color: #f87171; }
+    .prompt-box.good .label { color: #34d399; }
+    .prompt-box.bad  { border-left: 3px solid #f87171; }
+    .prompt-box.good { border-left: 3px solid #34d399; }
+    .prompt-box p { margin: 0; color: var(--text-2); font-style: italic; }
+    .compare { margin: 1.5rem 0; }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">Specified<span class="accent"> Behavior</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="../ai-basics.html">AI Basics</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../blog/" class="active">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-header">
+      <p class="article-back"><a href="../blog/">← All posts</a></p>
+      <h1>Prompt Engineering 101: How to Get Better Results from Any AI</h1>
+      <div class="article-meta">
+        <span>March 2026</span>
+        <span class="sep">·</span>
+        <span>Zeph</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>Most people who feel disappointed by AI tools are writing bad prompts. That's not an insult — it took me a while to figure this out too. The model isn't the bottleneck; the instructions are. Once you internalize a handful of principles, the same AI that was giving you mediocre answers starts producing work you'd actually use.</p>
+
+      <p>This isn't about tricks or jailbreaks. It's about communicating clearly with a system that takes you extremely literally.</p>
+
+      <h2>Why prompts matter so much</h2>
+      <p>A language model has no memory of you, no idea what project you're working on, and no instinct to ask clarifying questions the way a colleague would. It takes the text you give it and generates the most statistically probable continuation. If your prompt is vague, you get a vague answer — confidently delivered.</p>
+      <p>The good news: it also has no ego, never gets bored, and will patiently rewrite the same thing ten different ways if you ask it to. The better you get at prompting, the more that patience pays off.</p>
+
+      <h2>1. Give it a role</h2>
+      <p>Starting with "You are a..." immediately improves output quality. It focuses the model's response style and knowledge domain before you even ask your question.</p>
+
+      <div class="compare">
+        <div class="prompt-box bad">
+          <div class="label">✗ Weak</div>
+          <p>Explain how to structure a REST API.</p>
+        </div>
+        <div class="prompt-box good">
+          <div class="label">✓ Better</div>
+          <p>You are a senior backend engineer. Explain how to structure a REST API to a developer who understands HTTP but has never designed one from scratch. Focus on resource naming, versioning, and error responses.</p>
+        </div>
+      </div>
+
+      <p>The role doesn't have to be elaborate — even "You are a concise technical writer" shapes the output noticeably.</p>
+
+      <h2>2. Specify the format</h2>
+      <p>AI models will default to verbose paragraphs unless you tell them otherwise. If you want a list, a table, a code block, or a one-sentence answer — say so explicitly.</p>
+
+      <div class="compare">
+        <div class="prompt-box bad">
+          <div class="label">✗ Weak</div>
+          <p>What are the pros and cons of TypeScript?</p>
+        </div>
+        <div class="prompt-box good">
+          <div class="label">✓ Better</div>
+          <p>Give me the top 4 pros and top 4 cons of using TypeScript in a new project. Use a two-column table. Keep each point to one sentence.</p>
+        </div>
+      </div>
+
+      <h2>3. Show an example</h2>
+      <p>This is the single highest-leverage technique for getting consistent output: show the model exactly what you want, then ask for more like it. Researchers call this "few-shot prompting."</p>
+
+      <div class="compare">
+        <div class="prompt-box bad">
+          <div class="label">✗ Weak</div>
+          <p>Write a product description for a standing desk.</p>
+        </div>
+        <div class="prompt-box good">
+          <div class="label">✓ Better</div>
+          <p>Write a product description for a standing desk. Match this style exactly:<br><br>
+          "The Ember Mug² keeps your coffee at the perfect temperature for up to 80 minutes. Set your ideal temp, forget the microwave."<br><br>
+          Two sentences. Direct. No fluff.</p>
+        </div>
+      </div>
+
+      <h2>4. Give it context, not just a task</h2>
+      <p>The model doesn't know your audience, your constraints, or your goals. A sentence of context often does more than a paragraph of instructions.</p>
+
+      <div class="compare">
+        <div class="prompt-box bad">
+          <div class="label">✗ Weak</div>
+          <p>Write an email about the project delay.</p>
+        </div>
+        <div class="prompt-box good">
+          <div class="label">✓ Better</div>
+          <p>Write an email to a client informing them that a software project will be delayed by two weeks due to unexpected infrastructure issues. The client is non-technical and relationship-focused. Tone: direct but warm, not defensive. Include a revised timeline and a next step.</p>
+        </div>
+      </div>
+
+      <h2>5. Tell it what to avoid</h2>
+      <p>AI models have strong default tendencies — preamble, hedging, filler phrases like "Certainly!" or "Great question!". You can suppress these directly.</p>
+
+      <div class="compare">
+        <div class="prompt-box good">
+          <div class="label">✓ Add to almost any prompt</div>
+          <p>Do not start with a preamble. Do not use phrases like "Certainly" or "Of course". Get straight to the answer.</p>
+        </div>
+      </div>
+
+      <h2>6. Ask it to think before it answers</h2>
+      <p>For anything requiring reasoning — math, logic, analysis, strategy — telling the model to work through its thinking before giving a final answer consistently improves accuracy. This technique is called chain-of-thought prompting.</p>
+
+      <div class="compare">
+        <div class="prompt-box good">
+          <div class="label">✓ For analytical tasks</div>
+          <p>Before giving your final answer, work through the problem step by step. Show your reasoning, then give your conclusion.</p>
+        </div>
+      </div>
+
+      <p>The reason this works comes down to how language models generate text: each token is predicted based on what came before. When the model "writes out" its reasoning, those intermediate steps become part of the context it's predicting from — effectively giving it more to work with.</p>
+
+      <h2>7. Iterate, don't restart</h2>
+      <p>Most people treat a bad AI response as a failure and start over with a completely new prompt. That's a waste. The model has context from your conversation — use it.</p>
+      <p>After a weak first response, try:</p>
+      <ul>
+        <li><em>"This is too generic. Make it more specific to [X]."</em></li>
+        <li><em>"Good structure, but the tone is too formal. Rewrite with more personality."</em></li>
+        <li><em>"Option 2 is closest. Expand that one and cut the rest."</em></li>
+      </ul>
+      <p>Treating AI output as a first draft to refine — rather than a final answer to accept or reject — is the shift that separates people who find AI genuinely useful from people who don't.</p>
+
+      <h2>Putting it together</h2>
+      <p>A solid prompt isn't necessarily a long one. It just covers the basics: who the AI should be, what you want, what format to use, and what to avoid. Here's a template I actually use:</p>
+
+      <div class="prompt-box good" style="border-left-color: var(--accent);">
+        <div class="label" style="color: var(--accent);">Template</div>
+        <p>You are [role]. [Context about my situation in 1–2 sentences]. [The task]. Format: [list / table / paragraph / code / etc.]. [Any constraints: length, tone, what to avoid].</p>
+      </div>
+
+      <p>Once you've built a few prompts that work well for recurring tasks, save them. A small personal library of prompts you've tuned is worth more than any AI tool itself.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2023–2026 Specified Behavior &mdash; Exploring the world of AI</p>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+<script src="../js/main.js"></script>
+</body>
+</html>
