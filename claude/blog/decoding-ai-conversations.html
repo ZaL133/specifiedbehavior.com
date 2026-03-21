@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decoding AI Conversations | Specified Behavior</title>
+  <meta name="description" content="An in-depth look at how ChatGPT processes and generates language — tokenization, attention mechanisms, and the transformer architecture.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Specified Behavior">
+  <meta property="og:title" content="Decoding AI Conversations: Understanding How ChatGPT Works">
+  <meta property="og:url" content="https://specifiedbehavior.com/blog/decoding-ai-conversations.html">
+  <meta name="twitter:card" content="summary">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZMBY3P7BJ7');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">Specified<span class="accent"> Behavior</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="../ai-basics.html">AI Basics</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../blog/" class="active">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-header">
+      <p class="article-back"><a href="../blog/">← All posts</a></p>
+      <h1>Unraveling the Mysteries of AI: How Does ChatGPT Understand Our Words?</h1>
+      <div class="article-meta">
+        <span>June 3, 2023</span>
+        <span class="sep">·</span>
+        <span>ChatGPT / Zeph</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>Ever chatted with Siri, Google Assistant, or a customer support bot? If so, you've already interacted with a kind of Artificial Intelligence. One such AI, ChatGPT, is incredibly good at understanding and generating human-like text. But how does it accomplish this feat? Today, we're going to dig into some of the key concepts that make it possible for ChatGPT to understand and respond to us — starting with something called tokenization.</p>
+
+      <h2>The ABCs of AI: What is Tokenization?</h2>
+      <p>Imagine you're tackling a jigsaw puzzle. Before you start, you need to break the whole picture into individual pieces. In a similar way, before ChatGPT can understand our words, it needs to break them down into manageable chunks. These chunks are called "tokens."</p>
+      <p>A token could be as short as a single character, like 'a' or 'b', or as long as a whole word like 'apple' or 'banana'. Even punctuation marks like a period (.) or question mark (?) are tokens.</p>
+      <p>When we type a sentence, ChatGPT uses a process called tokenization to break the sentence into these tokens — like cutting a sentence into bite-sized pieces that it can analyze and understand more easily. The tokenized sentence acts as a set of instructions for the AI, guiding how it should respond.</p>
+      <p>For example, the sentence "ChatGPT is great!" might become the tokens: <code>['ChatGPT', ' is', ' great', '!']</code>. With these tokens, ChatGPT is ready to figure out what we're saying and how it should reply.</p>
+
+      <h2>The Brain of the AI: Understanding Transformer Architecture</h2>
+      <p>Now that we've sliced our sentence into tokens, what does ChatGPT do with them? Here's where we delve into the heart of the AI's language understanding capabilities: the Transformer Architecture.</p>
+      <p>Imagine you're in a bustling café, trying to follow a conversation with a friend. You naturally pay more attention to your friend's words, while tuning out the noise around you. Transformer models do something similar — they "pay attention" to certain parts of the input, allowing them to focus on what's important and ignore what's not. This process is aptly named the attention mechanism.</p>
+      <p>When ChatGPT receives our tokenized sentence, it uses this attention mechanism to figure out the relationship between the tokens. In the sentence "Jane loves pizza more than pasta," the model needs to understand that "Jane" is connected to "loves," and "loves" is linked to both "pizza" and "pasta."</p>
+      <p>In fact, ChatGPT's Transformer architecture doesn't just have one layer of attention — it has multiple. This is like having several layers of puzzle-solvers, each focusing on a different aspect of the picture. With each layer, the model gains a deeper understanding of the sentence.</p>
+
+      <h2>From Understanding to Speaking: How Does ChatGPT Generate Text?</h2>
+      <p>We've seen how ChatGPT breaks down sentences into tokens and understands them using its Transformer architecture. But how does it go from understanding to generating its own sentences? The key lies in probability.</p>
+      <p>In simple terms, ChatGPT learns from huge amounts of text data. During this learning process, it calculates the probability of what word (or token) should come next given all the previous words it has seen.</p>
+      <p>Let's take an example. If you start a sentence with "I am feeling...", what word might you expect next? Maybe "happy," "sad," or "tired"? How about "elephant"? Probably not — because in our experience, certain words are more likely to follow "I am feeling..." than others. ChatGPT learns in a similar way, internalizing the probability of a word following another word or a sequence of words.</p>
+      <p>So when it's time for ChatGPT to generate a reply, it looks at the tokens it's received, understands their relationships, and then generates the next token based on what it has learned is most probable. It does this one token at a time until it has a full reply. It's a bit like predicting the weather — forecasters can't be 100% sure if it will rain or shine, but they can make an educated guess based on patterns and data. That's what ChatGPT does, but with words instead of weather.</p>
+
+      <h2>Wrapping Up</h2>
+      <p>And there you have it — a peek into the inner workings of ChatGPT. From tokenization, to understanding with Transformer architecture, to text generation one probable token at a time, this AI has mastered the art of language understanding and response generation. But remember: it's all based on patterns and probabilities, not genuine comprehension in the human sense. Understanding this distinction helps us use these tools more thoughtfully — and appreciate both what they can do and where their limits lie.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2023–2026 Specified Behavior &mdash; Exploring the world of AI</p>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+<script src="../js/main.js"></script>
+</body>
+</html>

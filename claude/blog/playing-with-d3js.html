@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playing with D3.js | Specified Behavior</title>
+  <meta name="description" content="15 minutes to create a data visualization with AI assistance — a pie chart, a conversation, and surprisingly working code.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Specified Behavior">
+  <meta property="og:title" content="Playing with D3.js">
+  <meta property="og:url" content="https://specifiedbehavior.com/blog/playing-with-d3js.html">
+  <meta name="twitter:card" content="summary">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZMBY3P7BJ7');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">Specified<span class="accent"> Behavior</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="../ai-basics.html">AI Basics</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../blog/" class="active">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-header">
+      <p class="article-back"><a href="../blog/">← All posts</a></p>
+      <h1>Playing with D3.js</h1>
+      <div class="article-meta">
+        <span>May 14, 2023</span>
+        <span class="sep">·</span>
+        <span>Zeph</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>This took about 15 minutes to get running, start to finish. It was just to test drive a data visualization. The pie chart is super boring, but it was incredibly easy to get going — and ChatGPT even provided realistic mock data without being asked.</p>
+      <p>I asked ChatGPT to write a D3.js pie chart showing eye color distribution. The code came back on the first try, ran immediately, and even included hover effects that expand each slice. Here's the live result:</p>
+
+      <div class="chart-container">
+        <div id="chart"></div>
+      </div>
+
+      <p>The interesting part wasn't just that it worked — it was how it worked. ChatGPT didn't just dump boilerplate code; it made sensible choices throughout: using <code>d3.schemeCategory10</code> for colors, centering the chart with a group transform, adding mouseover transitions. It felt like reviewing code from a capable junior developer who understood the goal.</p>
+
+      <p>What would have taken me an hour of reading D3 documentation and debugging took 15 minutes. The only thing I had to do was copy the code in and add the D3 script tag. This kind of productivity multiplier is what makes AI tools genuinely exciting, not just as a curiosity but as a real part of a development workflow.</p>
+
+      <h3>The code</h3>
+      <p>For reference, here's roughly what ChatGPT produced:</p>
+      <pre style="background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;overflow-x:auto;font-size:0.85rem;line-height:1.6;"><code style="background:none;border:none;padding:0;color:var(--text-2);">const data = [
+  { color: "Blue",  value: 20 },
+  { color: "Brown", value: 35 },
+  { color: "Green", value: 15 },
+  { color: "Hazel", value: 10 },
+  { color: "Grey",  value:  5 },
+  { color: "Other", value: 15 },
+];
+
+const width = 500, height = 500;
+const radius = Math.min(width, height) / 2.2;
+
+const svg = d3.select("#chart").append("svg")
+  .attr("width", width).attr("height", height);
+
+const g = svg.append("g")
+  .attr("transform", `translate(${width/2},${height/2})`);
+
+const color = d3.scaleOrdinal(d3.schemeCategory10);
+const pie = d3.pie().value(d => d.value);
+const arc = d3.arc().innerRadius(0).outerRadius(radius);
+
+g.selectAll("path")
+  .data(pie(data)).enter().append("path")
+  .attr("fill", d => color(d.data.color))
+  .attr("d", arc)
+  .on("mouseover", function(event, d) {
+    d3.select(this).transition().duration(200)
+      .attr("d", d3.arc().innerRadius(0).outerRadius(radius * 1.1)(d));
+  })
+  .on("mouseout", function(event, d) {
+    d3.select(this).transition().duration(200).attr("d", arc(d));
+  });
+
+g.selectAll("text")
+  .data(pie(data)).enter().append("text")
+  .attr("transform", d => `translate(${arc.centroid(d)})`)
+  .attr("text-anchor", "middle")
+  .text(d => d.data.color);</code></pre>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2023–2026 Specified Behavior &mdash; Exploring the world of AI</p>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+(function() {
+  const data = [
+    { color: "Blue",  value: 20 },
+    { color: "Brown", value: 35 },
+    { color: "Green", value: 15 },
+    { color: "Hazel", value: 10 },
+    { color: "Grey",  value:  5 },
+    { color: "Other", value: 15 },
+  ];
+
+  const width = 500, height = 500;
+  const radius = Math.min(width, height) / 2.2;
+
+  const svg = d3.select("#chart").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .style("max-width", "100%");
+
+  const g = svg.append("g")
+    .attr("transform", `translate(${width / 2},${height / 2})`);
+
+  const color = d3.scaleOrdinal(d3.schemeCategory10);
+  const pie = d3.pie().value(d => d.value);
+  const arc = d3.arc().innerRadius(0).outerRadius(radius);
+
+  g.selectAll("path")
+    .data(pie(data))
+    .enter()
+    .append("path")
+    .attr("fill", d => color(d.data.color))
+    .attr("d", arc)
+    .attr("stroke", "#111827")
+    .attr("stroke-width", 2)
+    .on("mouseover", function(event, d) {
+      d3.select(this).transition().duration(200)
+        .attr("d", d3.arc().innerRadius(0).outerRadius(radius * 1.1)(d));
+    })
+    .on("mouseout", function(event, d) {
+      d3.select(this).transition().duration(200).attr("d", arc(d));
+    });
+
+  g.selectAll("text")
+    .data(pie(data))
+    .enter()
+    .append("text")
+    .attr("transform", d => `translate(${arc.centroid(d)})`)
+    .attr("text-anchor", "middle")
+    .attr("dominant-baseline", "middle")
+    .attr("fill", "#f9fafb")
+    .attr("font-size", "13")
+    .attr("font-family", "Inter, system-ui, sans-serif")
+    .attr("font-weight", "600")
+    .text(d => d.data.color);
+})();
+</script>
+<script src="../js/main.js"></script>
+</body>
+</html>

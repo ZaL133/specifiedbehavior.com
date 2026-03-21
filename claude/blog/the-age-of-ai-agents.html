@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Age of AI Agents | Specified Behavior</title>
+  <meta name="description" content="AI is moving from answering questions to taking actions. What are AI agents, how do they work, and what does it mean that they can now use tools, browse the web, and write and run code?">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Specified Behavior">
+  <meta property="og:title" content="The Age of AI Agents">
+  <meta property="og:description" content="AI is moving from answering questions to taking actions. What changes when a language model can use tools?">
+  <meta property="og:url" content="https://specifiedbehavior.com/blog/the-age-of-ai-agents.html">
+  <meta name="twitter:card" content="summary">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZMBY3P7BJ7');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">Specified<span class="accent"> Behavior</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="../ai-basics.html">AI Basics</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../blog/" class="active">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-header">
+      <p class="article-back"><a href="../blog/">← All posts</a></p>
+      <h1>The Age of AI Agents: From Answering Questions to Taking Actions</h1>
+      <div class="article-meta">
+        <span>March 2026</span>
+        <span class="sep">·</span>
+        <span>Zeph</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>When this site launched in 2023, the big question about AI was: "How good is ChatGPT at writing?" In 2026, the question has shifted: "What can an AI do on its own?" The conversation has moved from AI as a sophisticated autocomplete to AI as an autonomous actor in the world. That shift is what "AI agents" means — and it's worth understanding.</p>
+
+      <h2>What's an AI Agent, Exactly?</h2>
+      <p>A language model, at its core, takes text in and produces text out. That's it. ChatGPT, Claude, Gemini — underneath all the polish, they're next-token predictors. What makes an agent different is that the model is given <em>tools</em>: the ability to search the web, read and write files, execute code, call APIs, click buttons in a browser. The model decides when and how to use these tools based on a goal you give it.</p>
+      <p>The result is a system that can plan, take actions in the real world, observe results, and adjust — all without you having to hold its hand through every step. You give it a task, and it figures out the steps.</p>
+
+      <h2>What Changed to Make This Possible?</h2>
+      <p>Three things came together at roughly the same time:</p>
+
+      <h3>1. Models got much better at following instructions</h3>
+      <p>Early GPT models were impressive at generating text but unreliable at doing exactly what you asked. The instruction-following models that emerged from RLHF (Reinforcement Learning from Human Feedback) — the same technique that produced ChatGPT — are dramatically more precise. When you tell a modern model "search for X, then summarize the top three results," it actually does that, step by step, rather than just writing about what that might look like.</p>
+
+      <h3>2. Tool-use became a first-class feature</h3>
+      <p>OpenAI's function-calling API (2023) and Anthropic's tool-use feature for Claude made it possible to define external functions that a model can call as part of generating a response. The model produces a structured call like <code>{"tool": "search", "query": "latest AI news"}</code>, the application runs the actual search, returns the results to the model, and the model continues. It's remarkably clean.</p>
+
+      <h3>3. Context windows exploded in size</h3>
+      <p>Agents need to hold a lot in mind at once — the original goal, the steps taken so far, results from tool calls, errors encountered. In 2023, context windows were around 8,000 tokens. By 2025, the flagship models had context windows of 128,000 to 200,000 tokens — enough to fit an entire codebase, a long research project, or hours of conversation history. That's what makes complex, multi-step tasks tractable.</p>
+
+      <h2>What Can Agents Actually Do Today?</h2>
+      <p>The honest answer is: quite a lot, with caveats. Here's what's working well:</p>
+      <ul>
+        <li><strong>Software development:</strong> AI coding agents (GitHub Copilot Workspace, Cursor, Claude Code) can take a task description, write code across multiple files, run tests, read error messages, and iterate until tests pass. This is probably the most mature use case today.</li>
+        <li><strong>Research and synthesis:</strong> Agents that can browse the web, pull papers, summarize, and cross-reference sources have meaningfully sped up literature reviews and competitive research.</li>
+        <li><strong>Data analysis:</strong> Give an agent a spreadsheet and a question; it can write and execute Python, debug its own errors, and produce an answer with visualizations.</li>
+        <li><strong>Browser automation:</strong> Agents can navigate websites, fill out forms, and extract information — tasks that previously required custom scraping scripts.</li>
+      </ul>
+
+      <p>The caveats are real, though. Agents are brittle in unpredictable ways. They can confidently take a wrong turn and barrel down it for many steps before realizing the mistake. Error recovery is still a weak point. Long-horizon tasks that require subtle judgment calls across many steps still require human oversight.</p>
+
+      <h2>The Shift in How We Think About AI</h2>
+      <p>When AI was primarily a text-generation tool, the mental model was "AI as a very fast writer." You prompt, it writes, you edit. The human is always in the loop because every output goes through human review before anything happens.</p>
+      <p>AI agents change that model. When an agent is browsing the web, writing to a database, or sending API calls, actions happen. Some of them are irreversible. This is why so much of the current discussion in AI safety has shifted from "is the text accurate" to "is the AI taking the right actions for the right reasons." The consequences of a hallucination are very different when the output is a paragraph versus when it's a database write.</p>
+
+      <h2>Where This Is Going</h2>
+      <p>The trajectory is clear, even if the destination isn't. Models are getting better, tools are getting richer, and the infrastructure for deploying agents reliably is maturing quickly. The 2023 version of this site asked "What can AI write?" The 2026 version might reasonably ask "What can AI build on its own, end to end?"</p>
+      <p>I don't think we know the answer yet. But it's the most interesting question in technology right now. And unlike the breathless predictions that AI would write all software by 2025, the reality is more nuanced and more interesting: AI has become a genuine partner in building things, with real strengths, real limits, and a trajectory that's still pointing up.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2023–2026 Specified Behavior &mdash; Exploring the world of AI</p>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+<script src="../js/main.js"></script>
+</body>
+</html>
