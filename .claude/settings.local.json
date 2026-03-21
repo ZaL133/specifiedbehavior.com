@@ -3,7 +3,8 @@
     "allow": [
       "Bash(python -c \"import json,sys; data=json.load\\(sys.stdin\\); print\\(data[0][''''text'''']\\)\")",
       "Bash(start:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(git credential:*)"
     ]
   }
 }
