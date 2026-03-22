@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChatGPT vs. Claude vs. Gemini: Which Should You Use in 2026? | Specified Behavior</title>
+  <meta name="description" content="An honest, opinionated comparison of ChatGPT, Claude, and Gemini in 2026 — what each model is actually best at, and how to choose between them for specific tasks.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Specified Behavior">
+  <meta property="og:title" content="ChatGPT vs. Claude vs. Gemini: Which Should You Use in 2026?">
+  <meta property="og:description" content="An honest, opinionated comparison of ChatGPT, Claude, and Gemini in 2026 — what each is actually best at, with specific use cases for each.">
+  <meta property="og:url" content="https://specifiedbehavior.com/blog/chatgpt-vs-claude-vs-gemini.html">
+  <meta property="og:image" content="https://specifiedbehavior.com/img/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ChatGPT vs. Claude vs. Gemini: Which Should You Use in 2026?">
+  <meta name="twitter:description" content="An honest, opinionated comparison of the three leading AI assistants in 2026 — what each is best at and when to switch.">
+  <link rel="canonical" href="https://specifiedbehavior.com/blog/chatgpt-vs-claude-vs-gemini.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "ChatGPT vs. Claude vs. Gemini: Which Should You Use in 2026?",
+    "description": "An honest, opinionated comparison of ChatGPT, Claude, and Gemini in 2026 — what each model is actually best at, and how to choose between them for specific tasks.",
+    "url": "https://specifiedbehavior.com/blog/chatgpt-vs-claude-vs-gemini.html",
+    "datePublished": "2026-03-05",
+    "dateModified": "2026-03-05",
+    "author": { "@type": "Person", "name": "Zeph" },
+    "publisher": { "@type": "Organization", "name": "Specified Behavior", "url": "https://specifiedbehavior.com" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://specifiedbehavior.com/blog/chatgpt-vs-claude-vs-gemini.html" },
+    "isPartOf": { "@id": "https://specifiedbehavior.com/#website" }
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZMBY3P7BJ7');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    #radar-canvas {
+      display: block;
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 480 / 380;
+      margin: 1.75rem auto;
+      border-radius: var(--radius);
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+    }
+    .radar-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: -1rem;
+      margin-bottom: 1.75rem;
+    }
+    .verdict-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.85rem;
+      margin: 1.25rem 0;
+    }
+    .verdict-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+    }
+    .verdict-card .model-name {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.4rem;
+    }
+    .verdict-card.chatgpt .model-name { color: rgba(16,185,129,0.9); }
+    .verdict-card.claude .model-name { color: rgba(129,140,248,0.9); }
+    .verdict-card.gemini .model-name { color: rgba(96,165,250,0.9); }
+    .verdict-card p { margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+    .verdict-card ul { margin: 0.4rem 0 0; padding-left: 1.1rem; }
+    .verdict-card ul li { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">Specified<span class="accent"> Behavior</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="../ai-basics.html">AI Basics</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../blog/" class="active">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-header">
+      <p class="article-back"><a href="../blog/">← All posts</a></p>
+      <h1>ChatGPT vs. Claude vs. Gemini: Which Should You Use in 2026?</h1>
+      <div class="article-meta">
+        <span>March 5, 2026</span>
+        <span class="sep">·</span>
+        <span>Zeph</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>The "which AI is best" question gets asked constantly, and it gets answered badly just as often — usually with a benchmark table that tells you which model scores highest on tasks you'll never do, or with a caveat-filled non-answer that hedges everything. This is my attempt at a more useful take: opinionated, specific, and honest about where the differences actually matter.</p>
+      <p>The short version: at the flagship tier, all three are remarkably capable and the differences are at the margin. But the margins matter for specific use cases, and the free tier differences are significant. Here's how I actually think about choosing between them.</p>
+
+      <h2>At a Glance</h2>
+
+      <canvas id="radar-canvas" width="960" height="760" aria-label="Radar chart comparing ChatGPT, Claude, and Gemini across six dimensions: writing, coding, reasoning, multimodal, speed, and free tier value"></canvas>
+      <p class="radar-caption">Relative strengths across six dimensions — scores reflect typical flagship-tier performance as of early 2026. All three are strong; this chart shows where each leads.</p>
+
+      <h2>ChatGPT (GPT-4o / o3)</h2>
+      <p>ChatGPT is the Swiss Army knife. The GPT-4o model that powers the default experience is fast, capable across an enormous range of tasks, and genuinely multimodal — it can look at an image, read a document, listen to audio, and generate images (via DALL-E). The o3 reasoning model, available on the Plus plan, is among the strongest available for complex mathematical and scientific reasoning.</p>
+      <p>OpenAI ships fast. They were first to voice mode, first to image generation, first to canvas-style document editing, and generally first to whatever new AI interface paradigm captures attention for a news cycle. That's a real advantage: if you want to use AI for the widest range of tasks from a single subscription, ChatGPT's breadth is unmatched.</p>
+      <p>Where it's weakest: following very precise, multi-part instructions over a long document. GPT-4o has a tendency to subtly drift from complex specs in ways that Claude doesn't. For tasks that require careful adherence to a detailed brief — legal document drafting, technical spec writing, code that must conform exactly to a style guide — the gap matters.</p>
+      <p><strong>Use ChatGPT when:</strong> you need multimodal capabilities (images, voice, documents), you're doing advanced reasoning tasks with o3, you want the widest range of features, or you're deeply embedded in the Microsoft ecosystem (Copilot runs on OpenAI).</p>
+
+      <h2>Claude (Anthropic)</h2>
+      <p>Claude is the careful writer. Across writing quality, nuance of instruction-following, and handling long documents, Claude consistently outperforms its peers in my testing and in the broader community's benchmarks. If you paste a 100-page report and ask Claude to find every claim that contradicts the executive summary, it will do it. If you give it a 20-point style guide and ask it to write something, it will actually follow all 20 points.</p>
+      <p>Claude's context window (200K tokens for the flagship models) is one of the largest available and it actually uses that context well — not just technically, but meaningfully. It remembers things from earlier in a long conversation in a way that feels coherent rather than retrieved. The Sonnet and Opus models are the best I've used for tasks that require sustained, coherent reasoning over large amounts of text.</p>
+      <p>The weaknesses are real: Claude's free tier is the weakest of the three, hitting rate limits quickly. And it's slower than GPT-4o at the same capability tier. If speed or free access matters to you, that's a meaningful constraint.</p>
+      <p><strong>Use Claude when:</strong> you're doing long-document analysis, writing that needs to follow a detailed brief, anything requiring precise and nuanced instruction-following, or coding tasks where correctness and code quality matter more than speed.</p>
+
+      <h2>Gemini (Google)</h2>
+      <p>Gemini is Google's entry, and it shows — in both the good ways and the occasionally frustrating ways. The best things about Gemini: it's fast, its free tier is genuinely generous (Gemini 1.5 Flash is available free with very high rate limits), and its Google integration is unmatched. If you use Google Workspace, Gmail, Google Docs, or Google Drive, Gemini's deep integration is a genuine workflow advantage that the other two can't match from outside the ecosystem.</p>
+      <p>Gemini 2.0 Pro is competitive with GPT-4o on most benchmarks and has strong multimodal capabilities — Google's computer vision research runs deep, and it shows in how Gemini handles images and mixed-media content. For tasks where you want AI that can work natively with your Google files without copy-pasting, Gemini is the natural choice.</p>
+      <p>Where Gemini falls short: writing quality and instruction-following at the nuanced end of the spectrum. The responses often feel slightly more generic, more "AI-sounding," less likely to surprise you with a genuinely original observation. It's a capable but somewhat predictable writer compared to Claude.</p>
+      <p><strong>Use Gemini when:</strong> you want a capable free tier, you're embedded in Google Workspace, you need tight integration with Google Drive or Gmail, or you want fast multimodal capabilities without a paid subscription.</p>
+
+      <h2>Verdicts by Use Case</h2>
+
+      <div class="verdict-grid">
+        <div class="verdict-card chatgpt">
+          <div class="model-name">Best for: Image tasks</div>
+          <p>ChatGPT with DALL-E remains the strongest all-in-one for image generation and understanding. Gemini is competitive; Claude doesn't generate images.</p>
+        </div>
+        <div class="verdict-card claude">
+          <div class="model-name">Best for: Writing</div>
+          <p>Claude writes with more voice, follows style guides more precisely, and produces long-form content that sounds less "AI-generated" than its competitors.</p>
+        </div>
+        <div class="verdict-card chatgpt">
+          <div class="model-name">Best for: Hard reasoning</div>
+          <p>OpenAI's o3 model is the current benchmark leader on complex math, science, and coding challenges. Worth the Plus subscription for this alone.</p>
+        </div>
+        <div class="verdict-card gemini">
+          <div class="model-name">Best for: Free tier</div>
+          <p>Gemini's free tier is the most generous of the three by a wide margin. If you're not paying, Gemini 1.5 Flash gives you a capable model with high rate limits.</p>
+        </div>
+        <div class="verdict-card claude">
+          <div class="model-name">Best for: Long documents</div>
+          <p>200K token context + best-in-class instruction following makes Claude the clear choice for analyzing, summarizing, or writing across large amounts of text.</p>
+        </div>
+        <div class="verdict-card gemini">
+          <div class="model-name">Best for: Google users</div>
+          <p>If your workflow runs through Gmail, Docs, or Drive, Gemini's native integration is a genuine advantage. No copy-pasting. It reads your files directly.</p>
+        </div>
+      </div>
+
+      <h2>The Honest Take</h2>
+      <p>At the paid tier, the differences between these models for everyday tasks are smaller than the marketing suggests. A reasonably skilled user will get good results from any of them. The real differentiators show up at the edges: very long documents, very precise instructions, tasks that require genuine multimodal capability, or situations where the free tier is the only option.</p>
+      <p>My current rotation: Claude for writing and analysis, ChatGPT o3 when I need serious reasoning muscle, Gemini when I'm working in a Google Doc and don't want to context-switch. I pay for one (Claude Pro) and use Gemini's free tier for convenience. That's a reasonable setup for most people who do knowledge work.</p>
+      <p>These comparisons age fast. Each of these labs ships significant updates every few months. The model I'd rate highest today might not hold that position in six months. The more durable advice is to understand <em>why</em> each model behaves differently — and for that, the backstory on <a href="openai-vs-anthropic.html">OpenAI and Anthropic's different philosophies</a> is worth reading.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2023–2026 Specified Behavior &mdash; Exploring the world of AI</p>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var canvas = document.getElementById('radar-canvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+
+  var W = 480, H = 380;
+  var dpr = window.devicePixelRatio || 1;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  ctx.scale(dpr, dpr);
+
+  var CX = W / 2, CY = H / 2 - 16;
+  var R  = 118;
+  var N  = 6;
+  var LABELS = ['Writing', 'Coding', 'Reasoning', 'Multimodal', 'Speed', 'Free Tier'];
+  var MODELS = [
+    { name: 'ChatGPT', scores: [8, 9, 8, 9, 8, 7], fill: 'rgba(16,185,129,0.13)',  stroke: 'rgba(16,185,129,0.85)',  dot: 'rgba(16,185,129,1)'   },
+    { name: 'Claude',  scores: [9, 9, 9, 7, 6, 5], fill: 'rgba(129,140,248,0.13)', stroke: 'rgba(129,140,248,0.85)', dot: 'rgba(129,140,248,1)'  },
+    { name: 'Gemini',  scores: [7, 7, 8, 9, 9, 9], fill: 'rgba(96,165,250,0.13)',  stroke: 'rgba(96,165,250,0.85)',  dot: 'rgba(96,165,250,1)'   }
+  ];
+  var MAX = 10;
+  var START_ANGLE = -Math.PI / 2; // top
+
+  function polarXY(dimIdx, value, scale) {
+    var angle = START_ANGLE + dimIdx * (Math.PI * 2 / N);
+    var r = (value / MAX) * R * (scale || 1);
+    return { x: CX + r * Math.cos(angle), y: CY + r * Math.sin(angle) };
+  }
+
+  var progress = 0;
+  var startTs  = null;
+  var DURATION = 1100;
+
+  function draw(ts) {
+    if (!startTs) startTs = ts;
+    var raw = Math.min(1, (ts - startTs) / DURATION);
+    // cubic ease-out
+    var p = 1 - Math.pow(1 - raw, 3);
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Grid polygons at 25 / 50 / 75 / 100 %
+    [0.25, 0.5, 0.75, 1.0].forEach(function (frac) {
+      ctx.beginPath();
+      for (var i = 0; i < N; i++) {
+        var pt = polarXY(i, MAX * frac, 1);
+        i === 0 ? ctx.moveTo(pt.x, pt.y) : ctx.lineTo(pt.x, pt.y);
+      }
+      ctx.closePath();
+      ctx.strokeStyle = frac === 1 ? 'rgba(129,140,248,0.28)' : 'rgba(129,140,248,0.11)';
+      ctx.lineWidth   = frac === 1 ? 1.5 : 1;
+      ctx.stroke();
+    });
+
+    // Axis lines
+    for (var i = 0; i < N; i++) {
+      var end = polarXY(i, MAX, 1);
+      ctx.beginPath();
+      ctx.moveTo(CX, CY);
+      ctx.lineTo(end.x, end.y);
+      ctx.strokeStyle = 'rgba(129,140,248,0.15)';
+      ctx.lineWidth   = 1;
+      ctx.stroke();
+    }
+
+    // Axis labels
+    ctx.font      = '600 11px Inter, system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(156,163,175,0.85)';
+    for (var i = 0; i < N; i++) {
+      var angle = START_ANGLE + i * (Math.PI * 2 / N);
+      var lx = CX + (R + 24) * Math.cos(angle);
+      var ly = CY + (R + 24) * Math.sin(angle) + 4;
+      // nudge purely-vertical labels
+      if (i === 0)           ly -= 4;
+      if (i === N / 2)       ly += 6;
+      ctx.fillText(LABELS[i], lx, ly);
+    }
+
+    // Model polygons
+    MODELS.forEach(function (model) {
+      ctx.beginPath();
+      for (var i = 0; i < N; i++) {
+        var pt = polarXY(i, model.scores[i] * p, 1);
+        i === 0 ? ctx.moveTo(pt.x, pt.y) : ctx.lineTo(pt.x, pt.y);
+      }
+      ctx.closePath();
+      ctx.fillStyle   = model.fill;
+      ctx.fill();
+      ctx.strokeStyle = model.stroke;
+      ctx.lineWidth   = 2;
+      ctx.stroke();
+
+      // Vertex dots
+      for (var i = 0; i < N; i++) {
+        var pt = polarXY(i, model.scores[i] * p, 1);
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, 3.5, 0, Math.PI * 2);
+        ctx.fillStyle = model.dot;
+        ctx.fill();
+      }
+    });
+
+    // Legend
+    var legendY   = H - 22;
+    var totalW    = MODELS.length * 110;
+    var legendX0  = (W - totalW) / 2;
+    MODELS.forEach(function (model, idx) {
+      var lx = legendX0 + idx * 110;
+      // swatch
+      ctx.fillStyle   = model.fill.replace('0.13', '0.65');
+      ctx.strokeStyle = model.stroke;
+      ctx.lineWidth   = 1.5;
+      ctx.beginPath();
+      ctx.rect(lx, legendY - 9, 18, 10);
+      ctx.fill();
+      ctx.stroke();
+      // label
+      ctx.font      = '600 11px Inter, system-ui, sans-serif';
+      ctx.fillStyle = 'rgba(209,213,219,0.9)';
+      ctx.textAlign = 'left';
+      ctx.fillText(model.name, lx + 24, legendY);
+    });
+
+    if (raw < 1) requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

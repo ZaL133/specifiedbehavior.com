@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How AI Image Generation Actually Works | Specified Behavior</title>
+  <meta name="description" content="DALL-E, Midjourney, and Stable Diffusion all use a process called diffusion — starting from pure noise and iteratively refining toward an image. Here's how that actually works.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Specified Behavior">
+  <meta property="og:title" content="How AI Image Generation Actually Works">
+  <meta property="og:description" content="DALL-E, Midjourney, and Stable Diffusion all use diffusion — starting from pure noise and iteratively refining an image. Here's the accessible explanation.">
+  <meta property="og:url" content="https://specifiedbehavior.com/blog/how-ai-image-generation-works.html">
+  <meta property="og:image" content="https://specifiedbehavior.com/img/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How AI Image Generation Actually Works">
+  <meta name="twitter:description" content="DALL-E, Midjourney, and Stable Diffusion all use diffusion models. Here's how the noise-to-image process actually works, without the math.">
+  <link rel="canonical" href="https://specifiedbehavior.com/blog/how-ai-image-generation-works.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "How AI Image Generation Actually Works",
+    "description": "DALL-E, Midjourney, and Stable Diffusion all use a process called diffusion — starting from pure noise and iteratively refining toward an image. Here's how that actually works.",
+    "url": "https://specifiedbehavior.com/blog/how-ai-image-generation-works.html",
+    "datePublished": "2026-02-12",
+    "dateModified": "2026-02-12",
+    "author": { "@type": "Person", "name": "Zeph" },
+    "publisher": { "@type": "Organization", "name": "Specified Behavior", "url": "https://specifiedbehavior.com" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://specifiedbehavior.com/blog/how-ai-image-generation-works.html" },
+    "isPartOf": { "@id": "https://specifiedbehavior.com/#website" }
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZMBY3P7BJ7');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .diffusion-wrap {
+      margin: 1.75rem auto;
+      max-width: 520px;
+    }
+    #diffusion-canvas {
+      display: block;
+      width: 100%;
+      aspect-ratio: 420 / 230;
+      border-radius: var(--radius);
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+    }
+    .diffusion-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.6rem;
+      margin-bottom: 1.75rem;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">Specified<span class="accent"> Behavior</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="../ai-basics.html">AI Basics</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../blog/" class="active">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-header">
+      <p class="article-back"><a href="../blog/">← All posts</a></p>
+      <h1>How AI Image Generation Actually Works</h1>
+      <div class="article-meta">
+        <span>February 12, 2026</span>
+        <span class="sep">·</span>
+        <span>Zeph</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>Type a prompt into DALL-E, Midjourney, or Stable Diffusion and an image appears, seemingly conjured from text. The results range from impressive to unsettling to absurd, often in the same session. But how does a text prompt actually become pixels? The underlying process is counterintuitive and worth understanding — both because it's genuinely interesting and because it explains a lot about why these systems behave the way they do.</p>
+      <p>The answer, in almost all major image generation systems today, is <strong>diffusion</strong>.</p>
+
+      <h2>The Counterintuitive Starting Point</h2>
+      <p>Here's the central idea, which still surprises people when they first hear it: AI image generation starts with <em>random noise</em>.</p>
+      <p>Not with a blank canvas. Not with a rough sketch. Pure, random, static — like a TV with no signal. And then, step by step, the noise is <em>refined</em> into an image. Each step removes a small amount of noise, guided by the prompt, nudging the random pixels gradually toward something coherent.</p>
+      <p>The visualization below shows this process. Watch the noise resolve into structure as the steps progress.</p>
+
+      <div class="diffusion-wrap">
+        <canvas id="diffusion-canvas" width="840" height="460" aria-label="Animated pixel grid showing the diffusion process — starting from random colored noise and progressively denoising to reveal a night landscape with mountains, stars, and a moon"></canvas>
+      </div>
+      <p class="diffusion-caption">Each frame is one denoising step. The model learns to remove noise in a way that's steered by the text prompt — in this case, toward a night scene with mountains and a moon.</p>
+
+      <h2>What the Model Actually Learned</h2>
+      <p>Training a diffusion model involves a clever trick. Take millions of real images. Gradually add noise to each one — a little at first, then more, until each image is completely unrecognizable static. Then train a neural network to reverse that process: given a noisy version of an image and how much noise was added, predict what the original looked like.</p>
+      <p>Do this with enough images and enough compute, and the network learns something remarkable: it develops a deep understanding of what images look like. It knows that sky pixels tend to be blue and in the upper half. That edges have consistent orientations. That faces have specific geometric relationships between features. That fur has a particular texture. None of this was programmed — it was learned by repeatedly solving the "denoise this" puzzle across hundreds of millions of training examples.</p>
+      <p>Once the network can denoise, you can run it in reverse. Start from pure noise and ask: "What noise would I remove if the underlying image were a photograph of a golden retriever in a field?" The network's answer, applied repeatedly over 20–50 steps, converges to an image that actually looks like a golden retriever in a field.</p>
+
+      <h2>How Text Gets Involved</h2>
+      <p>The diffusion process I described so far produces images, but random ones — there's nothing steering it toward "a golden retriever in a field" rather than "a skyscraper at night." Text conditioning is what makes prompts work.</p>
+      <p>This is where language models and image models meet. The text prompt is first converted into a numerical representation by an encoder — essentially a compressed mathematical description of the semantic content of your words. That representation is fed into the denoising network at each step, influencing which direction the denoising goes. The network is trained to denoise <em>toward the content described in the text</em>.</p>
+      <p>In practice, this means the network has learned to associate "sunset" with warm orange and pink tones in the upper portion of an image, "forest" with green texture, "photorealistic portrait" with the specific pixel patterns of high-quality photography. The prompt doesn't directly write pixels — it steers the statistical process that does.</p>
+
+      <h2>The Role of Randomness</h2>
+      <p>Because you start from random noise, the same prompt generates a different image every time. The random starting point is called the <strong>seed</strong>, and it determines the specific path the denoising takes through the space of possible images. Photographers and designers who use these tools extensively learn to save seeds for images they like, so they can regenerate the same composition with small variations.</p>
+      <p>There's also a parameter called <strong>guidance scale</strong> (or cfg scale in Stable Diffusion) that controls how strictly the model follows the prompt versus how much creative freedom it takes. Low guidance: more varied and sometimes surprising outputs, occasionally drifting from the prompt. High guidance: very literal interpretation of the prompt, but sometimes over-saturated and strange. Most practical prompting lives in the middle range.</p>
+
+      <h2>Why the Same Models — Different Results?</h2>
+      <p>DALL-E (OpenAI), Midjourney (independent), and Stable Diffusion (Stability AI, open-source) all use diffusion, but they look distinctly different. Why?</p>
+      <ul>
+        <li><strong>Training data.</strong> Each model was trained on a different dataset. Midjourney is trained heavily on artistic and photographic content, which is why it produces such consistently aesthetic results. Stable Diffusion was trained on LAION-5B, a broad scrape of the internet. The "style" of a model is largely a function of what it saw during training.</li>
+        <li><strong>Architectural variations.</strong> Models differ in how they implement the denoising network, how they process text, how many steps they use, and dozens of other choices. DALL-E 3 uses a particularly good text encoder (inherited from GPT-4) which is why it handles complex, detailed prompts better than earlier systems.</li>
+        <li><strong>Fine-tuning and filtering.</strong> Every commercial model has been fine-tuned on curated examples and filtered to avoid certain types of output. This shapes the aesthetic range and the refusal behavior of each system.</li>
+      </ul>
+
+      <h2>Latent Diffusion: Why It's Fast Enough to Use</h2>
+      <p>One practical challenge: running diffusion directly on full-resolution pixel grids is enormously expensive. A 512×512 image has 786,432 pixels, and you'd need to run the denoising network across all of them at every step. That's prohibitively slow.</p>
+      <p>The insight behind <strong>latent diffusion</strong> (the architecture Stable Diffusion uses, and a key innovation from the Munich-based CompVis lab) is to run the diffusion process in a compressed latent space rather than in pixel space. A separate encoder compresses the image down to a much smaller representation (a latent), the diffusion process runs in that compressed space, and a decoder expands the result back to pixels at the end. This makes the process roughly 10x faster with minimal quality loss. It's why Stable Diffusion can run on consumer-grade hardware while producing results that were science fiction a few years ago.</p>
+
+      <h2>The Broader Picture</h2>
+      <p>Diffusion models are now the dominant approach not just for images but for audio generation (music, voice), video generation (Sora uses a diffusion-inspired architecture), and even some protein structure prediction. The core idea — learn to denoise, then generate by controlled denoising — has proven remarkably general.</p>
+      <p>The results sometimes feel like magic, and the implementation details are genuinely sophisticated. But the fundamental logic is traceable and understandable. A network learned what images look like. You start from noise. You denoise, guided by your words. Fifty steps later, you have an image.</p>
+      <p>The part that remains genuinely mysterious — to researchers as much as to anyone — is why that process sometimes produces images of uncanny quality and coherence, and sometimes produces the famously cursed AI hands or melted text. The model is doing statistics at scale, not reasoning about what an image "should" look like. The impressive cases and the failure cases are both outputs of the same process, and the line between them isn't always predictable in advance.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2023–2026 Specified Behavior &mdash; Exploring the world of AI</p>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var canvas = document.getElementById('diffusion-canvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+
+  var W = 420, H = 230;
+  var dpr = window.devicePixelRatio || 1;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  ctx.scale(dpr, dpr);
+
+  var LABEL_H = 26; // top area for step counter
+  var GW = 32, GH = 16; // grid cells
+  var CELL_W = Math.floor((W - 4) / GW);      // ~13
+  var CELL_H = Math.floor((H - LABEL_H - 4) / GH); // ~12
+  var GRID_X = Math.floor((W - GW * CELL_W) / 2);
+  var GRID_Y = LABEL_H + Math.floor((H - LABEL_H - GH * CELL_H) / 2);
+
+  // Pre-compute star positions (in cell coords)
+  var STARS = [
+    [1,1],[4,0],[7,2],[11,1],[15,0],[19,2],[23,1],[27,0],[30,2],
+    [2,4],[6,3],[9,5],[13,3],[17,4],[21,3],[25,5],[29,3],[31,4],
+    [3,7],[8,6],[14,6],[20,7],[26,6]
+  ];
+
+  // Moon center (cell coords)
+  var MOON_CX = 25, MOON_CY = 2.5, MOON_R = 1.8;
+
+  // Mountain ridge Y for each cell column
+  function mtnY(x) {
+    var t = x / (GW - 1);
+    return Math.round(GH * 0.58
+      + GH * 0.10 * Math.sin(t * Math.PI * 3.5)
+      + GH * 0.06 * Math.sin(t * Math.PI * 8.0)
+      + GH * 0.04 * Math.cos(t * Math.PI * 5.0));
+  }
+
+  // Star cell set for fast lookup
+  var starSet = {};
+  STARS.forEach(function(s) { starSet[s[0] + ',' + s[1]] = true; });
+
+  function targetColor(x, y) {
+    var my = mtnY(x);
+    // Mountain
+    if (y >= my) {
+      var depth = (y - my) / (GH - my);
+      return [
+        Math.round(6  + depth * 4),
+        Math.round(10 + depth * 6),
+        Math.round(28 + depth * 8)
+      ];
+    }
+    // Moon
+    var dx = x - MOON_CX, dy = y - MOON_CY;
+    if (Math.sqrt(dx*dx + dy*dy) < MOON_R) {
+      return [235, 232, 200];
+    }
+    // Star
+    if (starSet[x + ',' + y]) {
+      return [215, 220, 238];
+    }
+    // Sky gradient: deep navy at top → slightly lighter near horizon
+    var frac = y / my;
+    return [
+      Math.round(5  + frac * 18),
+      Math.round(8  + frac * 22),
+      Math.round(38 + frac * 38)
+    ];
+  }
+
+  // Build target grid
+  var target = [];
+  for (var x = 0; x < GW; x++) {
+    target[x] = [];
+    for (var y = 0; y < GH; y++) {
+      var c = targetColor(x, y);
+      target[x][y] = { r: c[0], g: c[1], b: c[2] };
+    }
+  }
+
+  // Current state starts as noise; regenerated each cycle
+  var current = [];
+  function initNoise() {
+    for (var x = 0; x < GW; x++) {
+      current[x] = current[x] || [];
+      for (var y = 0; y < GH; y++) {
+        current[x][y] = {
+          r: Math.random() * 255,
+          g: Math.random() * 255,
+          b: Math.random() * 255
+        };
+      }
+    }
+  }
+  initNoise();
+
+  var TOTAL_STEPS = 24;
+  var STEP_MS     = 160;  // ms per denoising step
+  var PAUSE_MS    = 2200; // hold final image
+  var phase       = 'denoising';
+  var step        = 0;
+  var phaseStart  = null;
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function applyStep(s) {
+    // Quadratic ease so early steps are visually "uncertain"
+    var t = (s / TOTAL_STEPS);
+    var p = t * t;
+    for (var x = 0; x < GW; x++) {
+      for (var y = 0; y < GH; y++) {
+        // noise[x][y] is implicitly initial (stored in current before any step)
+        // We track original noise separately to lerp from
+        current[x][y] = {
+          r: lerp(noiseSnap[x][y].r, target[x][y].r, p),
+          g: lerp(noiseSnap[x][y].g, target[x][y].g, p),
+          b: lerp(noiseSnap[x][y].b, target[x][y].b, p)
+        };
+      }
+    }
+  }
+
+  // Snapshot of initial noise for this cycle (so we lerp from fixed start)
+  var noiseSnap = [];
+  function snapNoise() {
+    for (var x = 0; x < GW; x++) {
+      noiseSnap[x] = noiseSnap[x] || [];
+      for (var y = 0; y < GH; y++) {
+        noiseSnap[x][y] = { r: current[x][y].r, g: current[x][y].g, b: current[x][y].b };
+      }
+    }
+  }
+  snapNoise();
+
+  function draw(ts) {
+    if (!phaseStart) phaseStart = ts;
+    var elapsed = ts - phaseStart;
+
+    if (phase === 'denoising') {
+      var targetStep = Math.min(TOTAL_STEPS, Math.floor(elapsed / STEP_MS));
+      if (targetStep > step) {
+        step = targetStep;
+        applyStep(step);
+      }
+      if (step >= TOTAL_STEPS) {
+        phase = 'paused';
+        phaseStart = ts;
+      }
+    } else {
+      if (elapsed >= PAUSE_MS) {
+        // Reset
+        phase = 'denoising';
+        step  = 0;
+        phaseStart = ts;
+        initNoise();
+        snapNoise();
+        applyStep(0);
+      }
+    }
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Draw pixel grid
+    for (var x = 0; x < GW; x++) {
+      for (var y = 0; y < GH; y++) {
+        var c = current[x][y];
+        ctx.fillStyle = 'rgb(' + Math.round(c.r) + ',' + Math.round(c.g) + ',' + Math.round(c.b) + ')';
+        ctx.fillRect(GRID_X + x * CELL_W, GRID_Y + y * CELL_H, CELL_W - 1, CELL_H - 1);
+      }
+    }
+
+    // Label bar background
+    ctx.fillStyle = 'var(--bg-2, #111827)';
+    ctx.fillRect(0, 0, W, LABEL_H - 2);
+
+    // Step label
+    var labelText;
+    if (phase === 'paused') {
+      labelText = 'Final image  ·  denoising complete';
+    } else if (step === 0) {
+      labelText = 'Starting from noise  ·  step 0 / ' + TOTAL_STEPS;
+    } else {
+      labelText = 'Denoising  ·  step ' + step + ' / ' + TOTAL_STEPS;
+    }
+
+    ctx.font      = '500 11px Inter, system-ui, sans-serif';
+    ctx.fillStyle = phase === 'paused' ? 'rgba(129,140,248,0.85)' : 'rgba(156,163,175,0.75)';
+    ctx.textAlign = 'center';
+    ctx.fillText(labelText, W / 2, LABEL_H - 8);
+
+    // Progress bar
+    var barW = GW * CELL_W;
+    var prog  = step / TOTAL_STEPS;
+    ctx.fillStyle = 'rgba(129,140,248,0.12)';
+    ctx.fillRect(GRID_X, LABEL_H - 5, barW, 2);
+    ctx.fillStyle = phase === 'paused' ? 'rgba(129,140,248,0.8)' : 'rgba(129,140,248,0.55)';
+    ctx.fillRect(GRID_X, LABEL_H - 5, Math.round(barW * prog), 2);
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

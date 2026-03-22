@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Hallucinations: Why AI Makes Things Up | Specified Behavior</title>
+  <meta name="description" content="AI models confidently state things that aren't true. This isn't a bug that will get patched — it's a consequence of how language models fundamentally work. Here's why, and what you can do about it.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Specified Behavior">
+  <meta property="og:title" content="AI Hallucinations: Why AI Makes Things Up">
+  <meta property="og:description" content="AI models confidently state things that aren't true. It's not a bug — it's a consequence of how language models work. Here's what's actually happening and how to reduce it.">
+  <meta property="og:url" content="https://specifiedbehavior.com/blog/ai-hallucinations.html">
+  <meta property="og:image" content="https://specifiedbehavior.com/img/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Hallucinations: Why AI Makes Things Up">
+  <meta name="twitter:description" content="AI models confidently state things that aren't true. It's not a bug — it's a consequence of how language models work. Here's what's actually happening.">
+  <link rel="canonical" href="https://specifiedbehavior.com/blog/ai-hallucinations.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "AI Hallucinations: Why AI Makes Things Up",
+    "description": "AI models confidently state things that aren't true. This isn't a bug that will get patched — it's a consequence of how language models fundamentally work. Here's why, and what you can do about it.",
+    "url": "https://specifiedbehavior.com/blog/ai-hallucinations.html",
+    "datePublished": "2026-02-19",
+    "dateModified": "2026-02-19",
+    "author": { "@type": "Person", "name": "Zeph" },
+    "publisher": { "@type": "Organization", "name": "Specified Behavior", "url": "https://specifiedbehavior.com" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://specifiedbehavior.com/blog/ai-hallucinations.html" },
+    "isPartOf": { "@id": "https://specifiedbehavior.com/#website" }
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZMBY3P7BJ7');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    #halluc-canvas {
+      display: block;
+      width: 100%;
+      max-width: 520px;
+      aspect-ratio: 520 / 300;
+      margin: 1.75rem auto;
+      border-radius: var(--radius);
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+    }
+    .halluc-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: -1rem;
+      margin-bottom: 1.75rem;
+    }
+    .tip-box {
+      background: rgba(129,140,248,0.06);
+      border: 1px solid rgba(129,140,248,0.25);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+    }
+    .tip-box strong { color: var(--accent); }
+    .tip-box ul { margin: 0.5rem 0 0; padding-left: 1.3rem; }
+    .tip-box ul li { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.35rem; line-height: 1.55; }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">Specified<span class="accent"> Behavior</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="../ai-basics.html">AI Basics</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../blog/" class="active">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-header">
+      <p class="article-back"><a href="../blog/">← All posts</a></p>
+      <h1>AI Hallucinations: Why AI Makes Things Up</h1>
+      <div class="article-meta">
+        <span>February 19, 2026</span>
+        <span class="sep">·</span>
+        <span>Zeph</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>If you've spent any real time with ChatGPT, Claude, or Gemini, you've probably encountered this: the AI confidently tells you something that's wrong. Not vague, not uncertain — confidently, fluently, authoritatively wrong. A made-up citation. A plausible-sounding but nonexistent law. A historical "fact" that never happened. A software function that doesn't exist but is described with impeccable syntax.</p>
+      <p>This is called a hallucination, and it's one of the most important things to understand about how these systems actually work. It's not a bug that will get patched. It's a consequence of what language models fundamentally <em>are</em>.</p>
+
+      <h2>Why It Happens: The Model Is Always Predicting</h2>
+      <p>A language model doesn't store facts the way a database does. It doesn't have a list of true things it retrieves on demand. What it has is a massively compressed statistical representation of patterns in text — learned from reading vast amounts of human writing. When you ask it a question, it's not looking up an answer. It's predicting the most plausible continuation of your prompt, given everything it learned during training.</p>
+      <p>Think about what that means. The model is constantly answering the question: "Given what has been written, what text is most likely to follow this?" For most everyday language tasks, that works brilliantly. The most likely continuation of "Please explain photosynthesis" is, in fact, a good explanation of photosynthesis — because lots of accurate explanations exist in the training data.</p>
+      <p>But for specific factual claims — exact dates, precise statistics, specific citations, details of obscure events — "most likely continuation" and "true continuation" start to diverge. The model learns the shape of a plausible answer and fills in the specifics with high-probability tokens, which may or may not correspond to reality.</p>
+
+      <h2>The Probability Problem, Illustrated</h2>
+      <p>The visualization below shows what's happening at the token level. The model assigns a probability to every possible next word. Most of the time, the high-probability answer is correct. But the second-highest probability token can be very close to the first — and it might be wrong. The model doesn't "know" which one is true; it just knows which seems more likely based on patterns.</p>
+
+      <canvas id="halluc-canvas" width="1040" height="600" aria-label="Animated bar chart showing token probability distribution for completing the sentence 'The capital of Australia is ___', with Canberra (correct) having the highest probability but Sydney (incorrect) close behind"></canvas>
+      <p class="halluc-caption">Token probability distribution when completing "The capital of Australia is ___." Canberra is most likely — but Sydney is a close second, and sometimes gets selected. The model has no internal alarm that fires when it's wrong.</p>
+
+      <p>The Australia example is instructive because many people don't know that the capital is Canberra, not Sydney. The model learned from human writing, which includes plenty of text incorrectly claiming Sydney is the capital, or simply discussing Sydney as the most prominent Australian city. The uncertainty in the model reflects real uncertainty (and real errors) in its training data.</p>
+
+      <h2>Why the Model Sounds So Confident</h2>
+      <p>This is the part that makes hallucinations genuinely dangerous: the model doesn't have an internal sense of "I'm not sure about this." It has no epistemic state that corresponds to human uncertainty. The same fluency and confidence that produces a correct answer also produces a wrong one. The model that says "The capital of Australia is Canberra" and the model that says "The capital of Australia is Sydney" are both doing exactly the same thing — producing the next token they believe is most likely. One happens to be right.</p>
+      <p>This is categorically different from a human saying something wrong. When a person states something confidently and incorrectly, they've usually made an active judgment that they know the answer. Language models aren't making that judgment. They're generating plausible text. Confidence is a property of the text, not of the model's internal state.</p>
+      <p>Modern models have been trained to express uncertainty more often — to say "I think" or "I'm not certain, but" — and that training helps. But it's a surface behavior, not a fundamental fix. The model can still hallucinate while saying "I believe."</p>
+
+      <h2>Specific Patterns to Watch For</h2>
+      <p>Not all hallucinations are equally likely. The terrain is reasonably predictable:</p>
+      <ul>
+        <li><strong>Citations and sources</strong> — This is the most reliable hallucination category. Ask a language model to cite sources, and it will often produce plausible-sounding but nonexistent papers, books, or articles. The author names might be real. The journal might be real. The paper doesn't exist. Always verify citations independently.</li>
+        <li><strong>Recent events</strong> — Models have training cutoffs. Anything after the cutoff is unknown territory, and the model will try to fill that gap with pattern-matching rather than admitting ignorance. Be especially skeptical of claims about recent news, recent research, or current statistics.</li>
+        <li><strong>Specific numbers</strong> — Statistics, percentages, counts, prices, dates. The model learns that answers to questions about statistics involve numbers, so it will provide a number. That number may be close to reality, or it may not. Don't trust exact figures without verification.</li>
+        <li><strong>Code for obscure libraries</strong> — Language models are excellent at coding in well-known languages and frameworks. For obscure libraries, niche APIs, or anything less represented in the training data, they'll write syntactically plausible code that calls functions that don't exist.</li>
+        <li><strong>Details about specific people</strong> — Biographical information about anyone not extremely famous is unreliable. The model has a sense of the "shape" of a biography and will fill in details it doesn't know.</li>
+      </ul>
+
+      <h2>How to Reduce Hallucinations in Practice</h2>
+      <div class="tip-box">
+        <strong>Practical techniques that help:</strong>
+        <ul>
+          <li><strong>Ask it to say when it doesn't know.</strong> Explicitly instruct the model: "If you're not certain, say so. I'd rather have 'I don't know' than a guess." Modern models respond to this reasonably well.</li>
+          <li><strong>Give it the facts, ask it to reason.</strong> Instead of "What were the Q3 results for Company X?" paste in the actual report and ask the model to analyze it. When you provide the source material, the model can't hallucinate the data — it can only interpret what you've given it.</li>
+          <li><strong>Ask for confidence with citations.</strong> "Provide a confidence level for each claim, and cite the specific source you're drawing from." This forces the model to surface its own uncertainty and flags unsupported claims.</li>
+          <li><strong>Use retrieval-augmented tools for facts.</strong> Perplexity, ChatGPT with web search, and similar tools pull actual sources before generating a response. For factual lookups, these are significantly more reliable than a raw model.</li>
+          <li><strong>Verify anything that matters.</strong> Treat AI outputs on factual questions as a starting point, not a final answer. For anything where being wrong has real consequences — legal, medical, financial, technical — always check against authoritative sources.</li>
+        </ul>
+      </div>
+
+      <h2>Will This Get Fixed?</h2>
+      <p>Partially, but not completely. The hallucination rate of frontier models has dropped significantly over the past few years — GPT-4o and Claude 3.7 hallucinate considerably less than their predecessors. Retrieval-augmented generation (RAG), where the model is given access to real-time information rather than relying solely on training data, has reduced factual errors for many use cases significantly.</p>
+      <p>But the fundamental architecture — predict the next token — doesn't have a natural mechanism for distinguishing "I know this" from "this sounds like what I should say here." Solving hallucinations completely would require either a fundamentally different architecture or a deep integration of external knowledge lookup into every factual claim the model makes. Significant progress is likely. Complete elimination is not.</p>
+      <p>In the meantime, the most reliable mental model for using AI well is this: trust it for reasoning, writing, and analysis. Verify it for specific facts. The combination of AI's strengths with your verification habit is more capable than either alone.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2023–2026 Specified Behavior &mdash; Exploring the world of AI</p>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var canvas = document.getElementById('halluc-canvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+
+  var W = 520, H = 300;
+  var dpr = window.devicePixelRatio || 1;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  ctx.scale(dpr, dpr);
+
+  var TOKENS = [
+    { label: 'Canberra',   prob: 0.42, correct: true  },
+    { label: 'Sydney',     prob: 0.33, correct: false },
+    { label: 'Melbourne',  prob: 0.15, correct: false },
+    { label: 'Brisbane',   prob: 0.06, correct: false },
+    { label: 'Other',      prob: 0.04, correct: false }
+  ];
+
+  var BAR_W     = 64;
+  var BAR_GAP   = 22;
+  var MAX_H     = 148;
+  var BASE_Y    = 215;
+  var TOTAL_W   = TOKENS.length * (BAR_W + BAR_GAP) - BAR_GAP;
+  var LEFT      = (W - TOTAL_W) / 2;
+
+  // Which token is "picked" this cycle: alternate correct / incorrect
+  var cycle        = 0;
+  var cycleStart   = null;
+  var CYCLE_DUR    = 3200;    // ms per full cycle
+  var BARS_IN      = 600;     // ms to animate bars in
+  var NEEDLE_START = 700;     // ms when needle begins moving
+  var NEEDLE_DUR   = 800;     // ms needle travels
+  var RESULT_SHOW  = 1700;    // ms when result label appears
+  var RESULT_HOLD  = 1400;    // ms result stays
+
+  // Every 3rd cycle: pick Sydney (wrong); otherwise Canberra (right)
+  function getPick(c) { return (c % 3 === 2) ? 1 : 0; }
+
+  function draw(ts) {
+    if (!cycleStart) cycleStart = ts;
+    var e = ts - cycleStart;
+
+    if (e >= CYCLE_DUR) {
+      cycle++;
+      cycleStart = ts;
+      e = 0;
+    }
+
+    var pickIdx   = getPick(cycle);
+    var barProg   = Math.min(1, e / BARS_IN);
+    // ease out
+    var bp        = 1 - Math.pow(1 - barProg, 2);
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Prompt text
+    ctx.font      = '500 12.5px Inter, system-ui, sans-serif';
+    ctx.fillStyle = 'rgba(156,163,175,0.7)';
+    ctx.textAlign = 'center';
+    ctx.fillText('"The capital of Australia is ___"', W / 2, 28);
+
+    ctx.font      = '600 11px Inter, system-ui, sans-serif';
+    ctx.fillStyle = 'rgba(129,140,248,0.55)';
+    ctx.fillText('NEXT TOKEN PROBABILITIES', W / 2, 46);
+
+    // Bars
+    TOKENS.forEach(function (tok, idx) {
+      var bx  = LEFT + idx * (BAR_W + BAR_GAP);
+      var bh  = tok.prob * MAX_H * bp;
+      var by  = BASE_Y - bh;
+
+      // Determine bar color: default accent, selected = green or red
+      var isSelected = (e >= RESULT_SHOW) && (idx === pickIdx);
+      var color;
+      if (isSelected) {
+        color = tok.correct ? 'rgba(16,185,129,0.85)' : 'rgba(248,113,113,0.85)';
+      } else if (e >= RESULT_SHOW && idx === 0 && !tok.correct) {
+        color = 'rgba(129,140,248,0.5)'; // dim others after result
+      } else {
+        color = 'rgba(129,140,248,' + (0.45 + tok.prob * 0.55).toFixed(2) + ')';
+      }
+
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.roundRect ? ctx.roundRect(bx, by, BAR_W, bh, [3, 3, 0, 0])
+                    : ctx.rect(bx, by, BAR_W, bh);
+      ctx.fill();
+
+      // Percentage label on bar
+      if (bp > 0.35) {
+        ctx.font      = '600 11px Inter, system-ui, sans-serif';
+        ctx.fillStyle = isSelected ? '#fff' : 'rgba(209,213,219,0.85)';
+        ctx.textAlign = 'center';
+        ctx.fillText(Math.round(tok.prob * 100) + '%', bx + BAR_W / 2, by - 7);
+      }
+
+      // Token label below
+      ctx.font      = '500 11px Inter, system-ui, sans-serif';
+      ctx.fillStyle = isSelected
+        ? (tok.correct ? 'rgba(16,185,129,1)' : 'rgba(248,113,113,1)')
+        : 'rgba(156,163,175,0.8)';
+      ctx.textAlign = 'center';
+      ctx.fillText(tok.label, bx + BAR_W / 2, BASE_Y + 17);
+    });
+
+    // Baseline
+    ctx.beginPath();
+    ctx.moveTo(LEFT - 10, BASE_Y);
+    ctx.lineTo(LEFT + TOTAL_W + 10, BASE_Y);
+    ctx.strokeStyle = 'rgba(129,140,248,0.2)';
+    ctx.lineWidth   = 1;
+    ctx.stroke();
+
+    // Sampling needle
+    if (e >= NEEDLE_START && e < RESULT_SHOW) {
+      var np = Math.min(1, (e - NEEDLE_START) / NEEDLE_DUR);
+      // ease-out + overshoot to final pick bar
+      var ease = 1 - Math.pow(1 - np, 2);
+      var targetX = LEFT + pickIdx * (BAR_W + BAR_GAP) + BAR_W / 2;
+      // needle starts from left of bars, sweeps to target
+      var startX = LEFT + BAR_W / 2;
+      var needleX = startX + (targetX - startX) * ease;
+
+      ctx.beginPath();
+      ctx.moveTo(needleX, BASE_Y + 5);
+      ctx.lineTo(needleX - 6, BASE_Y + 20);
+      ctx.lineTo(needleX + 6, BASE_Y + 20);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(165,180,252,0.9)';
+      ctx.fill();
+    }
+
+    // Result label
+    if (e >= RESULT_SHOW) {
+      var tok       = TOKENS[pickIdx];
+      var resultAlpha = Math.min(1, (e - RESULT_SHOW) / 200);
+      var msg = tok.correct
+        ? '✓ Correct — Canberra selected'
+        : '✗ Hallucination — Sydney selected (wrong answer)';
+      var msgColor = tok.correct
+        ? 'rgba(16,185,129,' + resultAlpha + ')'
+        : 'rgba(248,113,113,' + resultAlpha + ')';
+
+      ctx.font      = '600 12px Inter, system-ui, sans-serif';
+      ctx.fillStyle = msgColor;
+      ctx.textAlign = 'center';
+      ctx.fillText(msg, W / 2, H - 14);
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenAI vs. Anthropic: Two Different Visions for AI | Specified Behavior</title>
+  <meta name="description" content="OpenAI and Anthropic were founded with different philosophies about how to build AI safely. Here's where they came from, what they believe, and what that means for the products they ship.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Specified Behavior">
+  <meta property="og:title" content="OpenAI vs. Anthropic: Two Different Visions for AI">
+  <meta property="og:description" content="OpenAI and Anthropic were founded with different philosophies about how to build AI safely. Here's where they came from, what they believe, and what that means for the products they ship.">
+  <meta property="og:url" content="https://specifiedbehavior.com/blog/openai-vs-anthropic.html">
+  <meta property="og:image" content="https://specifiedbehavior.com/img/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OpenAI vs. Anthropic: Two Different Visions for AI">
+  <meta name="twitter:description" content="OpenAI and Anthropic share a common origin but follow radically different philosophies. What that means for the AI you use every day.">
+  <link rel="canonical" href="https://specifiedbehavior.com/blog/openai-vs-anthropic.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "OpenAI vs. Anthropic: Two Different Visions for AI",
+    "description": "OpenAI and Anthropic were founded with different philosophies about how to build AI safely. Here's where they came from, what they believe, and what that means for the products they ship.",
+    "url": "https://specifiedbehavior.com/blog/openai-vs-anthropic.html",
+    "datePublished": "2026-02-26",
+    "dateModified": "2026-02-26",
+    "author": { "@type": "Person", "name": "Zeph" },
+    "publisher": { "@type": "Organization", "name": "Specified Behavior", "url": "https://specifiedbehavior.com" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://specifiedbehavior.com/blog/openai-vs-anthropic.html" },
+    "isPartOf": { "@id": "https://specifiedbehavior.com/#website" }
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZMBY3P7BJ7');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .company-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    @media (max-width: 600px) { .company-grid { grid-template-columns: 1fr; } }
+    .company-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+    }
+    .company-card h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+      color: var(--text);
+      border: none;
+      padding: 0;
+    }
+    .company-card.openai { border-top: 2px solid rgba(16,185,129,0.6); }
+    .company-card.anthropic { border-top: 2px solid rgba(129,140,248,0.6); }
+    .company-card h3 .badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+    .company-card.openai h3 .badge { background: rgba(16,185,129,0.15); color: rgba(16,185,129,0.9); }
+    .company-card.anthropic h3 .badge { background: rgba(129,140,248,0.15); color: rgba(129,140,248,0.9); }
+    .company-card ul { margin: 0.5rem 0 0; padding-left: 1.25rem; }
+    .company-card ul li { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.35rem; line-height: 1.55; }
+    .philosophy-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    @media (max-width: 600px) { .philosophy-row { grid-template-columns: 1fr; } }
+    .philosophy-cell {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem;
+    }
+    .philosophy-cell .label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.4rem;
+    }
+    .philosophy-cell.openai .label { color: rgba(16,185,129,0.8); }
+    .philosophy-cell.anthropic .label { color: rgba(129,140,248,0.8); }
+    .philosophy-cell p { margin: 0; font-size: 0.875rem; color: var(--text-muted); line-height: 1.55; }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">Specified<span class="accent"> Behavior</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="../ai-basics.html">AI Basics</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../blog/" class="active">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-header">
+      <p class="article-back"><a href="../blog/">← All posts</a></p>
+      <h1>OpenAI vs. Anthropic: Two Different Visions for AI</h1>
+      <div class="article-meta">
+        <span>February 26, 2026</span>
+        <span class="sep">·</span>
+        <span>Zeph</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>Anthropic didn't appear from nowhere. It was founded by people who left OpenAI — not because of a falling out over money or competition strategy, but because of a genuine philosophical disagreement about how to build AI responsibly. That split, which happened in 2021, is the single most important piece of context for understanding why the two leading AI labs behave so differently today.</p>
+      <p>To understand that, you need to understand where OpenAI came from.</p>
+
+      <h2>OpenAI's Origin: A Nonprofit With Big Ambitions</h2>
+      <p>OpenAI was founded in 2015 as a nonprofit research lab, backed by Elon Musk, Sam Altman, and other prominent figures in tech. The founding premise was specific and somewhat surprising: powerful AI was coming, it was going to be transformative and potentially dangerous, and therefore the research should be done openly and for the benefit of all humanity — rather than captured by a single corporation. The "Open" in OpenAI was meant literally.</p>
+      <p>Over time, the reality diverged from the founding story. GPT-3, released in 2020, was too powerful to release openly. The organization restructured into a "capped-profit" entity to attract investment (Microsoft eventually committed $13 billion). The strategy shifted from sharing research to shipping products. By the time ChatGPT launched in late 2022, OpenAI looked less like a research nonprofit and more like a well-funded AI product company with a safety mission attached.</p>
+      <p>The key philosophical move OpenAI made — implicitly, never quite stated openly — was to accept that if powerful AI is coming regardless, it's better to be at the frontier than to fall behind. Being the most capable lab, in this view, gives you the most influence over how things go. Move fast, ship products, attract talent, maintain the lead.</p>
+
+      <h2>Anthropic's Origin: A Deliberate Break</h2>
+      <p>In 2021, Dario Amodei (then VP of Research at OpenAI) and his sister Daniela Amodei (VP of Operations), along with several other senior researchers, left to found Anthropic. The specific concerns that motivated the departure have been described in various interviews, but the through-line is consistent: the pace of scaling at OpenAI felt reckless relative to the current state of safety research, and the commercialization pressures were starting to win arguments they shouldn't win.</p>
+      <p>Anthropic's founding documents put safety first — not as a values statement on a website, but as a structural commitment. The company's stated mission is "the responsible development and maintenance of advanced AI for the long-term benefit of humanity." Unlike OpenAI, Anthropic is organized as a Public Benefit Corporation with explicit constitutional constraints on what its investors can require it to do.</p>
+
+      <h2>The Core Philosophical Difference</h2>
+
+      <div class="philosophy-row">
+        <div class="philosophy-cell openai">
+          <div class="label">OpenAI's approach</div>
+          <p>Build the most capable systems possible; align them as you go. Staying at the frontier gives you influence over how AI develops. Commercialization funds the research. Fast iteration produces safety insights as quickly as it produces capability gains.</p>
+        </div>
+        <div class="philosophy-cell anthropic">
+          <div class="label">Anthropic's approach</div>
+          <p>Safety research must keep pace with capabilities, or ideally run ahead. Interpretability — actually understanding what's happening inside models — is a prerequisite for trusting them. Slower, more deliberate deployment is worth it if it means understanding what you're deploying.</p>
+        </div>
+      </div>
+
+      <p>Neither of these positions is obviously correct. The "race to the top" argument (moving fast gives you control) has real merit. So does the "don't outrun your safety research" argument. Both labs are run by serious people who have thought carefully about these tradeoffs. The disagreement is genuine.</p>
+      <p>In practice, the difference shows up most clearly in how each company handles <em>alignment</em> — the problem of making sure AI systems do what we actually want.</p>
+      <p>OpenAI pioneered <strong>RLHF</strong> (Reinforcement Learning from Human Feedback) — the technique that made ChatGPT dramatically more useful than raw GPT-3 by training it to follow instructions and avoid harmful outputs. It works, but it's a behavioral fix: it trains the model to produce outputs humans rate highly, without necessarily ensuring the model's internal representations are honest or its reasoning is transparent.</p>
+      <p>Anthropic developed <strong>Constitutional AI</strong> — a method where instead of just learning from human feedback, the model learns from a set of explicit principles (a "constitution") and is trained to reason about whether its outputs conform to those principles. The approach is designed to produce AI that is more legibly aligned, not just behaviorally compliant. Anthropic's research team also leads the field on <strong>mechanistic interpretability</strong> — the hard technical work of opening the black box and understanding what's actually happening inside neural networks.</p>
+
+      <h2>What This Means for the Products</h2>
+
+      <div class="company-grid">
+        <div class="company-card openai">
+          <h3>OpenAI <span class="badge">ChatGPT / GPT-4o / o3</span></h3>
+          <ul>
+            <li>Broadest product portfolio: text, images (DALL-E), video (Sora), voice</li>
+            <li>First to market with most major features; sets the pace for the industry</li>
+            <li>GPT-4o is fast and capable across a huge range of tasks</li>
+            <li>o3 and reasoning models push the frontier on complex problem-solving</li>
+            <li>Deep Microsoft integration across Office 365, Azure, and Bing</li>
+            <li>More willing to move fast; has sometimes been ahead on capabilities but had high-profile safety stumbles</li>
+          </ul>
+        </div>
+        <div class="company-card anthropic">
+          <h3>Anthropic <span class="badge">Claude 3.7 Sonnet / Opus</span></h3>
+          <ul>
+            <li>Focused product line: text, documents, code — no image generation</li>
+            <li>Claude is consistently rated highly for writing quality, nuance, and following complex instructions</li>
+            <li>200K token context window is one of the longest available</li>
+            <li>More conservative deployment posture; more likely to decline ambiguous requests thoughtfully</li>
+            <li>Preferred by many developers and researchers for long-context analytical tasks</li>
+            <li>Publishes more safety research publicly than any competitor</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>The Structure of Their Businesses</h2>
+      <p>The business structures reflect the philosophies. OpenAI's capped-profit structure means investors can earn returns up to a cap (originally 100x, now modified), after which profits flow back to the nonprofit. In practice, the commercial pressures of a $150 billion valuation have reshaped how the organization behaves — the nonprofit structure is real, but so are the commercial incentives.</p>
+      <p>Anthropic is structured as a Public Benefit Corporation, with Dario Amodei as CEO and Daniela Amodei as President. Amazon has committed up to $4 billion in investment. The structure includes unusual provisions designed to preserve the safety mission even under acquisition pressure. Whether those provisions would hold under real duress is untested.</p>
+      <p>Both companies are burning cash at enormous rates. The compute required to train frontier models is staggering. Neither can operate indefinitely without massive external funding. This creates commercial pressure that, at some level, will always be in tension with a go-slow safety philosophy. How each company manages that tension is the real test of their stated commitments.</p>
+
+      <h2>Which Vision Is Right?</h2>
+      <p>Probably neither, in its pure form.</p>
+      <p>The "move fast to stay at the frontier" logic assumes that being the most capable lab makes you the most influential — but influence over what, exactly? Over regulation? Over other labs' behavior? Over what gets deployed at scale? Each of these is a different claim with different evidence behind it.</p>
+      <p>The "safety research must lead capabilities" logic assumes you can actually slow down — but in a competitive landscape with Chinese AI labs, European AI initiatives, and dozens of startups, unilateral deceleration just cedes ground without making anyone safer.</p>
+      <p>What's clear is that the AI field is genuinely better off having both labs. The competitive pressure they put on each other has accelerated both capabilities and safety research. Anthropic's alignment work has influenced how OpenAI thinks about its own systems. OpenAI's product launches force Anthropic to ship rather than just research.</p>
+      <p>When you use ChatGPT or Claude, you're interacting with the outputs of these different philosophies. The products feel different in ways that trace back to these founding choices. And the question of which approach is right — whether the AI systems we're building are aligned enough, safe enough, interpretable enough — won't be answered in a blog post. It'll be answered by what happens next.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2023–2026 Specified Behavior &mdash; Exploring the world of AI</p>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+<script src="../js/main.js"></script>
+</body>
+</html>

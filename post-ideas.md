@@ -39,6 +39,18 @@ Shoot for 2 per week. Rank these (1 = highest priority) and I'll write them in o
 
 ---
 
+---
+
+## Done
+
+- [x] **10 Ways to Use AI in Your Daily Work Right Now** → `blog/10-ways-to-use-ai-at-work.html` (March 12, 2026)
+- [x] **ChatGPT vs. Claude vs. Gemini: Which Should You Use in 2026?** → `blog/chatgpt-vs-claude-vs-gemini.html` (March 5, 2026) — radar chart viz
+- [x] **OpenAI vs. Anthropic: Two Different Visions for AI** → `blog/openai-vs-anthropic.html` (February 26, 2026)
+- [x] **AI Hallucinations: Why AI Makes Things Up** → `blog/ai-hallucinations.html` (February 19, 2026) — token probability viz
+- [x] **How AI Image Generation Actually Works** → `blog/how-ai-image-generation-works.html` (February 12, 2026) — diffusion animation viz
+
+---
+
 ## Notes
 - Posts ranked by you go into `blog/` as HTML — copy any existing post as template
 - Update `blog/index.html` and optionally the homepage recent posts section when adding

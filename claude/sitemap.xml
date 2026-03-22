@@ -30,6 +30,41 @@
   </url>
 
   <url>
+    <loc>https://specifiedbehavior.com/blog/10-ways-to-use-ai-at-work.html</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://specifiedbehavior.com/blog/chatgpt-vs-claude-vs-gemini.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://specifiedbehavior.com/blog/openai-vs-anthropic.html</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://specifiedbehavior.com/blog/ai-hallucinations.html</loc>
+    <lastmod>2026-02-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://specifiedbehavior.com/blog/how-ai-image-generation-works.html</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
     <loc>https://specifiedbehavior.com/blog/prompt-engineering-101.html</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>yearly</changefreq>
