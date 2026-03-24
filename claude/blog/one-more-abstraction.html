@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One More Abstraction: What AI Actually Does to Software Engineering | Specified Behavior</title>
+  <meta name="description" content="AI coding tools don't end software engineering — they raise the floor, just like high-level languages did before them. Here's what that shift actually means for the humans in the loop.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Specified Behavior">
+  <meta property="og:title" content="One More Abstraction: What AI Actually Does to Software Engineering">
+  <meta property="og:description" content="AI coding tools don't end software engineering — they raise the floor, just like high-level languages did before them. Here's what that shift actually means for the humans in the loop.">
+  <meta property="og:url" content="https://specifiedbehavior.com/blog/one-more-abstraction.html">
+  <meta property="og:image" content="https://specifiedbehavior.com/img/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="One More Abstraction: What AI Actually Does to Software Engineering">
+  <meta name="twitter:description" content="Each computing era raised the floor. AI is just doing it again — here's what stays human.">
+  <link rel="canonical" href="https://specifiedbehavior.com/blog/one-more-abstraction.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "One More Abstraction: What AI Actually Does to Software Engineering",
+    "description": "AI coding tools don't end software engineering — they raise the floor, just like high-level languages did before them. Here's what that shift actually means for the humans in the loop.",
+    "url": "https://specifiedbehavior.com/blog/one-more-abstraction.html",
+    "datePublished": "2026-03-24",
+    "dateModified": "2026-03-24",
+    "author": { "@type": "Person", "name": "Zeph" },
+    "publisher": { "@type": "Organization", "name": "Specified Behavior", "url": "https://specifiedbehavior.com" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://specifiedbehavior.com/blog/one-more-abstraction.html" },
+    "isPartOf": { "@id": "https://specifiedbehavior.com/#website" }
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZMBY3P7BJ7',{'client_storage':'none'});</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* ── Rising Floor Visualization ── */
+    .viz-container {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      user-select: none;
+    }
+    .viz-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      text-align: center;
+    }
+    .viz-stage {
+      position: relative;
+      height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      overflow: hidden;
+    }
+    .viz-stack {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(360px, 100%);
+      display: flex;
+      flex-direction: column-reverse;
+    }
+    .viz-layer {
+      height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      overflow: hidden;
+      transition: height 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  opacity 0.4s ease,
+                  background 0.4s ease;
+      border-radius: 3px;
+      margin-top: 2px;
+      opacity: 0;
+      white-space: nowrap;
+    }
+    .viz-layer.visible {
+      height: 38px;
+      opacity: 1;
+    }
+    .viz-layer:nth-child(1) { background: rgba(99,102,241,0.18); color: rgba(165,180,252,0.9); border: 1px solid rgba(99,102,241,0.3); }
+    .viz-layer:nth-child(2) { background: rgba(99,102,241,0.24); color: rgba(165,180,252,0.95); border: 1px solid rgba(99,102,241,0.35); }
+    .viz-layer:nth-child(3) { background: rgba(99,102,241,0.30); color: rgba(199,210,254,0.95); border: 1px solid rgba(99,102,241,0.4); }
+    .viz-layer:nth-child(4) { background: rgba(99,102,241,0.38); color: rgba(199,210,254,1); border: 1px solid rgba(99,102,241,0.5); }
+    .viz-layer:nth-child(5) { background: rgba(99,102,241,0.50); color: #fff; border: 1px solid rgba(99,102,241,0.65); }
+
+    .viz-human {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: bottom 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+      pointer-events: none;
+    }
+    .viz-human-figure {
+      font-size: 1.6rem;
+      line-height: 1;
+      filter: drop-shadow(0 0 6px rgba(99,102,241,0.6));
+    }
+    .viz-human-label {
+      background: rgba(99,102,241,0.85);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      margin-top: 0.3rem;
+      white-space: nowrap;
+      opacity: 0;
+      transform: scale(0.85);
+      transition: opacity 0.3s ease 0.3s, transform 0.3s ease 0.3s;
+      letter-spacing: 0.02em;
+    }
+    .viz-human-label.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .viz-era-info {
+      margin-top: 1.25rem;
+      min-height: 3.5rem;
+      text-align: center;
+    }
+    .viz-era-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      transition: opacity 0.25s;
+    }
+    .viz-era-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+      transition: opacity 0.25s;
+    }
+
+    .viz-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+    .viz-btn {
+      background: var(--bg-3, #1e293b);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: var(--radius);
+      padding: 0.4rem 1rem;
+      font-size: 0.8rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .viz-btn:hover:not(:disabled) {
+      background: rgba(99,102,241,0.15);
+      border-color: rgba(99,102,241,0.5);
+      color: var(--text);
+    }
+    .viz-btn:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+    .viz-dots {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .viz-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    .viz-dot.active {
+      background: rgba(99,102,241,0.85);
+    }
+
+    .callout {
+      background: rgba(99,102,241,0.08);
+      border-left: 3px solid rgba(99,102,241,0.5);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .callout strong { color: var(--text); }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">Specified<span class="accent"> Behavior</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="../ai-basics.html">AI Basics</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../blog/" class="active">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-header">
+      <p class="article-back"><a href="../blog/">← All posts</a></p>
+      <h1>One More Abstraction: What AI Actually Does to Software Engineering</h1>
+      <div class="article-meta">
+        <span>March 24, 2026</span>
+        <span class="sep">·</span>
+        <span>Zeph</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>I spent the past week using Claude Code — an AI coding agent that works inside your terminal — to build out features on this site. Not occasionally, but as my primary workflow. Write a description of what I want, watch it read the codebase, write the files, check the results. And I noticed something that took me a day or two to fully process: I wasn't really writing code anymore. I was specifying behavior and reviewing outcomes.</p>
+
+      <p>That's not a complaint. It was genuinely faster, and the code it wrote was fine. But it raised a harder question: if the AI can do the typing, the file manipulation, and a lot of the thinking about <em>how</em> to implement something — what exactly is left for the human?</p>
+
+      <p>The short answer, I think, is: the same thing that was always left for the human, just one level higher up. And this is not the first time that's happened.</p>
+
+      <h2>Every Era Raises the Floor</h2>
+
+      <p>Computing history is, in a very real sense, a history of abstraction. Each generation of tools takes something that previously required deep technical expertise and turns it into a given — a capability you can invoke without thinking about its implementation. And each time that happened, people predicted the end of the technical profession. Each time, the profession evolved instead of disappeared.</p>
+
+      <p>The visualization below steps through five eras of software development. In each one, a new abstraction layer was added beneath the human, raising the floor they stand on. Step through it and notice two things: the job title barely changes, but what fills the day completely changes.</p>
+
+      <!-- ── Rising Floor Visualization ── -->
+      <div class="viz-container">
+        <div class="viz-title">The Rising Floor of Software Development</div>
+        <div class="viz-stage">
+          <div class="viz-stack" id="vizStack">
+            <div class="viz-layer" id="layer0">Hardware &amp; Physical Circuits</div>
+            <div class="viz-layer" id="layer1">Assembly Language</div>
+            <div class="viz-layer" id="layer2">High-Level Languages (C, COBOL, FORTRAN)</div>
+            <div class="viz-layer" id="layer3">Object-Oriented Languages &amp; Frameworks</div>
+            <div class="viz-layer" id="layer4">AI Coding Assistants</div>
+          </div>
+          <div class="viz-human" id="vizHuman">
+            <div class="viz-human-figure">🧑‍💻</div>
+            <div class="viz-human-label" id="vizLabel"></div>
+          </div>
+        </div>
+        <div class="viz-era-info">
+          <div class="viz-era-name" id="vizEraName"></div>
+          <div class="viz-era-desc" id="vizEraDesc"></div>
+        </div>
+        <div class="viz-controls">
+          <button class="viz-btn" id="vizPrev">← Back</button>
+          <div class="viz-dots" id="vizDots"></div>
+          <button class="viz-btn" id="vizNext">Next →</button>
+        </div>
+      </div>
+
+      <p>Notice what happens each time: the abstraction layer below you gets thicker, and your job description moves one step up the value chain. Electrical engineers didn't disappear when high-level languages arrived — they moved into chip design, systems architecture, and hardware engineering specialties that simply didn't exist before. COBOL programmers weren't replaced by Java developers; the profession expanded to include more people solving harder problems.</p>
+
+      <h2>The Abstraction Thesis</h2>
+
+      <p>Here's the pattern, stated plainly: <strong>abstractions don't replace human judgment — they reposition it.</strong> When assembly language arrived, EE professionals who had been manually programming machine instructions suddenly had to think at a higher level: what algorithm do I want, not how do I encode it in binary. When object-oriented frameworks arrived, the programmers who had been carefully managing memory allocation suddenly had to think about architecture: how do these systems relate to each other, not how do I free this pointer.</p>
+
+      <p>AI coding tools are doing the same thing. They're absorbing the implementation layer — the translation of a design into working code — and pushing the human's job upward into design, judgment, and validation. The question is no longer "how do I write a function that does X?" but "what should X actually do, and is this right?"</p>
+
+      <div class="callout">
+        <strong>The pattern:</strong> Each abstraction automates the layer of work that felt most mechanical. What's left is what required judgment to begin with — it just wasn't visible through all the mechanical work surrounding it.
+      </div>
+
+      <h2>What AI Can't Abstract Away</h2>
+
+      <p>Two things remain stubbornly human, and I don't think this changes for a long time.</p>
+
+      <h3>1. Translating intent from the humans who have it</h3>
+
+      <p>Someone in an organization has a goal. A business analyst wants to understand customer churn. An executive wants to know why revenue dropped last quarter. A product manager wants a checkout flow that feels less confusing to users. These goals exist in human language, are shaped by political and organizational context, involve unstated assumptions, and are often only half-formed when first expressed.</p>
+
+      <p>AI can help implement once the goal is clear. But the translation from "what the business wants" to "a clear enough specification that anything can implement it" — that remains a deeply human act. It requires sitting in a room with stakeholders, pushing back, asking the uncomfortable clarifying questions, and making judgment calls about what matters most when requirements conflict. No model today can substitute for that process, because the model isn't in the room, doesn't know the organization's history, and can't read the politics of why a particular feature got prioritized.</p>
+
+      <p>Software engineers were always doing this, but it was hard to see. It looked like their job was writing code. Their job was actually being the interface between human intent and executable reality — the code was just the output of that process. AI takes over the output. The process is still human.</p>
+
+      <h3>2. Validating that "working" means "correct"</h3>
+
+      <p>Unit tests are useful but bounded. They verify that a function behaves as specified. What they can't verify is whether the specification itself was right. And this is where software development has always had a gap that only humans can close.</p>
+
+      <p>"Correct" in software means "matches expectations." But expectations are famously nebulous. They live in the minds of users who may not know what they want until they see it. They drift as the business changes. They're often contradictory across stakeholders. You can write a perfectly passing test suite for software that completely fails to do what anyone actually needed.</p>
+
+      <p>The engineer who sits down with a working build and thinks "this technically runs, but does it <em>make sense</em>?" is doing something irreplaceable. That judgment — grounded in domain knowledge, user empathy, and an understanding of what "good" looks like in context — is the thing that AI tools currently lack the grounding to perform. They can generate tests; they can't generate taste.</p>
+
+      <h2>A Different Kind of Engineering</h2>
+
+      <p>What I'm describing isn't the end of software engineering. It's the elevation of it. The parts of the job that were frankly mechanical — typing boilerplate, looking up syntax, translating a clear design into file structure — those are going away. Fast. What's left is the parts that required the most experienced engineers to begin with: understanding the problem, designing the solution, and validating the outcome.</p>
+
+      <p>This is good news for engineers who are already good at the hard part. It's a real disruption for workflows built around the mechanical part. The profession will contract in some dimensions and expand in others — just like it did when C replaced assembly, and when frameworks replaced bare C.</p>
+
+      <p>The floor keeps rising. The humans keep standing on top of it. The view from up there just keeps getting better.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2023–2026 Specified Behavior &mdash; Exploring the world of AI</p>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  const eras = [
+    {
+      name: "1940s–60s: The Hardware Era",
+      desc: "Engineers hand-wired circuits and wrote machine code. Every instruction was manual.",
+      label: "Wires circuits & writes machine code",
+      layers: 0
+    },
+    {
+      name: "1960s–70s: Assembly Language",
+      desc: "Mnemonics replaced binary. You still thought in registers and memory addresses, but a layer of syntax helped.",
+      label: "Designs algorithms in assembly",
+      layers: 1
+    },
+    {
+      name: "1970s–90s: High-Level Languages",
+      desc: "C, COBOL, FORTRAN let you express logic without thinking about hardware. The compiler handled the rest.",
+      label: "Writes application logic",
+      layers: 2
+    },
+    {
+      name: "1990s–2010s: OOP & Frameworks",
+      desc: "Libraries and frameworks handled memory, networking, UI. Engineers architected systems from pre-built components.",
+      label: "Architects systems & services",
+      layers: 3
+    },
+    {
+      name: "2020s: AI Coding Assistants",
+      desc: "AI handles implementation. The engineer specifies intent, reviews outcomes, and owns the interface to reality.",
+      label: "Specifies behavior & validates outcomes",
+      layers: 4
+    }
+  ];
+
+  const LAYER_H = 40; // px per layer (height + gap)
+
+  let current = 0;
+
+  const stack = document.getElementById('vizStack');
+  const human = document.getElementById('vizHuman');
+  const label = document.getElementById('vizLabel');
+  const eraName = document.getElementById('vizEraName');
+  const eraDesc = document.getElementById('vizEraDesc');
+  const prevBtn = document.getElementById('vizPrev');
+  const nextBtn = document.getElementById('vizNext');
+  const dotsEl = document.getElementById('vizDots');
+
+  // Build dots
+  eras.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'viz-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  });
+
+  function render(idx, animate) {
+    const era = eras[idx];
+
+    // Show/hide layers
+    const layers = stack.querySelectorAll('.viz-layer');
+    layers.forEach((l, i) => {
+      l.classList.toggle('visible', i <= era.layers);
+    });
+
+    // Lift human figure
+    const stackH = (era.layers + 1) * LAYER_H;
+    human.style.bottom = stackH + 'px';
+
+    // Update label
+    label.textContent = era.label;
+    label.classList.remove('show');
+    setTimeout(() => label.classList.add('show'), 10);
+
+    // Update info
+    eraName.textContent = era.name;
+    eraDesc.textContent = era.desc;
+
+    // Update dots
+    dotsEl.querySelectorAll('.viz-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === idx);
+    });
+
+    // Update buttons
+    prevBtn.disabled = idx === 0;
+    nextBtn.disabled = idx === eras.length - 1;
+  }
+
+  function goTo(idx) {
+    current = idx;
+    render(current, true);
+  }
+
+  prevBtn.addEventListener('click', () => { if (current > 0) goTo(current - 1); });
+  nextBtn.addEventListener('click', () => { if (current < eras.length - 1) goTo(current + 1); });
+
+  // Init
+  render(0, false);
+})();
+</script>
+</body>
+</html>
