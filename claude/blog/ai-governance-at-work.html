@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Companies Are Approaching AI Governance in 2026 | Specified Behavior</title>
+  <meta name="description" content="AI governance is the new IT governance headache. How companies are managing spend, risk, and policy across chat tools and coding tools — and why each category demands a different approach.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Specified Behavior">
+  <meta property="og:title" content="How Companies Are Approaching AI Governance in 2026">
+  <meta property="og:description" content="Chat tools and coding tools create very different governance problems. Here's how organizations are thinking about AI policy, spend, and risk in 2026.">
+  <meta property="og:url" content="https://specifiedbehavior.com/blog/ai-governance-at-work.html">
+  <meta property="og:image" content="https://specifiedbehavior.com/img/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How Companies Are Approaching AI Governance in 2026">
+  <meta name="twitter:description" content="Chat tools and coding tools create very different governance problems. Here's how organizations are thinking about AI policy, spend, and risk in 2026.">
+  <link rel="canonical" href="https://specifiedbehavior.com/blog/ai-governance-at-work.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "How Companies Are Approaching AI Governance in 2026",
+    "description": "Chat tools and coding tools create very different governance problems. Here's how organizations are thinking about AI policy, spend, and risk in 2026.",
+    "url": "https://specifiedbehavior.com/blog/ai-governance-at-work.html",
+    "datePublished": "2026-04-07",
+    "dateModified": "2026-04-07",
+    "author": { "@type": "Person", "name": "Zeph" },
+    "publisher": { "@type": "Organization", "name": "Specified Behavior", "url": "https://specifiedbehavior.com" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://specifiedbehavior.com/blog/ai-governance-at-work.html" },
+    "isPartOf": { "@id": "https://specifiedbehavior.com/#website" }
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZMBY3P7BJ7',{'client_storage':'none'});</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">Specified<span class="accent"> Behavior</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="../ai-basics.html">AI Basics</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../blog/" class="active">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-header">
+      <p class="article-back"><a href="../blog/">← All posts</a></p>
+      <h1>How Companies Are Approaching AI Governance in 2026</h1>
+      <div class="article-meta">
+        <span>April 2026</span>
+        <span class="sep">·</span>
+        <span>Zeph</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>Three years ago, AI governance meant a brief paragraph in the acceptable-use policy and a Slack message from IT reminding people not to paste customer data into ChatGPT. That was enough — barely — for a world where AI was a novelty. It's not enough anymore.</p>
+
+      <p>Today, AI tools are woven into how work actually gets done. Marketing teams run campaigns through Claude. Customer success reps draft responses with Copilot. And engineering teams — across companies of every size — use AI coding assistants so heavily that removing them would cause a productivity crisis. The question of how to govern AI use is no longer a future-tense concern. It's a present-tense operational problem.</p>
+
+      <p>And it turns out, it's two different problems depending on which category of tool you're talking about.</p>
+
+      <h2>The Two Categories That Matter</h2>
+
+      <p>Most companies, when they start thinking seriously about AI governance, quickly realize their tool landscape falls into two distinct buckets: <strong>chat-focused tools</strong> and <strong>coding-focused tools</strong>. They look superficially similar — you type something, an AI responds — but they create almost entirely different risk profiles, spend patterns, and governance challenges.</p>
+
+      <p>Chat tools are the general-purpose AI assistants: ChatGPT (and ChatGPT Enterprise), Claude.ai, Microsoft 365 Copilot, Google Gemini for Workspace. They're used by everyone in the organization — not just technical staff — for writing, research, summarization, brainstorming, and countless other tasks.</p>
+
+      <p>Coding tools are the developer-specific assistants: GitHub Copilot, Cursor, Codeium, JetBrains AI Assistant, and agentic tools like Claude Code and Copilot Workspace. They're used almost exclusively by engineers and operate with deep access to source code, terminals, and file systems.</p>
+
+      <p>Treating these two categories the same is a governance mistake. The risks are different. The spend patterns are different. The mitigation strategies are different.</p>
+
+      <h2>Chat Tools: The Shadow IT Problem and Data Leakage Risk</h2>
+
+      <p>The central governance challenge with chat tools isn't that employees use them badly — it's that employees use them <em>before</em> any governance exists. By the time most companies formalized AI policies, a significant portion of their workforce was already using free-tier tools with personal accounts. This is the shadow IT problem, and it's harder to solve than it looks.</p>
+
+      <p>When an employee pastes a sensitive customer contract into ChatGPT's free tier to ask for a summary, a few things happen simultaneously that should concern any compliance or security team:</p>
+
+      <ul>
+        <li>That text may be used to train future models, depending on the provider's data retention policies (OpenAI's free tier historically did retain conversation data for training; enterprise tiers typically don't).</li>
+        <li>The data transits and is processed on infrastructure outside the company's control.</li>
+        <li>There's no audit trail — no record that it happened, no way to investigate an incident after the fact.</li>
+      </ul>
+
+      <p>The solution most companies are landing on is <strong>tiered provisioning</strong>: make enterprise-grade tools available and frictionless so employees have no reason to reach for personal accounts. Microsoft 365 Copilot has been particularly strategic here — because it lives inside Office, it intercepts the use case before the employee ever opens a browser tab. If Copilot is already in Word and Outlook, there's less reason to go to ChatGPT.</p>
+
+      <p>From a spend perspective, chat tools are relatively straightforward. Enterprise licenses are generally per-seat, predictable, and comparable to other SaaS spend. The harder problem is measuring ROI: how do you know if the $30/seat/month is actually generating value? Most companies are still figuring this out, and the honest answer is that utilization metrics (are people logging in?) are a poor proxy for productivity impact.</p>
+
+      <h2>Coding Tools: Higher Stakes, More Surface Area</h2>
+
+      <p>Coding tools present a different class of governance problem, and it's more serious in almost every dimension.</p>
+
+      <h3>Intellectual Property and Licensing Risk</h3>
+
+      <p>The most publicized concern with AI coding tools is whether code they generate reproduces snippets from training data — including open-source code with GPL or other copyleft licenses. If GPL-licensed code ends up in a commercial product, the downstream licensing obligations can be significant. GitHub has argued that Copilot generates novel code rather than copying verbatim, but the legal question isn't fully settled and companies with significant IP concerns treat it as a real risk.</p>
+
+      <p>The mitigation is mostly filtering: enterprise versions of coding tools typically include a "public code filter" that blocks suggestions that match known open-source code above a certain similarity threshold. It's not a perfect solution, but it's the standard response.</p>
+
+      <h3>Security Vulnerabilities and Code Quality</h3>
+
+      <p>A more immediate and quantifiable concern: AI coding assistants sometimes suggest insecure code. SQL injection patterns, unvalidated input, hardcoded credentials, missing authentication checks — these issues appear in AI-generated code more often than in carefully reviewed human-written code, because the model is optimizing for code that <em>works</em>, not code that's secure.</p>
+
+      <p>This isn't hypothetical. Multiple security research teams have published studies showing that code generated by AI assistants, when reviewed by a developer who's moving fast and trusting the output, introduces more vulnerabilities than baseline. The risk isn't the AI — it's the AI combined with reduced scrutiny. Developers tend to review AI-generated code less critically than their own.</p>
+
+      <p>The governance response is to integrate AI code review into existing security tooling: run SAST (static application security testing) scanners on everything regardless of origin, and ensure that code review processes don't relax for AI-assisted code. This sounds obvious but requires explicit policy, because the cultural drift toward "the AI already checked it" is real.</p>
+
+      <h3>Secrets and Credentials in Context</h3>
+
+      <p>This one is underappreciated: AI coding assistants operate with context — often a lot of it. Modern tools like Cursor and GitHub Copilot read your entire open workspace to provide better suggestions. When that workspace contains a <code>.env</code> file with database credentials, an API key, or a private certificate, that data may be sent to the provider's servers as part of the inference request.</p>
+
+      <p>Enterprise agreements typically include data processing terms that prevent training on this data, but "no training" is different from "no exposure." The data still transits the wire and touches the provider's infrastructure. For highly sensitive credentials, the right governance response is secrets management — use a vault like HashiCorp Vault or AWS Secrets Manager so that credentials never live in plain text in the repository in the first place. This is good practice regardless of AI, but AI tooling makes it more urgent.</p>
+
+      <h3>Agentic Coding Tools: A Different Risk Category Entirely</h3>
+
+      <p>The newest category — agentic coding tools like Claude Code, Copilot Workspace, and Devin — creates a risk profile that doesn't map cleanly onto either chat tools or traditional coding assistants. These tools don't just suggest code; they <em>take actions</em>. They write and delete files, run terminal commands, make git commits, and in some configurations can push to remote branches or trigger CI/CD pipelines.</p>
+
+      <p>An agentic tool that misunderstands a task, or that's given a task with underspecified scope, can do a lot of damage in a short amount of time — not maliciously, but consequentially. Deleting files, overwriting working code, committing broken changes to a branch — these are recoverable with good version control hygiene, but they create real incidents.</p>
+
+      <p>Companies using agentic tools are adopting a few patterns: running agents in sandboxed environments with limited filesystem scope, requiring human review before any git operations, and logging all tool invocations so that agent actions are auditable. The principle is "human in the loop for irreversible actions" — which is conceptually simple but requires deliberate implementation.</p>
+
+      <h2>Spend: Two Different Problems</h2>
+
+      <p>AI spend governance has gotten its own abbreviation in some organizations: FinOps for AI, or AIFinOps. The challenge is that AI costs are both novel and fast-growing.</p>
+
+      <p>Chat tool spend is mostly predictable. You pay per seat, you manage license counts the same way you manage any SaaS subscription. The main risk is <strong>license sprawl</strong>: a company might end up paying for ChatGPT Enterprise, Microsoft 365 Copilot, and Claude for Work simultaneously, with overlapping use cases and no centralized owner of the total picture. Consolidation conversations are common, and they tend to get complicated because different teams have strong tool preferences.</p>
+
+      <p>Coding tool spend is messier. GitHub Copilot is per-seat, but other tools like Cursor are also per-seat, and usage-based API tools (if teams are calling the API directly) can spike unpredictably. More importantly, the number of tools is high: it's common to find individual developers running GitHub Copilot through their IDE, Cursor for certain tasks, and a CLI agent for automation — often on separate budgets or no formal budget at all.</p>
+
+      <p>The governance response is centralization of purchasing and visibility. A single team (often IT or engineering platform) owns the approved tool list, negotiates enterprise agreements, and has read access to utilization dashboards. Tools not on the approved list require a formal request. This creates friction, which is the point: friction that's designed to catch the "I'll just expense my personal subscription" pattern before it becomes a compliance issue.</p>
+
+      <h2>What Governance Actually Looks Like in Practice</h2>
+
+      <p>Across the companies that have moved past the "we should probably have a policy" phase, a few patterns stand out:</p>
+
+      <p><strong>Approved tool lists with data classification requirements.</strong> Tier 1: these tools are approved for use with any internal data. Tier 2: approved, but only for non-sensitive data (no PII, no financial data, no source code in restricted projects). Tier 3: not approved — use requires a security review. The classification scheme mirrors how the company already thinks about data, which makes adoption easier.</p>
+
+      <p><strong>Separate policies for chat and coding tools.</strong> The risk profiles are different enough that they warrant different treatment. Chat tool policy focuses on data handling and content. Coding tool policy adds IP risk, security review requirements, and agentic action constraints.</p>
+
+      <p><strong>Centralized licensing with team-level budgets.</strong> Procurement handles the enterprise agreements; teams get allocated spend or a license count. This prevents the fragmentation problem while keeping individual teams from feeling like they have no say.</p>
+
+      <p><strong>Audit logging where possible.</strong> Enterprise versions of most major tools now provide audit logs — who used what, when, what data classification they accessed. This isn't useful for day-to-day operations, but it's essential when something goes wrong and you need to investigate.</p>
+
+      <h2>The Governance Gap That Remains</h2>
+
+      <p>For all the progress, there's a governance gap that most organizations haven't solved: <strong>output quality verification</strong>. Policies can govern what data goes into AI tools. They can't easily govern the quality of what comes out.</p>
+
+      <p>Chat tools produce summaries, drafts, and analyses that employees act on. If those outputs are wrong — and they sometimes are, confidently and plausibly — that's a business risk that doesn't show up in any access log. Coding tools produce code that passes review but has subtle bugs or security issues that only manifest in production. The tooling for catching these failures at scale is still immature.</p>
+
+      <p>The honest state of AI governance in 2026 is: the infrastructure is in place, the policies are written, but the feedback loops that would tell you when the AI is making things worse rather than better are still being built. That's where the next wave of governance tooling will land — not in controlling access, but in measuring outcomes.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2023–2026 Specified Behavior &mdash; Exploring the world of AI</p>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+<script src="../js/main.js"></script>
+</body>
+</html>
