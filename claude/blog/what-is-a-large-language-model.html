@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Is a Large Language Model? | Specified Behavior</title>
+  <meta name="description" content="A plain-English explanation of what a large language model is, how it works, and why it seems so smart — no jargon required.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Specified Behavior">
+  <meta property="og:title" content="What Is a Large Language Model?">
+  <meta property="og:description" content="A plain-English explanation of what a large language model is, how it works, and why it seems so smart — no jargon required.">
+  <meta property="og:url" content="https://specifiedbehavior.com/blog/what-is-a-large-language-model.html">
+  <meta property="og:image" content="https://specifiedbehavior.com/img/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What Is a Large Language Model?">
+  <meta name="twitter:description" content="A plain-English explanation of what a large language model is, how it works, and why it seems so smart — no jargon required.">
+  <link rel="canonical" href="https://specifiedbehavior.com/blog/what-is-a-large-language-model.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "What Is a Large Language Model?",
+    "description": "A plain-English explanation of what a large language model is, how it works, and why it seems so smart — no jargon required.",
+    "url": "https://specifiedbehavior.com/blog/what-is-a-large-language-model.html",
+    "datePublished": "2026-04-01",
+    "dateModified": "2026-04-01",
+    "author": { "@type": "Person", "name": "Zeph" },
+    "publisher": { "@type": "Organization", "name": "Specified Behavior", "url": "https://specifiedbehavior.com" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://specifiedbehavior.com/blog/what-is-a-large-language-model.html" },
+    "isPartOf": { "@id": "https://specifiedbehavior.com/#website" }
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZMBY3P7BJ7',{'client_storage':'none'});</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    #token-canvas {
+      display: block;
+      width: 100%;
+      max-width: 580px;
+      aspect-ratio: 580 / 200;
+      margin: 1.75rem auto;
+      border-radius: var(--radius);
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+    }
+    .token-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: -1rem;
+      margin-bottom: 1.75rem;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">Specified<span class="accent"> Behavior</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="../ai-basics.html">AI Basics</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../blog/" class="active">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-header">
+      <p class="article-back"><a href="../blog/">← All posts</a></p>
+      <h1>What Is a Large Language Model?</h1>
+      <div class="article-meta">
+        <span>April 1, 2026</span>
+        <span class="sep">·</span>
+        <span>Zeph</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>ChatGPT. Claude. Gemini. Llama. You've seen the names everywhere. They're all described as "large language models" — but what does that actually mean? What's a language model, what makes it large, and why does it seem to understand and write like a person? Let's answer those questions in plain English.</p>
+
+      <h2>Start Here: What Is a Model?</h2>
+
+      <p>In machine learning, a "model" is a program that has learned to do something by looking at examples, rather than being explicitly programmed with rules. You don't tell it: "if the sentence contains 'unfortunately,' it's probably bad news." Instead, you show it millions of examples of bad-news sentences, and it figures out the patterns itself.</p>
+
+      <p>A <em>language</em> model specifically has learned patterns in text. Not grammar rules, not a dictionary, but deep statistical patterns about how words and ideas relate to each other across billions of documents. What word tends to come after "the cat sat on the"? What concepts tend to appear together? What makes a sentence feel complete?</p>
+
+      <p>And <em>large</em> refers to scale — both the amount of data used for training (hundreds of billions of words) and the number of parameters in the model (billions to hundreds of billions of adjustable internal values, roughly analogous to the "settings" the model has learned).</p>
+
+      <h2>The Core Task: Predicting the Next Word</h2>
+
+      <p>At its heart, a large language model does one thing: given a sequence of text, predict what comes next. That's it. It assigns probabilities to every possible next token (a token is roughly a word or part of a word), and picks from the likely ones.</p>
+
+      <canvas id="token-canvas" width="1160" height="400" aria-label="Animated demonstration of next-token generation: a sentence is shown with a blinking cursor, and tokens appear one at a time highlighted in indigo before settling into the text"></canvas>
+      <p class="token-caption">Each word arrives as a separate prediction. The model commits to one token at a time, then immediately predicts the next.</p>
+
+      <p>This sounds almost embarrassingly simple. But here's what's remarkable: to predict text well, you have to understand an enormous amount about the world.</p>
+
+      <p>To predict that "The capital of France is ___" ends with "Paris," you have to know geography. To predict the next line of a poem, you have to understand rhythm and rhyme. To predict what comes after "She was upset because ___," you need a model of human emotion and causality. A system that's learned to predict text very well has, in the process, absorbed a lot of implicit knowledge about how the world works.</p>
+
+      <p>This is why large language models seem so capable: they didn't learn facts explicitly, but they learned the patterns of how facts are expressed — and that turns out to encode a surprising amount of real-world understanding.</p>
+
+      <h2>How Does the Model Actually Learn?</h2>
+
+      <p>Training a large language model happens in phases. The first and most computationally expensive phase is <strong>pre-training</strong>: the model reads an enormous amount of text — web pages, books, code, Wikipedia, academic papers — and repeatedly tries to predict the next token. Every time it gets it wrong, the error is used to adjust its internal parameters slightly, nudging the model toward better predictions. This process happens billions of times across billions of examples.</p>
+
+      <p>After pre-training, the model is very good at predicting text but isn't particularly useful as an assistant yet — it might complete a question by generating more questions rather than answering. A second phase, called fine-tuning (often using a technique called Reinforcement Learning from Human Feedback, or RLHF), shapes the model to be helpful and to respond to instructions rather than just continue text. This is the step that turns a raw language model into something like ChatGPT or Claude.</p>
+
+      <h2>The "Large" Part Really Matters</h2>
+
+      <p>It's worth dwelling on the scale, because it's genuinely hard to internalize. GPT-3, which felt like a watershed moment when it launched in 2020, had 175 billion parameters and was trained on hundreds of billions of words. Modern frontier models are larger still — GPT-4, Claude 3, and Gemini Ultra are estimated to have hundreds of billions to over a trillion parameters, trained on trillions of words.</p>
+
+      <p>What scale buys you isn't just more knowledge — it's qualitatively different capabilities. Researchers have observed that certain abilities only emerge once models pass certain size thresholds. Below a certain scale, a model can't reliably do multi-step arithmetic. Above it, the ability just appears. This "emergent behavior" from scale was one of the surprising findings of the last few years and is still not fully understood theoretically.</p>
+
+      <h2>What LLMs Are Good At</h2>
+
+      <p>Large language models excel at tasks that involve understanding or generating natural language:</p>
+      <ul>
+        <li><strong>Writing and editing</strong> — drafting, summarizing, rewriting in different tones</li>
+        <li><strong>Question answering</strong> — explaining concepts, answering factual questions (with caveats, below)</li>
+        <li><strong>Translation</strong> — across virtually every major language pair</li>
+        <li><strong>Code generation</strong> — writing, explaining, and debugging code in most programming languages</li>
+        <li><strong>Reasoning through problems</strong> — breaking down complex questions, working through arguments step by step</li>
+        <li><strong>Classification and extraction</strong> — labeling text, pulling structured information from unstructured documents</li>
+      </ul>
+
+      <h2>What LLMs Are Bad At</h2>
+
+      <p>The limitations are just as important to understand as the capabilities.</p>
+
+      <p><strong>They sometimes make things up.</strong> This is the hallucination problem. Because the model is predicting plausible text, it can generate text that sounds factual but isn't. It doesn't "know" it's wrong — it has no internal ground truth to check against, just pattern completion. For critical information, always verify.</p>
+
+      <p><strong>They have a knowledge cutoff.</strong> Pre-training happens once (or periodically). A model's knowledge ends at its training cutoff date. It doesn't know what happened last week unless it's been given tools to search the web or its training data has been recently updated.</p>
+
+      <p><strong>They don't do precise computation natively.</strong> A language model predicting digits of arithmetic can get it right for simple cases (it's seen lots of arithmetic in training data) but becomes unreliable for complex calculations. When you see AI getting math right reliably, it's typically because it's been given a code execution tool to run the computation rather than predicting the answer directly.</p>
+
+      <p><strong>They have no persistent memory by default.</strong> Each conversation starts fresh. The model has no memory of previous conversations unless that history is explicitly included in the context window of the current session.</p>
+
+      <h2>Why This Matters for How You Use Them</h2>
+
+      <p>Understanding what an LLM actually is changes how you interact with one productively. It's not a search engine, and treating it like one will disappoint you — it doesn't look things up, it generates plausible responses. It's not a person, so it doesn't actually "understand" in the way you do — but it has learned patterns that look like understanding across an astonishing range of topics.</p>
+
+      <p>The most useful mental model is something like: <em>a very well-read collaborator who can help you think, write, and work — but who sometimes confidently says things that are wrong, and who you should verify rather than blindly trust for facts that matter.</em></p>
+
+      <p>That's not a limitation that makes LLMs useless. It's just an accurate description of what they are — and knowing it makes you a better user of them.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2023–2026 Specified Behavior &mdash; Exploring the world of AI</p>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var canvas = document.getElementById('token-canvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+
+  var W = 580, H = 200;
+  var dpr = window.devicePixelRatio || 1;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  ctx.scale(dpr, dpr);
+
+  var EXAMPLES = [
+    { prompt: 'Language models are trained to predict', tokens: [' the', ' next', ' token', ' in', ' a', ' sequence', '.'] },
+    { prompt: 'When you ask a question, AI',            tokens: [' reads', ' your', ' text', ' and', ' responds', ' one', ' token', ' at', ' a', ' time', '.'] },
+    { prompt: 'The best way to understand AI is to',    tokens: [' experiment', ' with', ' it', ' yourself', '.'] },
+  ];
+
+  var ei = 0, nShown = 0;
+  var phase = 'wait';
+  var phaseTs = null, cursorTs = null, cursorOn = true;
+
+  var WAIT_MS  = 900;
+  var FLASH_MS = 320;
+  var HOLD_MS  = 150;
+  var PAUSE_MS = 170;
+  var DONE_MS  = 2400;
+  var BLINK_MS = 530;
+
+  function baseText() {
+    var ex = EXAMPLES[ei], s = ex.prompt;
+    for (var i = 0; i < nShown; i++) s += ex.tokens[i];
+    return s;
+  }
+
+  function draw(ts) {
+    if (!phaseTs) phaseTs = ts;
+    if (!cursorTs) cursorTs = ts;
+    var el = ts - phaseTs;
+
+    if (ts - cursorTs > BLINK_MS) { cursorOn = !cursorOn; cursorTs = ts; }
+
+    var ex = EXAMPLES[ei];
+
+    if      (phase === 'wait'  && el > WAIT_MS)  { phase = 'flash'; phaseTs = ts; el = 0; }
+    else if (phase === 'flash' && el > FLASH_MS) { phase = 'hold';  phaseTs = ts; el = 0; }
+    else if (phase === 'hold'  && el > HOLD_MS)  {
+      nShown++;
+      phase = (nShown >= ex.tokens.length) ? 'done' : 'pause';
+      phaseTs = ts; el = 0;
+    }
+    else if (phase === 'pause' && el > PAUSE_MS) { phase = 'flash'; phaseTs = ts; el = 0; }
+    else if (phase === 'done'  && el > DONE_MS)  {
+      ei = (ei + 1) % EXAMPLES.length; nShown = 0;
+      phase = 'wait'; phaseTs = ts; el = 0;
+    }
+
+    ctx.clearRect(0, 0, W, H);
+
+    ctx.font      = '600 10.5px Inter, system-ui, sans-serif';
+    ctx.fillStyle = 'rgba(129,140,248,0.5)';
+    ctx.textAlign = 'center';
+    ctx.fillText('NEXT-TOKEN GENERATION', W / 2, 26);
+
+    var FONT = '500 13px Inter, system-ui, sans-serif';
+    ctx.font = FONT;
+
+    // measure full sentence to center
+    var fullText = ex.prompt;
+    ex.tokens.forEach(function (t) { fullText += t; });
+    var fullW   = ctx.measureText(fullText).width;
+    var startX  = Math.max(14, (W - fullW) / 2);
+    var lineY   = H / 2 + 6;
+
+    var base  = baseText();
+    var baseW = ctx.measureText(base).width;
+
+    // base text
+    ctx.fillStyle = 'rgba(209,213,219,0.9)';
+    ctx.textAlign = 'left';
+    ctx.fillText(base, startX, lineY);
+
+    // current token flashing in
+    if (phase === 'flash' || phase === 'hold') {
+      var tok   = ex.tokens[nShown];
+      var alpha = (phase === 'flash') ? Math.min(1, el / FLASH_MS) : 1.0;
+      ctx.fillStyle = 'rgba(129,140,248,' + alpha.toFixed(2) + ')';
+      ctx.fillText(tok, startX + baseW, lineY);
+      var tw = ctx.measureText(tok).width;
+      ctx.beginPath();
+      ctx.moveTo(startX + baseW, lineY + 3);
+      ctx.lineTo(startX + baseW + tw, lineY + 3);
+      ctx.strokeStyle = 'rgba(129,140,248,' + (alpha * 0.55).toFixed(2) + ')';
+      ctx.lineWidth   = 1.5;
+      ctx.stroke();
+    }
+
+    // blinking cursor
+    if ((phase === 'wait' || phase === 'pause' || phase === 'done') && cursorOn) {
+      var cx = startX + baseW + 2;
+      ctx.fillStyle = 'rgba(129,140,248,0.85)';
+      ctx.fillRect(cx, lineY - 13, 2, 15);
+    }
+
+    // footer status
+    ctx.font      = '400 11px Inter, system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    if (phase === 'done') {
+      ctx.fillStyle = 'rgba(129,140,248,0.55)';
+      ctx.fillText(ex.tokens.length + ' tokens generated', W / 2, H - 16);
+    } else {
+      var showing = nShown + ((phase === 'flash' || phase === 'hold') ? 1 : 0);
+      ctx.fillStyle = 'rgba(107,114,128,0.65)';
+      ctx.fillText('generating token ' + showing + ' of ' + ex.tokens.length + '\u2026', W / 2, H - 16);
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

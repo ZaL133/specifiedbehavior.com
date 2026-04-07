@@ -7,9 +7,9 @@ Shoot for 2 per week. Rank these (1 = highest priority) and I'll write them in o
 ## Unranked
 
 ### Explainers (broad audience, good for SEO)
-- [ ] **What is a Large Language Model?** — plain English, no jargon, answer the question people actually google
+- [x] **What is a Large Language Model?** — plain English, no jargon, answer the question people actually google → `blog/what-is-a-large-language-model.html` (April 1, 2026)
 - [ ] **AI Hallucinations: Why AI Makes Things Up** — what hallucinations are, why they happen structurally, how to reduce them in practice
-- [ ] **The Difference Between AI, Machine Learning, and Deep Learning** — these terms get used interchangeably; clear up the hierarchy
+- [x] **The Difference Between AI, Machine Learning, and Deep Learning** — these terms get used interchangeably; clear up the hierarchy → `blog/ai-vs-machine-learning-vs-deep-learning.html` (April 4, 2026)
 - [ ] **What is RAG?** — Retrieval-Augmented Generation: how AI gets access to current or private information without retraining
 - [ ] **What is the Context Window — and Why Does Size Matter?** — practical implications of short vs. long context, what "forgetting" looks like
 

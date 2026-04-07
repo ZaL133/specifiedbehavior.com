@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI vs. Machine Learning vs. Deep Learning: What's the Difference? | Specified Behavior</title>
+  <meta name="description" content="These three terms get used interchangeably, but they mean different things. Here's the clear, plain-English breakdown of how AI, machine learning, and deep learning relate to each other.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Specified Behavior">
+  <meta property="og:title" content="AI vs. Machine Learning vs. Deep Learning: What's the Difference?">
+  <meta property="og:description" content="These three terms get used interchangeably, but they mean different things. Here's the clear, plain-English breakdown of how they relate to each other.">
+  <meta property="og:url" content="https://specifiedbehavior.com/blog/ai-vs-machine-learning-vs-deep-learning.html">
+  <meta property="og:image" content="https://specifiedbehavior.com/img/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI vs. Machine Learning vs. Deep Learning: What's the Difference?">
+  <meta name="twitter:description" content="These three terms get used interchangeably, but they mean different things. Here's the plain-English breakdown of how they relate to each other.">
+  <link rel="canonical" href="https://specifiedbehavior.com/blog/ai-vs-machine-learning-vs-deep-learning.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "AI vs. Machine Learning vs. Deep Learning: What's the Difference?",
+    "description": "These three terms get used interchangeably, but they mean different things. Here's the clear, plain-English breakdown of how AI, machine learning, and deep learning relate to each other.",
+    "url": "https://specifiedbehavior.com/blog/ai-vs-machine-learning-vs-deep-learning.html",
+    "datePublished": "2026-04-04",
+    "dateModified": "2026-04-04",
+    "author": { "@type": "Person", "name": "Zeph" },
+    "publisher": { "@type": "Organization", "name": "Specified Behavior", "url": "https://specifiedbehavior.com" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://specifiedbehavior.com/blog/ai-vs-machine-learning-vs-deep-learning.html" },
+    "isPartOf": { "@id": "https://specifiedbehavior.com/#website" }
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZMBY3P7BJ7',{'client_storage':'none'});</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    #circles-canvas {
+      display: block;
+      width: 100%;
+      max-width: 420px;
+      aspect-ratio: 420 / 400;
+      margin: 1.75rem auto;
+      border-radius: var(--radius);
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+    }
+    .circles-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: -1rem;
+      margin-bottom: 1.75rem;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">Specified<span class="accent"> Behavior</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="../ai-basics.html">AI Basics</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../blog/" class="active">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-header">
+      <p class="article-back"><a href="../blog/">← All posts</a></p>
+      <h1>AI vs. Machine Learning vs. Deep Learning: What's the Difference?</h1>
+      <div class="article-meta">
+        <span>April 4, 2026</span>
+        <span class="sep">·</span>
+        <span>Zeph</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>Open any tech news article and you'll see these three terms used almost interchangeably: artificial intelligence, machine learning, deep learning. A headline might say "AI breakthrough" when it really means "a specific deep learning technique improved by a few percentage points on a benchmark." Another might say "machine learning" when they mean a rules-based algorithm that isn't learning at all.</p>
+
+      <p>The terms aren't synonyms. They describe different things at different levels of specificity — nested inside each other like Russian dolls. Here's the clear version.</p>
+
+      <h2>The Short Answer: Nested Circles</h2>
+
+      <p>Think of three concentric circles. The outermost is <strong>artificial intelligence</strong>. Inside it sits <strong>machine learning</strong>. Inside that sits <strong>deep learning</strong>. And if you want to know where ChatGPT and Claude live: inside deep learning, in the specific corner called <strong>large language models</strong>.</p>
+
+      <p>Every deep learning system is a machine learning system. Every machine learning system is an AI system. But not every AI system uses machine learning, and not every machine learning system uses deep learning.</p>
+
+      <p>Let's unpack each layer.</p>
+
+      <canvas id="circles-canvas" width="840" height="800" aria-label="Animated diagram of four concentric rings labeled from outermost to innermost: Artificial Intelligence, Machine Learning, Deep Learning, and LLMs"></canvas>
+      <p class="circles-caption">Each ring is a subset of the one outside it. Every LLM is a deep learning model; every deep learning model is a machine learning model; every machine learning model is an AI system.</p>
+
+      <h2>Artificial Intelligence: The Broadest Term</h2>
+
+      <p>Artificial intelligence, in its most general sense, means any system that does things we'd consider intelligent if a human did them — understanding language, recognizing faces, making decisions, playing games. The term dates to the 1950s, when researchers first started asking whether machines could think.</p>
+
+      <p>Early AI was mostly <strong>rule-based</strong>: programmers wrote explicit rules to encode expert knowledge. A medical diagnosis system might have thousands of if-then rules: "if fever AND rash AND recent travel to X, consider Y." These systems could be impressive within narrow domains, but they were brittle — they could only handle situations the rules anticipated, and writing comprehensive rules for complex domains like language turned out to be essentially impossible.</p>
+
+      <p>Rule-based AI still exists and is useful in many narrow contexts (your email spam filter has some rule-based components). But when people say "AI" today, they almost always mean machine learning.</p>
+
+      <h2>Machine Learning: AI That Learns from Data</h2>
+
+      <p>Machine learning is the approach where, instead of writing the rules yourself, you give the system examples and let it figure out the rules. You show it thousands of emails labeled spam or not-spam, and it learns the patterns that distinguish them. You show it thousands of photos labeled "cat" or "dog," and it learns what cats and dogs look like.</p>
+
+      <p>This shift — from programming rules to learning from data — is what made modern AI practical. Many problems that were impossible to solve with explicit rules became tractable when you could just feed in enough examples.</p>
+
+      <p>Machine learning has many subfields and approaches: decision trees, support vector machines, random forests, Bayesian classifiers. Most of these work well for structured data (spreadsheets, databases) and well-defined classification tasks. They're the workhorse of a lot of practical business AI — predicting customer churn, detecting fraud, recommending products.</p>
+
+      <p>What they weren't great at: unstructured data like images, audio, and natural language. For those problems, a different approach emerged.</p>
+
+      <h2>Deep Learning: Machine Learning with Neural Networks</h2>
+
+      <p>Deep learning is a type of machine learning that uses artificial neural networks — architectures loosely inspired by the brain — with many layers of processing ("deep" refers to these many layers). The input passes through layer after layer of computation, with each layer learning to detect increasingly abstract features.</p>
+
+      <p>For image recognition, the first layers might learn to detect edges. The next layers learn shapes. Later layers learn that certain combinations of shapes mean "wheel" or "face." The final layer combines all of that to say "this is a car."</p>
+
+      <p>Deep learning had existed as an idea for decades, but it became practically powerful in the early 2010s when three things converged: better training algorithms, dramatically cheaper GPU computing, and the availability of massive labeled datasets. AlexNet's win at the ImageNet competition in 2012 is often cited as the moment the field broke open — it dramatically outperformed everything else using deep learning, and it kicked off a decade of rapid advancement.</p>
+
+      <p>Deep learning is what powers modern image recognition, speech recognition, translation, and — most visibly — the generation of realistic text, images, audio, and video.</p>
+
+      <h2>Large Language Models: Deep Learning for Text</h2>
+
+      <p>Large language models (LLMs) like GPT-4, Claude, and Gemini are a specific architecture of deep learning model: the <strong>transformer</strong>, invented at Google in 2017. Transformers are particularly good at processing sequences — which makes them well-suited for language, since language is fundamentally a sequence of tokens.</p>
+
+      <p>What makes these models "large" is the scale of both training data (trillions of words) and the number of parameters (the internal values the model has learned — ranging from billions to potentially trillions in cutting-edge systems). As covered in a <a href="what-is-a-large-language-model.html">previous post</a>, scale turns out to unlock qualitatively new capabilities, not just more of the same.</p>
+
+      <p>The full nesting looks like this:</p>
+
+      <ul>
+        <li><strong>Artificial Intelligence</strong> — any system that performs intelligent tasks</li>
+        <li>&nbsp;&nbsp;&nbsp;&nbsp;<strong>Machine Learning</strong> — AI that learns from data rather than hard-coded rules</li>
+        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Deep Learning</strong> — ML using multi-layer neural networks</li>
+        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Large Language Models</strong> — deep learning transformers trained at scale on text</li>
+      </ul>
+
+      <h2>Why the Conflation Happens — and Why It Matters</h2>
+
+      <p>The reason these terms get blurred is partly laziness, but also partly because deep learning has become so dominant that the distinction feels academic. If 90% of the "AI" making news is deep learning, using the terms interchangeably is only slightly wrong most of the time.</p>
+
+      <p>But it matters in a few specific ways:</p>
+
+      <p><strong>When evaluating news.</strong> A headline about "AI" being used in a medical study might mean a simple logistic regression model, or it might mean a 70-billion-parameter neural network. The term "AI" tells you almost nothing about what's actually going on under the hood, and those two things have very different implications for reliability, interpretability, and generalizability.</p>
+
+      <p><strong>When choosing a tool.</strong> Not every problem needs deep learning. For many business prediction problems — customer lifetime value, fraud scoring, inventory forecasting — classical machine learning methods are faster to train, easier to interpret, require far less data, and perform just as well or better than a neural network. Reaching for a large language model when a simpler model would work is like using a sledgehammer to hang a picture frame.</p>
+
+      <p><strong>When thinking about risk.</strong> Deep learning models, and LLMs in particular, are notoriously hard to interpret — we often can't explain exactly why they produce a given output. Classical ML models like decision trees can be fully audited. That difference matters a lot for high-stakes applications where explainability is required (lending decisions, medical diagnostics, legal contexts).</p>
+
+      <h2>A Quick Reference</h2>
+
+      <p>If you take away nothing else, remember this:</p>
+
+      <ul>
+        <li><strong>AI</strong> is the field. Anything a machine does that looks intelligent.</li>
+        <li><strong>Machine learning</strong> is the dominant approach within AI: learn patterns from data rather than programming rules.</li>
+        <li><strong>Deep learning</strong> is a powerful subset of ML that uses neural networks with many layers. It's what powers everything you've heard about in the past few years — image generation, voice recognition, language models.</li>
+        <li><strong>LLMs</strong> (ChatGPT, Claude, Gemini) are deep learning models specifically trained on language at massive scale.</li>
+      </ul>
+
+      <p>When you see a headline that says "AI does X," you now have the vocabulary to ask the more precise question: what kind of AI, exactly? The answer is usually one of the layers above — and knowing which one tells you a lot about what you're actually dealing with.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2023–2026 Specified Behavior &mdash; Exploring the world of AI</p>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var canvas = document.getElementById('circles-canvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+
+  var W = 420, H = 400;
+  var dpr = window.devicePixelRatio || 1;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  ctx.scale(dpr, dpr);
+
+  var CX = W / 2, CY = H / 2 + 10;
+
+  // Each layer: label shown in the band between its ring and the next inner ring
+  var LAYERS = [
+    { label: 'Artificial Intelligence', desc: 'Any system that acts intelligently',  r: 168, rgb: '156,163,175' },
+    { label: 'Machine Learning',         desc: 'Learns patterns from data',           r: 122, rgb: '129,140,248' },
+    { label: 'Deep Learning',            desc: 'Multi-layer neural networks',         r: 78,  rgb: '99,102,241'  },
+    { label: 'LLMs',                     desc: 'GPT-4, Claude, Gemini \u2026',        r: 36,  rgb: '165,180,252' },
+  ];
+
+  // label y-positions: roughly midpoint of each band
+  // Band tops (from CY): 168, 122, 78, 36 above CY
+  // Band midpoints above CY: (168+122)/2=145, (122+78)/2=100, (78+36)/2=57, (36+0)/2=18
+  var LABEL_Y = [
+    CY - 145,  // AI
+    CY - 100,  // ML
+    CY - 57,   // DL
+    CY - 18,   // LLMs
+  ];
+
+  var STAGGER  = 600;   // ms between layers starting
+  var REVEAL   = 750;   // ms for each layer to animate in
+  var startTs  = null;
+
+  function layerP(i, ts) {
+    if (!startTs) return 0;
+    var el = ts - startTs - i * STAGGER;
+    if (el <= 0) return 0;
+    var raw = Math.min(1, el / REVEAL);
+    return 1 - Math.pow(1 - raw, 3); // ease-out cubic
+  }
+
+  function draw(ts) {
+    if (!startTs) startTs = ts;
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Draw outer rings first so inner ones paint on top
+    for (var i = 0; i < LAYERS.length; i++) {
+      var L = LAYERS[i];
+      var p = layerP(i, ts);
+      if (p <= 0) continue;
+
+      var r = L.r * p;
+
+      // fill
+      ctx.beginPath();
+      ctx.arc(CX, CY, r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(' + L.rgb + ',' + (0.06 * p).toFixed(3) + ')';
+      ctx.fill();
+
+      // stroke
+      ctx.beginPath();
+      ctx.arc(CX, CY, r, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(' + L.rgb + ',' + (0.55 * p).toFixed(3) + ')';
+      ctx.lineWidth   = (i === LAYERS.length - 1) ? 2 : 1.5;
+      ctx.stroke();
+    }
+
+    // Labels drawn after all circles so they're always on top
+    for (var i = 0; i < LAYERS.length; i++) {
+      var L  = LAYERS[i];
+      var p  = layerP(i, ts);
+      if (p < 0.45) continue;
+      var la = Math.min(1, (p - 0.45) / 0.4); // fade in 0.45→0.85
+
+      var ly   = LABEL_Y[i];
+      var fs   = (i === 0) ? 11 : (i === 1) ? 11 : (i === 2) ? 10.5 : 11;
+      var bold = (i === 3) ? '700' : '600';
+
+      ctx.font      = bold + ' ' + fs + 'px Inter, system-ui, sans-serif';
+      ctx.fillStyle = 'rgba(' + L.rgb + ',' + (0.92 * la).toFixed(3) + ')';
+      ctx.textAlign = 'center';
+      ctx.fillText(L.label, CX, ly);
+
+      ctx.font      = '400 9.5px Inter, system-ui, sans-serif';
+      ctx.fillStyle = 'rgba(156,163,175,' + (0.65 * la).toFixed(3) + ')';
+      ctx.fillText(L.desc, CX, ly + 14);
+    }
+
+    // Gentle pulse on innermost once fully loaded
+    var innerP = layerP(LAYERS.length - 1, ts);
+    if (innerP >= 1) {
+      var age   = ts - (startTs + (LAYERS.length - 1) * STAGGER + REVEAL);
+      var cycle = (age % 2200) / 2200;
+      var pr    = LAYERS[LAYERS.length - 1].r * (1 + 0.18 * Math.sin(cycle * Math.PI * 2));
+      var pa    = 0.12 * (0.5 + 0.5 * Math.sin(cycle * Math.PI * 2));
+      ctx.beginPath();
+      ctx.arc(CX, CY, pr, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(165,180,252,' + pa.toFixed(3) + ')';
+      ctx.lineWidth   = 2;
+      ctx.stroke();
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>
