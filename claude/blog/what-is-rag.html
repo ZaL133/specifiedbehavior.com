@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is RAG? Retrieval-Augmented Generation Explained | Specified Behavior</title>
+  <meta name="description" content="RAG lets AI answer questions about documents it was never trained on — current events, private files, internal knowledge bases. Here's exactly how it works.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Specified Behavior">
+  <meta property="og:title" content="What is RAG? Retrieval-Augmented Generation Explained">
+  <meta property="og:description" content="RAG lets AI answer questions about documents it was never trained on — current events, private files, internal knowledge bases. Here's exactly how it works.">
+  <meta property="og:url" content="https://specifiedbehavior.com/blog/what-is-rag.html">
+  <meta property="og:image" content="https://specifiedbehavior.com/img/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What is RAG? Retrieval-Augmented Generation Explained">
+  <meta name="twitter:description" content="RAG lets AI answer questions about documents it was never trained on. Here's exactly how it works.">
+  <link rel="canonical" href="https://specifiedbehavior.com/blog/what-is-rag.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "What is RAG? Retrieval-Augmented Generation Explained",
+    "description": "RAG lets AI answer questions about documents it was never trained on — current events, private files, internal knowledge bases. Here's exactly how it works.",
+    "url": "https://specifiedbehavior.com/blog/what-is-rag.html",
+    "datePublished": "2026-04-08",
+    "dateModified": "2026-04-08",
+    "author": { "@type": "Person", "name": "Zeph" },
+    "publisher": { "@type": "Organization", "name": "Specified Behavior", "url": "https://specifiedbehavior.com" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://specifiedbehavior.com/blog/what-is-rag.html" },
+    "isPartOf": { "@id": "https://specifiedbehavior.com/#website" }
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZMBY3P7BJ7',{'client_storage':'none'});</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    #rag-canvas {
+      display: block;
+      width: 100%;
+      max-width: 560px;
+      aspect-ratio: 560 / 320;
+      margin: 1.75rem auto;
+      border-radius: var(--radius);
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+    }
+    .rag-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: -1rem;
+      margin-bottom: 1.75rem;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">Specified<span class="accent"> Behavior</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="../ai-basics.html">AI Basics</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../blog/" class="active">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-header">
+      <p class="article-back"><a href="../blog/">← All posts</a></p>
+      <h1>What is RAG? Retrieval-Augmented Generation Explained</h1>
+      <div class="article-meta">
+        <span>April 8, 2026</span>
+        <span class="sep">·</span>
+        <span>Zeph</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>There's a fundamental problem with AI language models: they only know what they were trained on. A model trained through early 2025 doesn't know about things that happened in late 2025. A model trained on the public internet doesn't know anything about your company's internal documents, your customer database, or the report your team published last week.</p>
+
+      <p>For a lot of real-world applications, that's a dealbreaker. You can't build a useful customer support bot that doesn't know your product's documentation. You can't build a research assistant that can't read current papers. You can't build an internal knowledge tool on a model that doesn't know your internal knowledge.</p>
+
+      <p>Retrieval-Augmented Generation — RAG — is the most widely deployed solution to this problem. The idea is elegant: instead of baking all the knowledge into the model's weights through training, you look up the relevant information at the moment the question is asked and hand it to the model along with the question. The model doesn't need to know everything in advance; it just needs to be good at using the information it's given.</p>
+
+      <h2>The RAG Pipeline</h2>
+
+      <p>There are two distinct phases in a RAG system: <strong>indexing</strong> (which happens in advance) and <strong>retrieval + generation</strong> (which happens when someone asks a question).</p>
+
+      <canvas id="rag-canvas" width="1120" height="640" aria-label="Animated diagram showing the RAG pipeline: user query flows to vector search, which retrieves relevant documents, which are combined with the query into a prompt, which the LLM uses to generate an answer"></canvas>
+      <p class="rag-caption">The RAG pipeline: a question triggers a search, retrieved chunks are stuffed into the prompt, and the model generates a grounded answer.</p>
+
+      <h3>Phase 1: Indexing Your Documents</h3>
+
+      <p>Before any questions get asked, you need to process your documents into a form that supports fast semantic search. This involves three steps:</p>
+
+      <p><strong>Chunking.</strong> Large documents are split into smaller pieces — chunks — typically a few hundred words each. The chunk size is a meaningful design decision: too small and individual chunks lack context; too large and you retrieve more noise than signal.</p>
+
+      <p><strong>Embedding.</strong> Each chunk is converted into an <em>embedding</em> — a list of numbers (a vector) that captures its semantic meaning. Two chunks about similar topics will have similar vectors, even if they use different words. This is what makes semantic search possible: you're searching by meaning, not by keyword matching.</p>
+
+      <p><strong>Storing.</strong> The embeddings are stored in a vector database — a specialized data store designed for fast nearest-neighbor search over high-dimensional vectors. Popular options include Pinecone, Weaviate, Chroma, and pgvector (a Postgres extension). This database is your indexed knowledge base.</p>
+
+      <h3>Phase 2: Retrieval and Generation</h3>
+
+      <p>Now a user asks a question. Here's what happens:</p>
+
+      <p><strong>Embed the query.</strong> The user's question is converted into an embedding using the same embedding model used during indexing. This puts the question and the documents in the same vector space.</p>
+
+      <p><strong>Search.</strong> The vector database is queried for the chunks whose embeddings are closest to the query embedding — the chunks most semantically similar to the question. This happens in milliseconds, even over millions of documents.</p>
+
+      <p><strong>Construct the prompt.</strong> The top-k retrieved chunks are inserted into a prompt along with the user's question. A typical prompt looks something like: <em>"Use the following context to answer the question. Context: [retrieved chunks]. Question: [user question]."</em></p>
+
+      <p><strong>Generate.</strong> The language model receives this augmented prompt and generates an answer — one that's now grounded in the specific documents you retrieved. Because the relevant information is right there in the context, the model can cite it accurately rather than drawing on (potentially outdated or fabricated) training knowledge.</p>
+
+      <h2>Why RAG Works Better Than the Alternatives</h2>
+
+      <p>The obvious alternative to RAG is fine-tuning: train the model on your documents so it "knows" them the way it knows its pretraining data. Fine-tuning has its uses, but for knowledge retrieval it's generally a poor fit. It's expensive. It's slow — you can't update a fine-tuned model every time your documents change. And models trained to memorize facts tend to still hallucinate when pushed to the edges of what they learned.</p>
+
+      <p>Another alternative — now more viable as context windows have grown — is simply stuffing all your documents into the context window. With models supporting 200K or even 1M token contexts, this is sometimes workable for small document sets. But it's slow and expensive for large corpora, and attention quality tends to degrade over very long contexts (the "lost in the middle" problem, where models pay less attention to information buried in the middle of a very long context).</p>
+
+      <p>RAG threads the needle: you only retrieve the handful of chunks actually relevant to the current question, keeping the context focused and costs manageable, while the knowledge base can be as large as you need and updated continuously.</p>
+
+      <h2>What RAG Gets Wrong (and How to Fix It)</h2>
+
+      <p>RAG isn't magic, and naive implementations fail in predictable ways.</p>
+
+      <p><strong>Retrieval misses.</strong> If the right chunks aren't retrieved, the model has nothing to work with. This is the most common failure mode. Causes include poor chunking strategy, weak embedding models, or questions that are phrased very differently from how the documents are written. Solutions include hybrid search (combining semantic vectors with keyword matching), query rewriting (having the LLM rephrase the question before searching), and HyDE (Hypothetical Document Embeddings — generating what a good answer might look like, then searching for chunks similar to that hypothetical answer).</p>
+
+      <p><strong>Context noise.</strong> Retrieving too many chunks, or chunks that are only tangentially related, can confuse the model or push the most relevant content out of focus. Reranking — using a second model to score the initial candidates and keep only the best — often helps significantly here.</p>
+
+      <p><strong>Answering from training data instead of retrieved context.</strong> Models sometimes ignore the retrieved context and answer from their weights instead, especially when the retrieved chunks contradict what the model "thinks it knows." Careful prompt engineering (explicitly instructing the model to use only the provided context) and model selection matter here.</p>
+
+      <p><strong>Chunk boundary problems.</strong> Important information often spans chunk boundaries. A sentence that starts one chunk and completes the next may be retrieved without its conclusion. Overlapping chunks (where adjacent chunks share a window of tokens) partially mitigate this.</p>
+
+      <h2>Where RAG Shows Up in the Real World</h2>
+
+      <p>RAG is now the dominant architecture for enterprise AI deployments. When a company builds a chatbot that can answer questions about their product documentation, that's almost certainly RAG. When a law firm builds an AI that can analyze and answer questions about their case files, that's RAG. When a hospital builds a clinical decision support tool that retrieves relevant guidelines and studies, that's RAG.</p>
+
+      <p>Most of the AI assistants that enterprise software vendors have been bolting onto their products — Salesforce Einstein, Microsoft Copilot for M365, ServiceNow's AI features — are fundamentally RAG systems: they index your organization's data and wire it up to a language model.</p>
+
+      <p>The pattern also shows up in consumer AI. When ChatGPT or Claude uses a web search tool to retrieve current information before answering, that's a lightweight form of RAG. Perplexity AI is essentially a RAG product: it retrieves from the web in real time and synthesizes the results.</p>
+
+      <h2>The Bottom Line</h2>
+
+      <p>RAG solves the knowledge cutoff problem without requiring you to retrain a model. It gives AI systems access to current, private, or specialized information at the moment of a query, keeps that context focused and relevant, and produces answers that are grounded in specific documents rather than floating free in the model's learned parameters.</p>
+
+      <p>It's not perfect — retrieval quality is a genuine engineering challenge — but it's the most practical solution available for the vast majority of "AI that knows your stuff" use cases, and it's now a foundational pattern in how AI gets deployed in production systems.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2023–2026 Specified Behavior &mdash; Exploring the world of AI</p>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var canvas = document.getElementById('rag-canvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+
+  var W = 560, H = 320;
+  var dpr = window.devicePixelRatio || 1;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  ctx.scale(dpr, dpr);
+
+  // Nodes: label, sublabel, x, y, w, h, color rgb
+  var nodes = [
+    { label: 'User Query',      sub: '"What is our refund policy?"', x: 30,  y: 130, w: 110, h: 56, rgb: '129,140,248' },
+    { label: 'Vector Search',   sub: 'Semantic nearest-neighbor',    x: 200, y: 130, w: 110, h: 56, rgb: '99,102,241'  },
+    { label: 'Knowledge Base',  sub: 'Indexed document chunks',      x: 200, y: 20,  w: 110, h: 48, rgb: '156,163,175' },
+    { label: 'Augmented Prompt',sub: 'Query + retrieved context',    x: 370, y: 130, w: 118, h: 56, rgb: '129,140,248' },
+    { label: 'LLM',             sub: 'Generates grounded answer',    x: 448, y: 244, w: 82,  h: 48, rgb: '99,102,241'  },
+  ];
+
+  // Edges: from node index → to node index, plus label
+  var edges = [
+    { from: 0, to: 1, label: 'embed + search', phase: 0 },
+    { from: 2, to: 1, label: 'retrieve chunks', phase: 1 },
+    { from: 1, to: 3, label: 'top-k chunks',   phase: 2 },
+    { from: 3, to: 4, label: 'generate',        phase: 3 },
+  ];
+
+  var PHASE_DUR  = 900;   // ms each phase takes
+  var PHASE_GAP  = 400;   // ms between phases
+  var CYCLE      = (PHASE_DUR + PHASE_GAP) * edges.length + 1200; // total cycle ms
+
+  var startTs = null;
+
+  function cx(n) { return n.x + n.w / 2; }
+  function cy(n) { return n.y + n.h / 2; }
+
+  function edgeP(edgeIdx, elapsed) {
+    var phaseStart = edgeIdx * (PHASE_DUR + PHASE_GAP);
+    var t = elapsed - phaseStart;
+    if (t <= 0) return 0;
+    var raw = Math.min(1, t / PHASE_DUR);
+    return 1 - Math.pow(1 - raw, 2);
+  }
+
+  function drawNode(n, alpha) {
+    var a = Math.max(0, Math.min(1, alpha));
+    var r = 7;
+    ctx.beginPath();
+    ctx.roundRect(n.x, n.y, n.w, n.h, r);
+    ctx.fillStyle = 'rgba(' + n.rgb + ',' + (0.10 * a) + ')';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(' + n.rgb + ',' + (0.55 * a) + ')';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    ctx.font = '600 10px Inter, system-ui, sans-serif';
+    ctx.fillStyle = 'rgba(' + n.rgb + ',' + (0.95 * a) + ')';
+    ctx.textAlign = 'center';
+    ctx.fillText(n.label, cx(n), n.y + 19);
+
+    ctx.font = '400 8.5px Inter, system-ui, sans-serif';
+    ctx.fillStyle = 'rgba(156,163,175,' + (0.75 * a) + ')';
+    ctx.fillText(n.sub, cx(n), n.y + 33);
+  }
+
+  function drawArrow(x1, y1, x2, y2, p, rgb, label) {
+    if (p <= 0) return;
+    var dx = x2 - x1, dy = y2 - y1;
+    var len = Math.sqrt(dx*dx + dy*dy);
+    var ex = x1 + dx * p, ey = y1 + dy * p;
+
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(ex, ey);
+    ctx.strokeStyle = 'rgba(' + rgb + ',0.7)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // arrowhead when near end
+    if (p > 0.85) {
+      var ha = (p - 0.85) / 0.15;
+      var ux = dx/len, uy = dy/len;
+      var ax = ex - ux*8, ay = ey - uy*8;
+      ctx.beginPath();
+      ctx.moveTo(ex, ey);
+      ctx.lineTo(ax - uy*4, ay + ux*4);
+      ctx.lineTo(ax + uy*4, ay - ux*4);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(' + rgb + ',' + (0.7 * ha) + ')';
+      ctx.fill();
+    }
+
+    if (label && p > 0.5) {
+      var la = Math.min(1, (p - 0.5) / 0.3);
+      var mx = (x1 + ex) / 2, my = (y1 + ey) / 2;
+      ctx.font = '400 8px Inter, system-ui, sans-serif';
+      ctx.fillStyle = 'rgba(156,163,175,' + (0.85 * la) + ')';
+      ctx.textAlign = 'center';
+      // offset label perpendicular to arrow
+      var px2 = -dy/len * 10, py2 = dx/len * 10;
+      ctx.fillText(label, mx + px2, my + py2);
+    }
+  }
+
+  function nodeAlpha(nodeIdx, elapsed) {
+    // A node is visible once any edge touching it has started
+    var first = 999999;
+    edges.forEach(function(e, i) {
+      if (e.from === nodeIdx || e.to === nodeIdx) {
+        first = Math.min(first, i * (PHASE_DUR + PHASE_GAP));
+      }
+    });
+    if (first === 999999) first = 0;
+    var t = elapsed - first;
+    return Math.min(1, Math.max(0, t / 400));
+  }
+
+  function draw(ts) {
+    if (!startTs) startTs = ts;
+    var elapsed = (ts - startTs) % CYCLE;
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Draw nodes
+    nodes.forEach(function(n, i) {
+      drawNode(n, nodeAlpha(i, elapsed));
+    });
+
+    // Draw edges
+    edges.forEach(function(e, i) {
+      var p = edgeP(i, elapsed);
+      var fn = nodes[e.from], tn = nodes[e.to];
+      // find edge start/end points on node borders
+      var x1 = cx(fn), y1 = cy(fn), x2 = cx(tn), y2 = cy(tn);
+      // shorten to node edge
+      var dx = x2-x1, dy = y2-y1, len = Math.sqrt(dx*dx+dy*dy);
+      x1 += dx/len * (fn.w/2 + 2); y1 += dy/len * (fn.h/2 + 2);
+      x2 -= dx/len * (tn.w/2 + 2); y2 -= dy/len * (tn.h/2 + 2);
+      drawArrow(x1, y1, x2, y2, p, fn.rgb, e.label);
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  // polyfill roundRect for older browsers
+  if (!ctx.roundRect) {
+    ctx.roundRect = function(x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x+r, y);
+      ctx.lineTo(x+w-r, y); ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+      ctx.lineTo(x+w, y+h-r); ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+      ctx.lineTo(x+r, y+h); ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+      ctx.lineTo(x, y+r); ctx.quadraticCurveTo(x, y, x+r, y);
+      ctx.closePath();
+    };
+  }
+
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

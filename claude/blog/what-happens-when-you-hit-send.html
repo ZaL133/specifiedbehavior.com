@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Happens When You Hit Send? The Full Journey of a ChatGPT Message | Specified Behavior</title>
+  <meta name="description" content="From the moment you press send to the first word appearing on screen — here's the full technical journey of a message through a large language model, step by step.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Specified Behavior">
+  <meta property="og:title" content="What Happens When You Hit Send? The Full Journey of a ChatGPT Message">
+  <meta property="og:description" content="From the moment you press send to the first word on screen — here's the full technical journey of a message through a large language model.">
+  <meta property="og:url" content="https://specifiedbehavior.com/blog/what-happens-when-you-hit-send.html">
+  <meta property="og:image" content="https://specifiedbehavior.com/img/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What Happens When You Hit Send?">
+  <meta name="twitter:description" content="The full technical journey of a message through a large language model — tokenization to sampling to streaming text.">
+  <link rel="canonical" href="https://specifiedbehavior.com/blog/what-happens-when-you-hit-send.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "What Happens When You Hit Send? The Full Journey of a ChatGPT Message",
+    "description": "From the moment you press send to the first word appearing on screen — here's the full technical journey of a message through a large language model, step by step.",
+    "url": "https://specifiedbehavior.com/blog/what-happens-when-you-hit-send.html",
+    "datePublished": "2026-04-18",
+    "dateModified": "2026-04-18",
+    "author": { "@type": "Person", "name": "Zeph" },
+    "publisher": { "@type": "Organization", "name": "Specified Behavior", "url": "https://specifiedbehavior.com" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://specifiedbehavior.com/blog/what-happens-when-you-hit-send.html" },
+    "isPartOf": { "@id": "https://specifiedbehavior.com/#website" }
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZMBY3P7BJ7',{'client_storage':'none'});</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    #pipeline-canvas {
+      display: block;
+      width: 100%;
+      max-width: 560px;
+      aspect-ratio: 560 / 200;
+      margin: 1.75rem auto;
+      border-radius: var(--radius);
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+    }
+    .pipeline-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: -1rem;
+      margin-bottom: 1.75rem;
+    }
+    .step-number {
+      display: inline-block;
+      width: 1.5rem;
+      height: 1.5rem;
+      line-height: 1.5rem;
+      text-align: center;
+      background: rgba(99,102,241,0.15);
+      border: 1px solid rgba(99,102,241,0.35);
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #818cf8;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">Specified<span class="accent"> Behavior</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="../ai-basics.html">AI Basics</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../blog/" class="active">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-header">
+      <p class="article-back"><a href="../blog/">← All posts</a></p>
+      <h1>What Happens When You Hit Send?</h1>
+      <div class="article-meta">
+        <span>April 18, 2026</span>
+        <span class="sep">·</span>
+        <span>Zeph</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>You type a question into ChatGPT or Claude and press Enter. Within a second or two, text starts streaming back onto your screen. It looks like magic — or at least like something happening invisibly inside a black box.</p>
+
+      <p>It's not magic. There's a concrete sequence of operations happening, each with a specific purpose. Understanding them doesn't require a math degree — it just requires a willingness to follow the chain. Here's the full journey, from keystroke to response.</p>
+
+      <canvas id="pipeline-canvas" width="1120" height="400" aria-label="Animated pipeline diagram showing the stages of LLM inference: Tokenize, Embed, Transformer Layers, Output Distribution, Sample, Decode — repeating per token"></canvas>
+      <p class="pipeline-caption">Each token in the response is generated one at a time through this pipeline — thousands of times per response, in rapid sequence.</p>
+
+      <h2><span class="step-number">1</span> Your Text is Broken Into Tokens</h2>
+
+      <p>The model doesn't see letters or words — it sees <em>tokens</em>. A tokenizer slices your input text into chunks that the model was trained to work with. Common words become single tokens; rarer words get split. "ChatGPT" might be two tokens: "Chat" and "GPT." Punctuation, spaces, and newlines are their own tokens.</p>
+
+      <p>The tokenization is deterministic — the same input always produces the same token sequence. It's based on a vocabulary built during the model's training, typically containing 50,000 to 100,000 possible tokens. Once tokenized, your message is a list of integers — each one an index into the vocabulary.</p>
+
+      <h2><span class="step-number">2</span> Tokens Become Vectors</h2>
+
+      <p>Each token ID is looked up in an <em>embedding table</em> — a large matrix where each row is a learned vector representing a token. The model has trained these vectors so that tokens used in similar contexts have similar vectors. "King" and "Queen" will be near each other in embedding space; "king" and "bicycle" will be far apart.</p>
+
+      <p>Your entire input sequence is now a stack of vectors — one per token — each typically 4,096 to 12,288 numbers long, depending on the model size. This stack is the actual input to the main transformer network.</p>
+
+      <h2><span class="step-number">3</span> The Transformer Layers Run</h2>
+
+      <p>The transformer is a deep neural network with dozens to hundreds of repeated layers. Your vector stack passes through each layer in sequence. Each layer does two main things:</p>
+
+      <p><strong>Attention.</strong> Every token looks at every other token and figures out which ones are relevant to understanding it. "It" as a pronoun needs to figure out which noun it refers to. "Deposits" needs to know whether the surrounding context is about banking or geology. Attention is how the model handles context and relationships across the full input.</p>
+
+      <p>This attention mechanism is famously expensive — it scales with the square of the sequence length — which is why longer context windows cost significantly more to process. In a 128,000-token context, every token is attending to 127,999 others.</p>
+
+      <p><strong>Feed-forward computation.</strong> After attention, each token's vector passes through a feed-forward network that applies another learned transformation. If attention figures out <em>which</em> context is relevant, the feed-forward layer applies what to <em>do</em> with that context. This is where a lot of the model's factual and reasoning capabilities are thought to live.</p>
+
+      <p>After all the layers, each token has a new, richly contextualized vector — one that now encodes not just what the token is in isolation, but what it means in the context of the entire input.</p>
+
+      <h2><span class="step-number">4</span> A Probability Distribution Over the Next Token</h2>
+
+      <p>The vector for the last token in the sequence gets passed through a final linear layer that maps it to a score for every token in the vocabulary. These raw scores (logits) are then passed through a <em>softmax</em> function that converts them into probabilities — numbers between 0 and 1 that sum to 1.</p>
+
+      <p>What you get out is a probability distribution over the full vocabulary: "the next token is 'The' with probability 18%, 'I' with probability 12%, 'Here' with probability 9%..." and so on across all 50,000+ possible tokens. Most tokens will have near-zero probability; a handful will have meaningful probabilities.</p>
+
+      <p>This is the model's actual output. The AI doesn't directly decide what word to say — it outputs a probability distribution, and then something picks from that distribution.</p>
+
+      <h2><span class="step-number">5</span> Sampling: Picking the Next Token</h2>
+
+      <p>The model can't output the whole distribution — it has to pick one token. This is where <em>sampling</em> happens, and it's controlled by settings you've probably seen mentioned: temperature and top-p.</p>
+
+      <p><strong>Temperature</strong> controls how spread out the distribution is. A temperature of 0 always picks the single highest-probability token (deterministic, but repetitive and formulaic). A temperature of 1 samples from the distribution as-is. Higher temperatures make lower-probability tokens more likely — more creative, more surprising, sometimes more nonsensical.</p>
+
+      <p><strong>Top-p (nucleus sampling)</strong> restricts sampling to only the smallest set of tokens whose combined probability exceeds a threshold p. With top-p = 0.9, the model samples only from whichever tokens collectively account for 90% of the probability mass, ignoring the long tail of highly unlikely tokens.</p>
+
+      <p>Together, these settings let you tune the trade-off between predictability and creativity. Coding tasks tend to benefit from lower temperature (more deterministic). Creative writing benefits from higher temperature (more varied).</p>
+
+      <h2><span class="step-number">6</span> The Sampled Token is Decoded and Returned</h2>
+
+      <p>The selected token ID gets looked up in the vocabulary to get the actual text fragment. That fragment is streamed back to you. The token might be a full word, part of a word, a space, or a punctuation mark.</p>
+
+      <p>This is why responses stream in piece by piece: you're literally watching the model work one token at a time. The "thinking" cursor isn't a fake UI effect — it genuinely reflects that the model is computing one token, sending it, then computing the next.</p>
+
+      <h2><span class="step-number">7</span> Repeat Until Done</h2>
+
+      <p>Now the cycle starts over. The newly generated token is appended to the input sequence, and the whole pipeline runs again: embed, attend, compute, sample, decode. One more token appears on your screen.</p>
+
+      <p>This continues until the model either generates a special "end of sequence" token (signaling it's done) or hits an output length limit set by the API. A typical response of 300 words is around 400 tokens — meaning this loop ran 400 times to produce it.</p>
+
+      <h2>What This Means in Practice</h2>
+
+      <p>A few things about AI behavior make much more sense once you understand this pipeline:</p>
+
+      <p><strong>AI doesn't plan ahead.</strong> The model generates token by token. It can't "think about" the whole response and then write it — it's committing to each word before it knows what comes next. This is why models sometimes start down a path and then get stuck, or why they can contradict themselves mid-response: they're building the response left-to-right, one token at a time.</p>
+
+      <p><strong>AI isn't retrieving stored answers.</strong> The model doesn't have a database of pre-written answers that it looks up. Every response is synthesized from scratch by the transformer, based on the patterns encoded in the weights during training. There is no storage cabinet; there's only the computation.</p>
+
+      <p><strong>Longer inputs are genuinely more expensive.</strong> Because attention scales quadratically with sequence length, a 10,000-token context doesn't cost 10x more than a 1,000-token context — it costs roughly 100x more in attention computation. This is the real economic reason why API pricing is measured in tokens and why context length matters commercially.</p>
+
+      <p><strong>Randomness is intentional.</strong> The sampling step means the model will give different responses to the same question on different runs, unless temperature is set to 0. This is a feature, not a bug — it's what allows the model to generate varied, non-formulaic text. The trade-off is that it also means occasional surprising or inconsistent outputs, even when everything else is held constant.</p>
+
+      <p>The pipeline from token to response runs in milliseconds per step across massive GPU clusters. The scale is staggering — and the result, a system that produces fluent, contextually appropriate text by iteratively sampling from a learned probability distribution, is one of the more remarkable things built in the last decade of computing.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2023–2026 Specified Behavior &mdash; Exploring the world of AI</p>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var canvas = document.getElementById('pipeline-canvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+
+  var W = 560, H = 200;
+  var dpr = window.devicePixelRatio || 1;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  ctx.scale(dpr, dpr);
+
+  var stages = [
+    { label: 'Tokenize',    sub: 'text → IDs',        rgb: '156,163,175' },
+    { label: 'Embed',       sub: 'IDs → vectors',     rgb: '129,140,248' },
+    { label: 'Transformer', sub: 'attention + FF',     rgb: '99,102,241'  },
+    { label: 'Distribution',sub: 'softmax over vocab', rgb: '129,140,248' },
+    { label: 'Sample',      sub: 'pick a token',       rgb: '165,180,252' },
+    { label: 'Decode',      sub: 'ID → text',          rgb: '156,163,175' },
+  ];
+
+  var N = stages.length;
+  var PAD = 16, GAP = 10;
+  var boxW = (W - PAD*2 - GAP*(N-1)) / N;
+  var boxH = 80;
+  var BY = (H - boxH) / 2;
+
+  var STEP_DUR = 420;
+  var HOLD     = 300;
+  var CYCLE    = (STEP_DUR + HOLD) * N + 800;
+  var startTs  = null;
+
+  if (!ctx.roundRect) {
+    ctx.roundRect = function(x,y,w,h,r){
+      ctx.beginPath();
+      ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+      ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+      ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+      ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y);
+      ctx.closePath();
+    };
+  }
+
+  function draw(ts) {
+    if (!startTs) startTs = ts;
+    var el = (ts - startTs) % CYCLE;
+
+    ctx.clearRect(0, 0, W, H);
+
+    // determine which stage is "active"
+    var activeIdx = -1;
+    for (var i = 0; i < N; i++) {
+      var sStart = i * (STEP_DUR + HOLD);
+      if (el >= sStart && el < sStart + STEP_DUR + HOLD) {
+        activeIdx = i;
+      }
+    }
+
+    stages.forEach(function(s, i) {
+      var bx = PAD + i * (boxW + GAP);
+      var sStart = i * (STEP_DUR + HOLD);
+      var elapsed = el - sStart;
+      var isActive = (i === activeIdx);
+      var wasDone  = (el > sStart + STEP_DUR);
+
+      var glow = 0;
+      if (isActive) {
+        glow = Math.min(1, elapsed / STEP_DUR);
+        // ease in-out
+        glow = glow < 0.5 ? 2*glow*glow : -1 + (4-2*glow)*glow;
+      } else if (wasDone && i < activeIdx) {
+        glow = 0.25;
+      }
+
+      var baseAlpha = 0.35 + glow * 0.55;
+
+      ctx.beginPath();
+      ctx.roundRect(bx, BY, boxW, boxH, 6);
+      ctx.fillStyle = 'rgba(' + s.rgb + ',' + (0.06 + glow*0.12) + ')';
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(' + s.rgb + ',' + baseAlpha + ')';
+      ctx.lineWidth = isActive ? 2 : 1;
+      ctx.stroke();
+
+      ctx.font = '600 9px Inter,system-ui,sans-serif';
+      ctx.fillStyle = 'rgba(' + s.rgb + ',' + baseAlpha + ')';
+      ctx.textAlign = 'center';
+      ctx.fillText(s.label, bx + boxW/2, BY + 28);
+      ctx.font = '400 8px Inter,system-ui,sans-serif';
+      ctx.fillStyle = 'rgba(156,163,175,' + (0.5 + glow*0.4) + ')';
+      ctx.fillText(s.sub, bx + boxW/2, BY + 43);
+
+      // pulse dot when active
+      if (isActive && glow > 0.2) {
+        var r = 3 + glow * 2;
+        ctx.beginPath();
+        ctx.arc(bx + boxW/2, BY + boxH - 14, r, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(' + s.rgb + ',' + (0.4 + glow*0.5) + ')';
+        ctx.fill();
+      }
+
+      // arrow to next
+      if (i < N-1) {
+        var ax = bx + boxW + 1, ay = BY + boxH/2;
+        var ax2 = bx + boxW + GAP - 1;
+        var arAlpha = wasDone ? 0.55 : 0.2;
+        ctx.strokeStyle = 'rgba(' + s.rgb + ',' + arAlpha + ')';
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(ax2, ay); ctx.stroke();
+        // arrowhead
+        ctx.beginPath();
+        ctx.moveTo(ax2, ay);
+        ctx.lineTo(ax2-5, ay-3);
+        ctx.lineTo(ax2-5, ay+3);
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(' + s.rgb + ',' + arAlpha + ')';
+        ctx.fill();
+      }
+    });
+
+    // "× token" label
+    ctx.font = '400 9px Inter,system-ui,sans-serif';
+    ctx.fillStyle = 'rgba(156,163,175,0.5)';
+    ctx.textAlign = 'center';
+    ctx.fillText('repeats once per output token', W/2, BY + boxH + 18);
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

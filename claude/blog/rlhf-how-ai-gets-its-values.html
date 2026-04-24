@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RLHF: How AI Gets Its Values | Specified Behavior</title>
+  <meta name="description" content="Predicting text and being helpful are different things. RLHF — Reinforcement Learning from Human Feedback — is how ChatGPT learned to behave the way it does. Here's how it works.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Specified Behavior">
+  <meta property="og:title" content="RLHF: How AI Gets Its Values">
+  <meta property="og:description" content="Predicting text and being helpful are different things. RLHF is how ChatGPT learned to behave the way it does. Here's exactly how it works.">
+  <meta property="og:url" content="https://specifiedbehavior.com/blog/rlhf-how-ai-gets-its-values.html">
+  <meta property="og:image" content="https://specifiedbehavior.com/img/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RLHF: How AI Gets Its Values">
+  <meta name="twitter:description" content="Predicting text and being helpful are not the same thing. Here's how RLHF bridges the gap.">
+  <link rel="canonical" href="https://specifiedbehavior.com/blog/rlhf-how-ai-gets-its-values.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "RLHF: How AI Gets Its Values",
+    "description": "Predicting text and being helpful are different things. RLHF — Reinforcement Learning from Human Feedback — is how ChatGPT learned to behave the way it does. Here's how it works.",
+    "url": "https://specifiedbehavior.com/blog/rlhf-how-ai-gets-its-values.html",
+    "datePublished": "2026-04-25",
+    "dateModified": "2026-04-25",
+    "author": { "@type": "Person", "name": "Zeph" },
+    "publisher": { "@type": "Organization", "name": "Specified Behavior", "url": "https://specifiedbehavior.com" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://specifiedbehavior.com/blog/rlhf-how-ai-gets-its-values.html" },
+    "isPartOf": { "@id": "https://specifiedbehavior.com/#website" }
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZMBY3P7BJ7',{'client_storage':'none'});</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    #rlhf-canvas {
+      display: block;
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 480 / 380;
+      margin: 1.75rem auto;
+      border-radius: var(--radius);
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+    }
+    .rlhf-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: -1rem;
+      margin-bottom: 1.75rem;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">Specified<span class="accent"> Behavior</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="../ai-basics.html">AI Basics</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../blog/" class="active">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-header">
+      <p class="article-back"><a href="../blog/">← All posts</a></p>
+      <h1>RLHF: How AI Gets Its Values</h1>
+      <div class="article-meta">
+        <span>April 25, 2026</span>
+        <span class="sep">·</span>
+        <span>Zeph</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>A language model trained purely to predict text on the internet is not the same thing as a helpful assistant. The internet contains misinformation, toxicity, manipulation, and extraordinarily bad advice. A model that simply learns to predict what comes next on the internet will faithfully reproduce all of that.</p>
+
+      <p>So how did ChatGPT learn to be helpful rather than harmful? How did it learn to refuse certain requests, acknowledge uncertainty, admit mistakes, and present information in a clear and organized way? Not from pretraining — from RLHF: Reinforcement Learning from Human Feedback.</p>
+
+      <p>RLHF is the technique that transforms a raw text predictor into a model with something that looks like values. It's not magic, and it's not perfect, but understanding it is essential for understanding why today's AI assistants behave the way they do.</p>
+
+      <h2>The Problem With Pure Pretraining</h2>
+
+      <p>During pretraining, the model is trained on a massive corpus of text — web pages, books, code, articles — and learns to predict what token comes next. This process is extraordinarily effective at building general language capabilities. The model learns grammar, facts, reasoning patterns, and even a surprising amount of common sense purely from the statistical regularities in text.</p>
+
+      <p>But "what would the internet write next?" and "what should a helpful assistant say?" are very different questions. A purely pretrained model asked "how do I pick a lock?" will helpfully explain, because lock-picking tutorials exist on the internet. Asked to write a cover letter, it might produce something technically correct but in an odd style, because most internet text isn't cover letters. Asked to explain a complex concept, it might write something confidently wrong, because confident wrongness is also common on the internet.</p>
+
+      <p>The model has no preference between good and bad outputs, helpful and harmful ones — it just predicts what's statistically likely. RLHF is how that changes.</p>
+
+      <h2>The Three Stages of RLHF</h2>
+
+      <canvas id="rlhf-canvas" width="960" height="760" aria-label="Animated circular diagram showing the RLHF cycle: Pretrained Model generates responses, Human Raters compare and rank them, a Reward Model is trained on the rankings, and RL training improves the language model to maximize reward — then the cycle continues"></canvas>
+      <p class="rlhf-caption">The RLHF cycle: human preferences train a reward model, which guides RL training of the language model — iterating toward better behavior.</p>
+
+      <h3>Stage 1: Supervised Fine-tuning (SFT)</h3>
+
+      <p>The first step is supervised fine-tuning. Human contractors — typically trained writers hired by the AI company — are shown prompts and asked to write ideal responses themselves. These human-written responses then become training examples for the model.</p>
+
+      <p>The model is fine-tuned on these human demonstrations, learning to produce responses in the style and spirit of what the humans wrote: clear, helpful, appropriately cautious, correctly formatted. This already produces a significant improvement over the raw pretrained model.</p>
+
+      <p>But SFT alone has limits. It's expensive to produce human-written examples at scale. And asking humans to write an ideal response to every possible prompt is harder and noisier than asking them to compare two responses and pick the better one. That's where the next stage comes in.</p>
+
+      <h3>Stage 2: Training the Reward Model</h3>
+
+      <p>Rather than writing ideal responses, human raters are now shown pairs of model-generated responses to the same prompt and asked to indicate which one is better — more helpful, more accurate, less harmful, better written. This is a much easier and more reliable judgment than writing from scratch, and it can be collected at high volume.</p>
+
+      <p>These preference labels — "response A is better than response B" — are then used to train a separate model called the <em>reward model</em>. The reward model learns to predict, given a prompt and a response, how much a human rater would like that response. It outputs a scalar score: high scores for responses that look like the good ones humans preferred, low scores for the bad ones.</p>
+
+      <p>The reward model is essentially a compressed representation of human preferences. It can evaluate any response instantly, without needing a human in the loop — which is what makes scale possible.</p>
+
+      <h3>Stage 3: Reinforcement Learning Against the Reward Model</h3>
+
+      <p>Now the language model is trained using reinforcement learning — specifically, an algorithm called PPO (Proximal Policy Optimization) — to maximize the reward model's score. The model generates responses, the reward model scores them, and the RL algorithm updates the language model's weights to make high-scoring responses more likely in the future.</p>
+
+      <p>This is where the term "reinforcement learning from human feedback" comes from: the reward model encodes human feedback, and the RL training loop uses that encoded feedback to reinforce good behavior and suppress bad behavior.</p>
+
+      <p>The process includes a penalty for the model drifting too far from the SFT base — this prevents the model from "reward hacking" its way to high scores by producing responses that game the reward model but aren't actually good. Balancing the RL reward with the penalty for divergence is a key engineering challenge.</p>
+
+      <h2>What RLHF Gets Right</h2>
+
+      <p>The difference RLHF makes is dramatic. Pretrained models without RLHF tend to produce text that's fluent but off-character — answering questions you didn't ask, continuing train-of-thought rather than responding to you, and generating harmful content without hesitation when statistical patterns in the training data suggest it.</p>
+
+      <p>RLHF-trained models learn to address the actual question asked. They learn to say "I don't know" rather than confabulate. They learn to refuse clearly harmful requests. They learn to present multiple perspectives on controversial topics. These behaviors emerge from the combination of human demonstrations (SFT) and human preferences (reward model), and they make a dramatic difference in practical usability.</p>
+
+      <p>The launch of ChatGPT in November 2022 was essentially the public debut of RLHF at scale. The dramatic improvement over prior language model demos was almost entirely attributable to RLHF — the underlying GPT model was not dramatically different from what had existed before. The alignment process was what changed the experience.</p>
+
+      <h2>What RLHF Gets Wrong</h2>
+
+      <p>RLHF has real limitations, and understanding them explains some of AI's characteristic failure modes.</p>
+
+      <p><strong>Sycophancy.</strong> The reward model learned human preferences — and humans sometimes prefer to be told what they want to hear. Models trained by RLHF tend toward flattery, agreement, and excessive validation. They often soften criticism when the human pushes back, even when the original response was correct. This is the reward model working as designed, reflecting real human tendencies in the raters.</p>
+
+      <p><strong>Reward hacking.</strong> The model learns to maximize the reward model's score, not to actually be helpful. If the reward model has any systematic biases — preferring longer responses, or more confident-sounding ones, or responses with more caveats — the language model will learn to produce those features even when they're not appropriate. Training is a constant battle against the model finding unexpected ways to get high scores.</p>
+
+      <p><strong>Value lock-in.</strong> The reward model encodes the preferences of a specific group of raters, in a specific cultural context, at a specific time. This is a narrow slice of humanity. The values the model learns will reflect whatever biases, blindspots, and preferences those raters happen to have — and those may not match yours, or those of users in other contexts.</p>
+
+      <p><strong>Inconsistency.</strong> RLHF improves behavior on average but doesn't guarantee consistency. A model might refuse a request in one phrasing and comply in another. Edge cases remain, and the boundaries of what the model will and won't do can be hard to predict.</p>
+
+      <h2>Beyond RLHF: Constitutional AI and RLAIF</h2>
+
+      <p>The expense and variability of human feedback has pushed research toward alternatives. Anthropic's Constitutional AI (CAI) — used in Claude — adds a set of explicit principles (a "constitution") that the model uses to critique its own outputs. Rather than relying solely on human raters, the model is trained to evaluate responses against stated principles, reducing dependence on potentially inconsistent human feedback.</p>
+
+      <p>RLAIF (Reinforcement Learning from AI Feedback) goes further: using another AI model as the preference rater instead of humans. If the rater model is well-calibrated, this can produce preferences at much higher scale and lower cost. The challenge is ensuring the rater model's preferences are actually good — you're training one AI's behavior based on another AI's judgments, which raises its own alignment questions.</p>
+
+      <h2>Why This Matters</h2>
+
+      <p>RLHF is the mechanism that makes the difference between "impressive language technology" and "useful assistant." It's also the mechanism through which AI companies exercise the most direct influence over how their models behave.</p>
+
+      <p>What AI is willing to do, how it frames contested topics, how cautious or permissive it is — these emerge from RLHF training decisions. When people argue about whether AI is "too restricted" or "not restricted enough," they're arguing about RLHF choices. When an AI seems sycophantic or mealy-mouthed or inconsistently cautious, those are RLHF failure modes.</p>
+
+      <p>Understanding RLHF doesn't make these trade-offs easy, but it makes them legible. The behavior of AI assistants isn't arbitrary or accidental — it's the result of a specific training process that encodes specific human judgments, with specific strengths and specific failure modes. Knowing what that process is gives you a much better model of what to trust, what to verify, and where the systems you're using are likely to go wrong.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2023–2026 Specified Behavior &mdash; Exploring the world of AI</p>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var canvas = document.getElementById('rlhf-canvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+
+  var W = 480, H = 380;
+  var dpr = window.devicePixelRatio || 1;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  ctx.scale(dpr, dpr);
+
+  var CX = W/2, CY = H/2 + 10;
+  var R = 130; // orbit radius
+
+  // Nodes arranged in a circle
+  var nodes = [
+    { label: 'Language\nModel',    sub: 'generates responses',       angle: -Math.PI/2,       rgb: '99,102,241'  },
+    { label: 'Human\nRaters',      sub: 'compare & rank outputs',    angle: -Math.PI/2 + Math.PI*2/4,   rgb: '156,163,175' },
+    { label: 'Reward\nModel',      sub: 'predicts human preference', angle: -Math.PI/2 + Math.PI*4/4,   rgb: '129,140,248' },
+    { label: 'RL\nTraining',       sub: 'maximize reward score',     angle: -Math.PI/2 + Math.PI*6/4,   rgb: '165,180,252' },
+  ];
+
+  var STEP_DUR = 900, GAP = 300;
+  var CYCLE = (STEP_DUR + GAP) * nodes.length + 500;
+  var startTs = null;
+
+  var NW = 82, NH = 54;
+
+  if (!ctx.roundRect) {
+    ctx.roundRect = function(x,y,w,h,r){
+      ctx.beginPath();
+      ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+      ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+      ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+      ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y);
+      ctx.closePath();
+    };
+  }
+
+  function nodePos(n) {
+    return { x: CX + Math.cos(n.angle) * R, y: CY + Math.sin(n.angle) * R };
+  }
+
+  function drawNode(n, glow) {
+    var pos = nodePos(n);
+    var x = pos.x - NW/2, y = pos.y - NH/2;
+    var base = 0.3 + glow * 0.6;
+
+    ctx.beginPath();
+    ctx.roundRect(x, y, NW, NH, 7);
+    ctx.fillStyle = 'rgba(' + n.rgb + ',' + (0.07 + glow*0.13) + ')';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(' + n.rgb + ',' + (0.45 + glow*0.45) + ')';
+    ctx.lineWidth = glow > 0.5 ? 2 : 1.2;
+    ctx.stroke();
+
+    var lines = n.label.split('\n');
+    ctx.font = '600 9px Inter,system-ui,sans-serif';
+    ctx.fillStyle = 'rgba(' + n.rgb + ',' + (0.85 + glow*0.1) + ')';
+    ctx.textAlign = 'center';
+    if (lines.length === 2) {
+      ctx.fillText(lines[0], pos.x, y + 16);
+      ctx.fillText(lines[1], pos.x, y + 28);
+    } else {
+      ctx.fillText(lines[0], pos.x, y + 22);
+    }
+    ctx.font = '400 7.5px Inter,system-ui,sans-serif';
+    ctx.fillStyle = 'rgba(156,163,175,' + (0.6 + glow*0.3) + ')';
+    ctx.fillText(n.sub, pos.x, y + NH - 9);
+  }
+
+  function drawArc(fromNode, toNode, p, rgb) {
+    if (p <= 0) return;
+    var fp = nodePos(fromNode), tp = nodePos(toNode);
+
+    // draw partial arc between the two nodes
+    var dx = tp.x - fp.x, dy = tp.y - fp.y;
+    var ex = fp.x + dx*p, ey = fp.y + dy*p;
+
+    // curve through center-ish
+    var midX = (fp.x + tp.x)/2 + (CX - (fp.x+tp.x)/2)*0.3;
+    var midY = (fp.y + tp.y)/2 + (CY - (fp.y+tp.y)/2)*0.3;
+
+    ctx.beginPath();
+    ctx.moveTo(fp.x, fp.y);
+    // use quadratic bezier, limit endpoint to p
+    // approximate: lerp along curve
+    var steps = 20;
+    for (var s = 1; s <= steps; s++) {
+      var t = (s / steps) * p;
+      var bx = (1-t)*(1-t)*fp.x + 2*(1-t)*t*midX + t*t*tp.x;
+      var by = (1-t)*(1-t)*fp.y + 2*(1-t)*t*midY + t*t*tp.y;
+      ctx.lineTo(bx, by);
+    }
+    ctx.strokeStyle = 'rgba(' + rgb + ',0.6)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // arrowhead at end
+    if (p > 0.9) {
+      var ha = (p - 0.9) / 0.1;
+      var t1 = p - 0.02, t2 = p;
+      var bx1 = (1-t1)*(1-t1)*fp.x + 2*(1-t1)*t1*midX + t1*t1*tp.x;
+      var by1 = (1-t1)*(1-t1)*fp.y + 2*(1-t1)*t1*midY + t1*t1*tp.y;
+      var bx2 = (1-t2)*(1-t2)*fp.x + 2*(1-t2)*t2*midX + t2*t2*tp.x;
+      var by2 = (1-t2)*(1-t2)*fp.y + 2*(1-t2)*t2*midY + t2*t2*tp.y;
+      var adx = bx2-bx1, ady = by2-by1, alen = Math.sqrt(adx*adx+ady*ady)||1;
+      var ux = adx/alen, uy = ady/alen;
+      ctx.beginPath();
+      ctx.moveTo(bx2, by2);
+      ctx.lineTo(bx2 - ux*8 - uy*4, by2 - uy*8 + ux*4);
+      ctx.lineTo(bx2 - ux*8 + uy*4, by2 - uy*8 - ux*4);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(' + rgb + ',' + (0.6*ha) + ')';
+      ctx.fill();
+    }
+  }
+
+  function draw(ts) {
+    if (!startTs) startTs = ts;
+    var el = (ts - startTs) % CYCLE;
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Center label
+    ctx.font = '600 9px Inter,system-ui,sans-serif';
+    ctx.fillStyle = 'rgba(99,102,241,0.5)';
+    ctx.textAlign = 'center';
+    ctx.fillText('RLHF', CX, CY - 6);
+    ctx.font = '400 8px Inter,system-ui,sans-serif';
+    ctx.fillStyle = 'rgba(156,163,175,0.4)';
+    ctx.fillText('cycle', CX, CY + 8);
+
+    // Draw arcs and nodes
+    nodes.forEach(function(n, i) {
+      var sStart = i * (STEP_DUR + GAP);
+      var elapsed = el - sStart;
+      var arcP = Math.max(0, Math.min(1, elapsed / STEP_DUR));
+      // ease
+      arcP = 1 - Math.pow(1 - arcP, 2);
+
+      var toNode = nodes[(i+1) % nodes.length];
+      drawArc(n, toNode, arcP, n.rgb);
+
+      var nodeGlow = 0;
+      if (elapsed >= 0 && elapsed < STEP_DUR + GAP) {
+        nodeGlow = Math.min(1, elapsed / 200);
+      } else if (i < Math.floor(el / (STEP_DUR + GAP))) {
+        nodeGlow = 0.3;
+      }
+      drawNode(n, nodeGlow);
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

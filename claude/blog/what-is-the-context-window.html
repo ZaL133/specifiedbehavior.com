@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is the Context Window — and Why Does Size Matter? | Specified Behavior</title>
+  <meta name="description" content="The context window is everything an AI can see at once. Here's what tokens are, why context limits exist, what happens when you hit them, and why the size arms race matters.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Specified Behavior">
+  <meta property="og:title" content="What is the Context Window — and Why Does Size Matter?">
+  <meta property="og:description" content="The context window is everything an AI can see at once. Here's what tokens are, why context limits exist, and why the size arms race matters.">
+  <meta property="og:url" content="https://specifiedbehavior.com/blog/what-is-the-context-window.html">
+  <meta property="og:image" content="https://specifiedbehavior.com/img/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What is the Context Window — and Why Does Size Matter?">
+  <meta name="twitter:description" content="The context window is everything an AI can see at once. Here's what it is, why limits exist, and why size matters.">
+  <link rel="canonical" href="https://specifiedbehavior.com/blog/what-is-the-context-window.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "What is the Context Window — and Why Does Size Matter?",
+    "description": "The context window is everything an AI can see at once. Here's what tokens are, why context limits exist, what happens when you hit them, and why the size arms race matters.",
+    "url": "https://specifiedbehavior.com/blog/what-is-the-context-window.html",
+    "datePublished": "2026-04-11",
+    "dateModified": "2026-04-11",
+    "author": { "@type": "Person", "name": "Zeph" },
+    "publisher": { "@type": "Organization", "name": "Specified Behavior", "url": "https://specifiedbehavior.com" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://specifiedbehavior.com/blog/what-is-the-context-window.html" },
+    "isPartOf": { "@id": "https://specifiedbehavior.com/#website" }
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZMBY3P7BJ7',{'client_storage':'none'});</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    #ctx-canvas {
+      display: block;
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 540 / 280;
+      margin: 1.75rem auto;
+      border-radius: var(--radius);
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+    }
+    .ctx-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: -1rem;
+      margin-bottom: 1.75rem;
+    }
+    .model-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+    .model-table th {
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .model-table td {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    .model-table tr:last-child td { border-bottom: none; }
+    .model-table .num { font-variant-numeric: tabular-nums; color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">Specified<span class="accent"> Behavior</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="../ai-basics.html">AI Basics</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../blog/" class="active">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-header">
+      <p class="article-back"><a href="../blog/">← All posts</a></p>
+      <h1>What is the Context Window — and Why Does Size Matter?</h1>
+      <div class="article-meta">
+        <span>April 11, 2026</span>
+        <span class="sep">·</span>
+        <span>Zeph</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>Every AI language model has a context window — a hard limit on how much text it can see at one time. Everything within that window, the model can reason about. Everything outside it, the model simply cannot access, as if it doesn't exist.</p>
+
+      <p>The context window is one of the most practically important properties of a language model, and it's also one of the most misunderstood. People often describe AI as "forgetting" things or "losing track" of earlier conversation. Usually, what's actually happening is much more structural than that: the content has scrolled out of the context window, and the model has no access to it whatsoever — it's not that it forgot, it's that the information is no longer present.</p>
+
+      <h2>What's a Token?</h2>
+
+      <p>Context windows are measured in tokens, not words or characters. A token is roughly a word or word-fragment — the basic unit the model processes. "Hello" is one token. "Unbelievable" might be three tokens: "Un", "believ", "able". Whitespace and punctuation each take up tokens too.</p>
+
+      <p>A useful rule of thumb: <strong>one token is about three-quarters of a word</strong>, or about four characters. So 1,000 tokens is roughly 750 words — about two or three pages of a novel. 100,000 tokens is roughly 75,000 words, or a short book.</p>
+
+      <p>The token count in the context window includes everything the model sees: the system prompt (instructions given to the AI by the developer), the entire conversation history, any documents or files you've pasted in, and the AI's own previous responses.</p>
+
+      <canvas id="ctx-canvas" width="1080" height="560" aria-label="Animated visualization of a context window filling up with different segments: system prompt, conversation history, uploaded document, and the current query"></canvas>
+      <p class="ctx-caption">The context window holds everything the model sees at once — system instructions, conversation history, documents, and your current question.</p>
+
+      <h2>Why Context Windows Have Limits</h2>
+
+      <p>The limit isn't arbitrary — it's a consequence of the transformer architecture. The key operation in a transformer is <em>attention</em>: every token attends to every other token to compute its contextual meaning. The computational cost of attention scales with the square of the sequence length. Double the context, and you quadruple the compute. A 200,000-token context isn't just 200x more expensive than a 1,000-token context — it's roughly 40,000x more expensive in attention compute.</p>
+
+      <p>This is why longer context windows are genuinely hard to build. It's not a software problem you fix with a config setting; it requires either architectural innovations to make attention more efficient or massive increases in compute. Recent architectures like sliding window attention and various sparse attention mechanisms are attempts to reduce this quadratic scaling, and they've enabled the large context windows we have today — but there are still real costs.</p>
+
+      <h2>Context Sizes Today</h2>
+
+      <p>Context windows have grown dramatically over the past few years. GPT-3 in 2020 had a 4,096-token context — roughly 3,000 words. Today's leading models have contexts orders of magnitude larger:</p>
+
+      <table class="model-table">
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Context Window</th>
+            <th>Approx. Word Equivalent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>GPT-4o</td>
+            <td class="num">128,000 tokens</td>
+            <td>~96,000 words (a short novel)</td>
+          </tr>
+          <tr>
+            <td>Claude 3.5 / 3.7</td>
+            <td class="num">200,000 tokens</td>
+            <td>~150,000 words (a long novel)</td>
+          </tr>
+          <tr>
+            <td>Gemini 1.5 Pro</td>
+            <td class="num">1,000,000 tokens</td>
+            <td>~750,000 words (several books)</td>
+          </tr>
+          <tr>
+            <td>Gemini 2.0 Flash</td>
+            <td class="num">1,000,000 tokens</td>
+            <td>~750,000 words</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>One million tokens sounds extraordinary — and it is. It means you can, in theory, load an entire codebase, a year's worth of meeting transcripts, or a large collection of research papers into a single context and ask questions across all of it.</p>
+
+      <h2>What Happens at the Limit</h2>
+
+      <p>When a conversation or document exceeds the context window, something has to give. Different systems handle this differently:</p>
+
+      <p><strong>Hard truncation.</strong> The oldest content gets dropped. If the system drops from the beginning, the model loses its earliest conversation turns. If it drops from the middle, the model loses whatever was there. Either way, that information is gone — the model will have no knowledge of it.</p>
+
+      <p><strong>Summarization.</strong> Some systems periodically summarize older context into a compact form, then discard the original. This preserves the gist of early conversation at the cost of detail. Claude and ChatGPT both use variants of this in their products.</p>
+
+      <p><strong>User-facing limits.</strong> Some interfaces simply stop the conversation when you hit the limit and require you to start a new one.</p>
+
+      <p>The practical implication: if you're having a very long conversation with an AI and it suddenly seems to have "forgotten" something you said early on, you've likely hit the context limit. Starting fresh is often the right move.</p>
+
+      <h2>The "Lost in the Middle" Problem</h2>
+
+      <p>Bigger isn't always uniformly better. Research has shown that LLMs tend to pay more attention to content at the very beginning and very end of the context window than to content buried in the middle. A document stuffed in the middle of a 200,000-token context may receive less careful attention than the same document in a short, focused prompt.</p>
+
+      <p>This "lost in the middle" effect varies by model and is improving with each generation, but it's a real concern when working with large contexts. Practical workarounds include placing the most important content near the beginning or end of the prompt, and using RAG (retrieval-augmented generation) to retrieve only the most relevant chunks rather than stuffing everything in.</p>
+
+      <h2>Why Context Window Size Matters for Real Use Cases</h2>
+
+      <p>The practical impact of context size depends on what you're doing:</p>
+
+      <p><strong>Casual chat:</strong> Context size rarely matters. Most conversations stay well within even small windows.</p>
+
+      <p><strong>Document analysis:</strong> Context size becomes critical. A 4K context can't hold a 10-page report. A 128K context can. A 1M context can hold an entire book. If you want to ask questions across a whole document without chunking it up, you need a context large enough to hold the whole thing.</p>
+
+      <p><strong>Long coding sessions:</strong> Codebases grow large quickly. A model with a small context will lose track of earlier files as the conversation grows. A model with a large context can hold multiple files simultaneously, which makes it dramatically more useful for non-trivial software work.</p>
+
+      <p><strong>Multi-document research:</strong> The ability to load five research papers simultaneously and ask the model to synthesize them is genuinely new — it wasn't possible even two years ago. Gemini's 1M-token context makes this practical for the first time.</p>
+
+      <h2>The Honest Limitation</h2>
+
+      <p>Despite rapid growth in context sizes, the context window remains a fundamental constraint. A model cannot synthesize knowledge it doesn't have in front of it. And while retrieval systems like RAG can help route the right content into the context, they introduce their own failure modes — retrieved content that's slightly off, important context that doesn't get retrieved, and coordination complexity.</p>
+
+      <p>The context window is finite working memory. Like human working memory, it's surprisingly powerful within its limits, and surprisingly useless when those limits are exceeded. Understanding the limit — what's in it, what's been pushed out, and how to manage it — is one of the most important practical skills for getting reliable results from language models.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2023–2026 Specified Behavior &mdash; Exploring the world of AI</p>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var canvas = document.getElementById('ctx-canvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+
+  var W = 540, H = 280;
+  var dpr = window.devicePixelRatio || 1;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  ctx.scale(dpr, dpr);
+
+  // Segments that fill the context window bar
+  var segments = [
+    { label: 'System Prompt',        frac: 0.08, rgb: '156,163,175', desc: '~1,000 tokens' },
+    { label: 'Conversation History', frac: 0.35, rgb: '129,140,248', desc: '~20,000 tokens' },
+    { label: 'Uploaded Document',    frac: 0.42, rgb: '99,102,241',  desc: '~24,000 tokens' },
+    { label: 'Current Query',        frac: 0.06, rgb: '165,180,252', desc: '~350 tokens' },
+  ];
+
+  var BAR_X = 30, BAR_Y = 80, BAR_W = W - 60, BAR_H = 48;
+  var FILL_DUR = 2800; // ms to fill all segments
+  var HOLD     = 1200;
+  var CYCLE    = FILL_DUR + HOLD;
+
+  var startTs = null;
+
+  function draw(ts) {
+    if (!startTs) startTs = ts;
+    var elapsed = (ts - startTs) % CYCLE;
+    var fillP = Math.min(1, elapsed / FILL_DUR);
+    // ease out
+    fillP = 1 - Math.pow(1 - fillP, 2.5);
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Bar background
+    ctx.fillStyle = 'rgba(30,31,40,0.8)';
+    ctx.strokeStyle = 'rgba(99,102,241,0.25)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.roundRect(BAR_X, BAR_Y, BAR_W, BAR_H, 6);
+    ctx.fill();
+    ctx.stroke();
+
+    // Title
+    ctx.font = '600 11px Inter, system-ui, sans-serif';
+    ctx.fillStyle = 'rgba(156,163,175,0.9)';
+    ctx.textAlign = 'left';
+    ctx.fillText('Context Window  —  ~128,000 tokens', BAR_X, BAR_Y - 14);
+
+    // Fill segments
+    var totalFrac = segments.reduce(function(s, seg) { return s + seg.frac; }, 0);
+    var cursor = 0;
+    var drawnFrac = 0;
+
+    segments.forEach(function(seg, i) {
+      var segStart = drawnFrac / totalFrac;
+      var segEnd   = (drawnFrac + seg.frac) / totalFrac;
+      var segP = Math.max(0, Math.min(1, (fillP - segStart) / (segEnd - segStart)));
+
+      var rx = BAR_X + cursor;
+      var rw = (seg.frac / totalFrac) * BAR_W * segP;
+
+      if (rw > 0) {
+        ctx.fillStyle = 'rgba(' + seg.rgb + ',0.55)';
+        ctx.beginPath();
+        ctx.roundRect(rx, BAR_Y, rw, BAR_H, segP < 0.95 ? 0 : (i === segments.length - 1 ? 6 : 0));
+        ctx.fill();
+
+        // Label inside bar if wide enough
+        if (rw > 55 && segP > 0.7) {
+          var la = Math.min(1, (segP - 0.7) / 0.2);
+          ctx.font = '600 8.5px Inter, system-ui, sans-serif';
+          ctx.fillStyle = 'rgba(255,255,255,' + (0.85 * la) + ')';
+          ctx.textAlign = 'center';
+          ctx.fillText(seg.label, rx + rw / 2, BAR_Y + 22);
+          ctx.font = '400 7.5px Inter, system-ui, sans-serif';
+          ctx.fillStyle = 'rgba(255,255,255,' + (0.6 * la) + ')';
+          ctx.fillText(seg.desc, rx + rw / 2, BAR_Y + 35);
+        }
+      }
+
+      cursor += (seg.frac / totalFrac) * BAR_W;
+      drawnFrac += seg.frac;
+    });
+
+    // Empty portion label
+    var usedFrac = fillP;
+    var emptyX = BAR_X + usedFrac * BAR_W;
+    var emptyW = BAR_W * (1 - usedFrac);
+    if (emptyW > 40) {
+      ctx.font = '400 8px Inter, system-ui, sans-serif';
+      ctx.fillStyle = 'rgba(156,163,175,0.4)';
+      ctx.textAlign = 'center';
+      ctx.fillText('available', emptyX + emptyW / 2, BAR_Y + BAR_H / 2 + 4);
+    }
+
+    // Legend
+    var legY = BAR_Y + BAR_H + 28;
+    var legX = BAR_X;
+    segments.forEach(function(seg, i) {
+      var la = Math.min(1, Math.max(0, fillP * 5 - i));
+      ctx.fillStyle = 'rgba(' + seg.rgb + ',' + (0.8 * la) + ')';
+      ctx.fillRect(legX, legY - 7, 10, 10);
+      ctx.font = '400 9px Inter, system-ui, sans-serif';
+      ctx.fillStyle = 'rgba(156,163,175,' + (0.85 * la) + ')';
+      ctx.textAlign = 'left';
+      ctx.fillText(seg.label + '  ' + seg.desc, legX + 14, legY + 2);
+      legX += 130;
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  if (!ctx.roundRect) {
+    ctx.roundRect = function(x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x+r, y);
+      ctx.lineTo(x+w-r, y); ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+      ctx.lineTo(x+w, y+h-r); ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+      ctx.lineTo(x+r, y+h); ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+      ctx.lineTo(x, y+r); ctx.quadraticCurveTo(x, y, x+r, y);
+      ctx.closePath();
+    };
+  }
+
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

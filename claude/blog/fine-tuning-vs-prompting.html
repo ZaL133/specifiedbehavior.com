@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fine-tuning vs. Prompting: What's the Difference? | Specified Behavior</title>
+  <meta name="description" content="Prompting guides an AI at runtime. Fine-tuning changes its weights permanently. Here's when each approach makes sense — and when to use neither.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Specified Behavior">
+  <meta property="og:title" content="Fine-tuning vs. Prompting: What's the Difference?">
+  <meta property="og:description" content="Prompting guides an AI at runtime. Fine-tuning changes its weights permanently. Here's when each approach makes sense.">
+  <meta property="og:url" content="https://specifiedbehavior.com/blog/fine-tuning-vs-prompting.html">
+  <meta property="og:image" content="https://specifiedbehavior.com/img/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Fine-tuning vs. Prompting: What's the Difference?">
+  <meta name="twitter:description" content="Prompting guides an AI at runtime. Fine-tuning changes its weights. Here's when each approach makes sense.">
+  <link rel="canonical" href="https://specifiedbehavior.com/blog/fine-tuning-vs-prompting.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Fine-tuning vs. Prompting: What's the Difference?",
+    "description": "Prompting guides an AI at runtime. Fine-tuning changes its weights permanently. Here's when each approach makes sense — and when to use neither.",
+    "url": "https://specifiedbehavior.com/blog/fine-tuning-vs-prompting.html",
+    "datePublished": "2026-04-15",
+    "dateModified": "2026-04-15",
+    "author": { "@type": "Person", "name": "Zeph" },
+    "publisher": { "@type": "Organization", "name": "Specified Behavior", "url": "https://specifiedbehavior.com" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://specifiedbehavior.com/blog/fine-tuning-vs-prompting.html" },
+    "isPartOf": { "@id": "https://specifiedbehavior.com/#website" }
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZMBY3P7BJ7',{'client_storage':'none'});</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    #ftpt-canvas {
+      display: block;
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 540 / 300;
+      margin: 1.75rem auto;
+      border-radius: var(--radius);
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+    }
+    .ftpt-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: -1rem;
+      margin-bottom: 1.75rem;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">Specified<span class="accent"> Behavior</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="../ai-basics.html">AI Basics</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../blog/" class="active">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-header">
+      <p class="article-back"><a href="../blog/">← All posts</a></p>
+      <h1>Fine-tuning vs. Prompting: What's the Difference?</h1>
+      <div class="article-meta">
+        <span>April 15, 2026</span>
+        <span class="sep">·</span>
+        <span>Zeph</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>When you want to customize how an AI model behaves — to make it respond in a certain tone, focus on a specific domain, follow a particular format, or avoid certain topics — you have two fundamentally different levers to pull: <strong>prompting</strong> and <strong>fine-tuning</strong>. They operate at completely different levels and are suited to completely different situations.</p>
+
+      <p>Most people who interact with AI have only ever used prompting, sometimes without thinking of it as such. Fine-tuning is less commonly understood, often misdescribed, and frequently reached for when it isn't actually the right tool. Understanding both clearly — and knowing when to use each — is increasingly valuable as AI gets woven into more products and workflows.</p>
+
+      <h2>Prompting: Guiding the Model at Runtime</h2>
+
+      <p>A prompt is everything you send to the model as input. For most users, that's just a question or instruction. But for developers and power users, prompts have more structure: a <em>system prompt</em> (background instructions the model sees before anything else) plus the actual conversation.</p>
+
+      <p>Through prompting, you can tell the model who it is, what it should and shouldn't do, what format to use, what persona to adopt, and what knowledge to prioritize. This all happens at inference time — each time the model is called — and it changes nothing about the model's underlying weights.</p>
+
+      <p>The model you're prompting today is the same model someone else is prompting with completely different instructions. Your prompt shapes behavior within a conversation; it doesn't persist beyond it, and it doesn't affect anyone else's experience with the same model.</p>
+
+      <canvas id="ftpt-canvas" width="1080" height="600" aria-label="Split diagram comparing the prompting path (left: prompt goes into the model at runtime) and the fine-tuning path (right: training data updates the model's weights, producing a new model)"></canvas>
+      <p class="ftpt-caption">Prompting shapes behavior at runtime — nothing about the model changes. Fine-tuning updates the model's weights, permanently altering how it behaves.</p>
+
+      <h2>Fine-tuning: Changing the Model Itself</h2>
+
+      <p>Fine-tuning is a form of continued training. You start with a pretrained model and run additional training on a curated dataset — typically examples of the specific input-output behavior you want. The training process updates the model's internal weights to make it more likely to produce outputs like the ones in your training examples.</p>
+
+      <p>The result is a new, distinct model. The base model's general capabilities remain (you haven't overwritten its training from scratch), but it has been nudged — sometimes significantly — toward the style, format, domain, or behavior you encoded in your training data.</p>
+
+      <p>Fine-tuned models are persistent: the behavior is baked in and doesn't require you to include long instructions in every prompt. A fine-tuned customer support model will respond in your company's voice without you having to tell it to every time.</p>
+
+      <h2>When to Use Each</h2>
+
+      <p>The right choice depends on what you're trying to accomplish.</p>
+
+      <p><strong>Use prompting when:</strong></p>
+      <ul>
+        <li>You need flexibility. Prompting is trivially updatable — change a line of text and you've changed the behavior. Fine-tuned models require a new training run to update.</li>
+        <li>You're iterating quickly. Prompt engineering takes minutes. Fine-tuning takes hours to days and costs real money.</li>
+        <li>The behavior you want is something a clear, well-written instruction can capture. "Always respond in three bullet points" or "You are a helpful assistant for a law firm; always recommend consulting an attorney" are prompt jobs, not fine-tuning jobs.</li>
+        <li>You need to inject factual knowledge. Fine-tuning doesn't reliably transfer specific facts — the model may learn a general style but hallucinate the details. For factual grounding, use retrieval-augmented generation (RAG) instead.</li>
+      </ul>
+
+      <p><strong>Use fine-tuning when:</strong></p>
+      <ul>
+        <li>You need consistent style or format that would otherwise require a very long system prompt every time. Fine-tuning can embed that style into the model, reducing prompt length and improving consistency.</li>
+        <li>You're working in a specialized domain with its own terminology and conventions — medical, legal, scientific, technical — and the base model doesn't handle it well.</li>
+        <li>You have high-volume inference where prompt length adds meaningful cost. A shorter prompt (because behavior is baked in) reduces tokens and thus cost at scale.</li>
+        <li>You need the model to produce outputs in a very specific structure or follow rules the model keeps breaking despite clear prompting.</li>
+      </ul>
+
+      <h2>Few-Shot Prompting: The Middle Ground</h2>
+
+      <p>Between zero-shot prompting (just giving instructions) and fine-tuning sits <em>few-shot prompting</em>: including a handful of examples in the prompt itself. You show the model two or three (or ten) examples of the input-output pattern you want, and it generalizes from those examples.</p>
+
+      <p>Few-shot prompting is often astonishingly effective. For many tasks where you might reflexively reach for fine-tuning, a carefully chosen set of three to five examples in the prompt gets you 80-90% of the way there at a fraction of the effort. Before investing in fine-tuning, it's almost always worth trying few-shot prompting first.</p>
+
+      <p>The downside: examples take up tokens, and at scale those tokens cost money. If you're running millions of queries with twenty examples each, the token cost may eventually justify fine-tuning to bake the behavior in.</p>
+
+      <h2>What Fine-tuning Cannot Do</h2>
+
+      <p>This is perhaps the most important thing to understand, because it's widely misunderstood: <strong>fine-tuning does not reliably teach a model new facts</strong>.</p>
+
+      <p>If you fine-tune a model on your internal documents, hoping it will then "know" those documents, you will likely be disappointed. The model may pick up stylistic patterns from your documents, or learn that certain question types tend to appear in certain contexts, but it will not reliably memorize and accurately recall the factual contents. When pushed, it will hallucinate.</p>
+
+      <p>This is a consequence of how fine-tuning works: it adjusts weights to make certain output patterns more probable, but it doesn't store facts the way a database stores rows. For factual knowledge injection, the right tool is RAG — retrieving the relevant documents at query time and including them in the context — not fine-tuning.</p>
+
+      <p>Fine-tuning excels at <em>style, format, and behavior</em>. RAG excels at <em>knowledge</em>. Prompting is the first thing to try for both. Understanding this division prevents a lot of expensive mistakes.</p>
+
+      <h2>The Practical Decision Tree</h2>
+
+      <p>If you're trying to customize an AI's behavior, here's a sensible order of operations:</p>
+
+      <ol>
+        <li><strong>Prompt first.</strong> Can a clear system prompt and a few examples get you what you need? Try this before anything else. For most use cases, the answer is yes.</li>
+        <li><strong>Add few-shot examples.</strong> If zero-shot prompting isn't working, add two to ten examples of the behavior you want. This often closes the gap dramatically.</li>
+        <li><strong>Use RAG if you need factual grounding.</strong> If the model needs to answer questions from specific documents, retrieve those documents at query time rather than trying to bake them in through training.</li>
+        <li><strong>Fine-tune if you've exhausted the above.</strong> If you have a persistent style/format/behavior problem that prompting can't solve, or you need to reduce prompt length at scale, fine-tuning makes sense. But it's a bigger investment and should be a deliberate choice, not a first instinct.</li>
+      </ol>
+
+      <p>The AI landscape has a tendency to make fine-tuning sound more magical and necessary than it is. The models available today are so capable that thoughtful prompting handles an enormous range of customization needs. Most of the time, the better prompt is more valuable than the fine-tuned model — and it costs a lot less to iterate on.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2023–2026 Specified Behavior &mdash; Exploring the world of AI</p>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+<script src="../js/main.js"></script>
+<script>
+(function () {
+  var canvas = document.getElementById('ftpt-canvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+
+  var W = 540, H = 300;
+  var dpr = window.devicePixelRatio || 1;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  ctx.scale(dpr, dpr);
+
+  var ANIM = 2200, HOLD = 1000, CYCLE = ANIM + HOLD;
+  var startTs = null;
+
+  if (!ctx.roundRect) {
+    ctx.roundRect = function(x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+      ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+      ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+      ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y);
+      ctx.closePath();
+    };
+  }
+
+  function ease(t) { return 1 - Math.pow(1-t, 2.5); }
+
+  function box(x, y, w, h, rgb, alpha, label, sub) {
+    ctx.beginPath();
+    ctx.roundRect(x, y, w, h, 6);
+    ctx.fillStyle = 'rgba(' + rgb + ',' + (0.12 * alpha) + ')';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(' + rgb + ',' + (0.6 * alpha) + ')';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.font = '600 10px Inter,system-ui,sans-serif';
+    ctx.fillStyle = 'rgba(' + rgb + ',' + (0.95 * alpha) + ')';
+    ctx.textAlign = 'center';
+    ctx.fillText(label, x + w/2, y + (sub ? 18 : h/2 + 4));
+    if (sub) {
+      ctx.font = '400 8.5px Inter,system-ui,sans-serif';
+      ctx.fillStyle = 'rgba(156,163,175,' + (0.7 * alpha) + ')';
+      ctx.fillText(sub, x + w/2, y + 32);
+    }
+  }
+
+  function arrow(x1, y1, x2, y2, p, rgb) {
+    if (p <= 0) return;
+    var dx = x2-x1, dy = y2-y1, len = Math.sqrt(dx*dx+dy*dy);
+    var ex = x1 + dx*p, ey = y1 + dy*p;
+    ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(ex,ey);
+    ctx.strokeStyle = 'rgba('+rgb+',0.65)'; ctx.lineWidth = 1.5; ctx.stroke();
+    if (p > 0.8) {
+      var ha = (p-0.8)/0.2;
+      var ux=dx/len,uy=dy/len;
+      var ax=ex-ux*7,ay=ey-uy*7;
+      ctx.beginPath(); ctx.moveTo(ex,ey);
+      ctx.lineTo(ax-uy*4,ay+ux*4); ctx.lineTo(ax+uy*4,ay-ux*4);
+      ctx.closePath(); ctx.fillStyle='rgba('+rgb+','+0.65*ha+')'; ctx.fill();
+    }
+  }
+
+  function draw(ts) {
+    if (!startTs) startTs = ts;
+    var el = (ts - startTs) % CYCLE;
+    var p = ease(Math.min(1, el / ANIM));
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Divider
+    ctx.strokeStyle = 'rgba(99,102,241,0.12)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4,4]);
+    ctx.beginPath(); ctx.moveTo(W/2, 20); ctx.lineTo(W/2, H-20); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Column headers
+    ctx.font = '700 10px Inter,system-ui,sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(129,140,248,0.85)';
+    ctx.fillText('PROMPTING', W*0.25, 22);
+    ctx.fillStyle = 'rgba(99,102,241,0.85)';
+    ctx.fillText('FINE-TUNING', W*0.75, 22);
+
+    // --- LEFT SIDE: Prompting ---
+    var lx = 20, mid = W*0.25;
+    // Base model box
+    var bma = Math.min(1, p * 3);
+    box(mid-45, 40, 90, 44, '129,140,248', bma, 'Base Model', 'unchanged weights');
+
+    // prompt box
+    var pa = Math.min(1, Math.max(0, p*4-0.5));
+    box(mid-45, 108, 90, 36, '165,180,252', pa, 'Your Prompt', 'runtime instructions');
+
+    // arrow: prompt → model
+    var a1p = Math.min(1, Math.max(0, p*4-1));
+    arrow(mid, 144, mid, 84, a1p, '165,180,252');
+
+    // output box
+    var oa = Math.min(1, Math.max(0, p*4-2));
+    box(mid-45, 190, 90, 36, '129,140,248', oa, 'Response', 'guided by prompt');
+    arrow(mid, 84, mid, 190, Math.min(1,Math.max(0,p*4-1.5)), '129,140,248');
+
+    // label: "same model every time"
+    if (p > 0.7) {
+      ctx.font = '400 8px Inter,system-ui,sans-serif';
+      ctx.fillStyle = 'rgba(156,163,175,' + Math.min(1,(p-0.7)/0.2) + ')';
+      ctx.textAlign = 'center';
+      ctx.fillText('Model weights unchanged', mid, 244);
+    }
+
+    // --- RIGHT SIDE: Fine-tuning ---
+    var rx = W*0.75;
+    // base model
+    var bma2 = Math.min(1, p * 3);
+    box(rx-45, 40, 90, 44, '156,163,175', bma2, 'Base Model', 'starting weights');
+
+    // training data box
+    var tda = Math.min(1, Math.max(0, p*4-0.5));
+    box(rx-45, 108, 90, 36, '99,102,241', tda, 'Training Data', 'examples of ideal output');
+
+    // arrow: training → model (fine-tune)
+    var a2p = Math.min(1, Math.max(0, p*4-1));
+    arrow(rx, 144, rx, 84, a2p, '99,102,241');
+
+    // Updated model box
+    var uma = Math.min(1, Math.max(0, p*4-2));
+    box(rx-48, 190, 96, 44, '99,102,241', uma, 'Fine-tuned Model', 'updated weights');
+    arrow(rx, 84, rx, 190, Math.min(1,Math.max(0,p*4-1.5)), '99,102,241');
+
+    if (p > 0.7) {
+      ctx.font = '400 8px Inter,system-ui,sans-serif';
+      ctx.fillStyle = 'rgba(156,163,175,' + Math.min(1,(p-0.7)/0.2) + ')';
+      ctx.textAlign = 'center';
+      ctx.fillText('New model — behavior is permanent', rx, 252);
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

@@ -10,26 +10,26 @@ Shoot for 2 per week. Rank these (1 = highest priority) and I'll write them in o
 - [x] **What is a Large Language Model?** — plain English, no jargon, answer the question people actually google → `blog/what-is-a-large-language-model.html` (April 1, 2026)
 - [ ] **AI Hallucinations: Why AI Makes Things Up** — what hallucinations are, why they happen structurally, how to reduce them in practice
 - [x] **The Difference Between AI, Machine Learning, and Deep Learning** — these terms get used interchangeably; clear up the hierarchy → `blog/ai-vs-machine-learning-vs-deep-learning.html` (April 4, 2026)
-- [ ] **What is RAG?** — Retrieval-Augmented Generation: how AI gets access to current or private information without retraining
-- [ ] **What is the Context Window — and Why Does Size Matter?** — practical implications of short vs. long context, what "forgetting" looks like
+- [x] **What is RAG?** — Retrieval-Augmented Generation: how AI gets access to current or private information without retraining → `blog/what-is-rag.html` (April 8, 2026)
+- [x] **What is the Context Window — and Why Does Size Matter?** — practical implications of short vs. long context, what "forgetting" looks like → `blog/what-is-the-context-window.html` (April 11, 2026)
 
 ### Practical / How-to
 - [ ] **10 Ways to Use AI in Your Daily Work Right Now** — concrete, specific, not vague productivity advice
 - [ ] **How to Fact-Check AI Output** — when to trust it, when to verify, what tools help
 - [ ] **AI for Developers: The Tools Worth Knowing in 2026** — Cursor, GitHub Copilot, Claude Code, etc. — a practical roundup
 - [ ] **Building Your First Chatbot with the OpenAI API** — walkthrough, code included, beginner-friendly
-- [ ] **Fine-tuning vs. Prompting: What's the Difference?** — when to reach for each, with examples
+- [x] **Fine-tuning vs. Prompting: What's the Difference?** — when to reach for each, with examples → `blog/fine-tuning-vs-prompting.html` (April 15, 2026)
 
 ### Comparisons
 - [ ] **ChatGPT vs. Claude vs. Gemini: Which Should You Use in 2026?** — honest, opinionated comparison with specific use cases for each
-- [ ] **Free vs. Paid AI: Is the Subscription Worth It?** — what you actually get at each tier across the major models
+- [x] **Free vs. Paid AI: Is the Subscription Worth It?** — what you actually get at each tier across the major models → `blog/free-vs-paid-ai.html` (April 22, 2026)
 - [ ] **OpenAI vs. Anthropic: Two Different Visions for AI** — their histories, philosophies, and what that means for the products they ship
 
 ### Technical Deep Dives
 - [ ] **How AI Image Generation Actually Works** — diffusion models explained accessibly; DALL-E, Midjourney, Stable Diffusion
-- [ ] **RLHF: How AI Gets Its Values** — Reinforcement Learning from Human Feedback, why it matters, what it can and can't do
+- [x] **RLHF: How AI Gets Its Values** — Reinforcement Learning from Human Feedback, why it matters, what it can and can't do → `blog/rlhf-how-ai-gets-its-values.html` (April 25, 2026)
 - [ ] **The Attention Mechanism, Explained Without Math** — the "why" behind transformers for a general audience
-- [ ] **What Happens When You Hit Send?** — the full journey of a ChatGPT message, from token to response
+- [x] **What Happens When You Hit Send?** — the full journey of a ChatGPT message, from token to response → `blog/what-happens-when-you-hit-send.html` (April 18, 2026)
 
 ### Opinion / Editorial
 - [ ] **Is AI Writing Killing the Blog?** — honest take; what gets lost and what doesn't matter
