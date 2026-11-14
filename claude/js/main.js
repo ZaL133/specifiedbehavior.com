@@ -9,16 +9,13 @@ if (toggle && navLinks) {
 }
 
 // Active nav link
-const path = window.location.pathname;
+// Compare the first path segment ("blog", "experiment", "resources.html", ...)
+const section = p => p.replace(/^\/+/, '').split('/')[0];
+const here = section(window.location.pathname);
 document.querySelectorAll('.nav-links a').forEach(link => {
-  const href = link.getAttribute('href');
-  if (!href) return;
-  // Match blog section
-  if (href.includes('blog') && path.includes('blog')) {
-    link.classList.add('active');
-  } else if (!href.includes('blog') && path.endsWith(href.split('/').pop())) {
-    link.classList.add('active');
-  }
+  if (!link.getAttribute('href')) return;
+  const target = section(new URL(link.href).pathname);
+  link.classList.toggle('active', target !== '' && target === here);
 });
 
 // Back to top
