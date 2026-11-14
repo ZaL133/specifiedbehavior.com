@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The $1,000 Experiment | Specified Behavior</title>
+  <meta name="description" content="Can an AI manage money better than I would? $1,000 in an IRA, Claude makes the calls, I place the orders. Ground rules and a running log.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Specified Behavior">
+  <meta property="og:title" content="The $1,000 Experiment">
+  <meta property="og:description" content="Can an AI manage money better than I would? $1,000 in an IRA, Claude makes the calls, I place the orders. Ground rules and a running log.">
+  <meta property="og:url" content="https://specifiedbehavior.com/experiment/">
+  <meta property="og:image" content="https://specifiedbehavior.com/img/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The $1,000 Experiment">
+  <meta name="twitter:description" content="Can an AI manage money better than I would? $1,000 in an IRA, Claude makes the calls, I place the orders. Ground rules and a running log.">
+  <link rel="canonical" href="https://specifiedbehavior.com/experiment/">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZMBY3P7BJ7',{'client_storage':'none'});</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .xp-table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.9rem; }
+    .xp-table th, .xp-table td { text-align: left; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--border); }
+    .xp-table th { color: var(--text-muted); font-weight: 500; }
+    .xp-table td.num, .xp-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .xp-note { font-size: 0.85rem; color: var(--text-muted); }
+    .xp-tag { font-size: 0.75rem; color: var(--text-muted); }
+    @media (max-width: 600px) { .xp-table { font-size: 0.8rem; } .xp-table th, .xp-table td { padding: 0.4rem 0.3rem; } }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">Specified<span class="accent"> Behavior</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="../ai-basics.html">AI Basics</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../experiment/" class="active">Experiment</a></li>
+      <li><a href="../blog/">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="page-header">
+      <h1>The $1,000 Experiment</h1>
+      <p class="subtitle">Can an AI manage money better than I would? Claude makes the calls. I place the orders.</p>
+    </div>
+
+    <div class="article-body">
+      <h2>What this is</h2>
+      <p>On April 19, 2026 I put $1,000 in an IRA and made Claude the analyst in a Claude Code project. It decides what to buy and sell, keeps the trade log and tracks the weekly numbers. I place the orders it calls, report back the fills, and try very hard not to steer. It runs 12 months, through April 2027.</p>
+      <p>The returns have been a roller coaster (see below). The more interesting part is watching the instructions and rules change over time, and how many of its mistakes turned out to be the exact same mistakes people make with their own money.</p>
+
+      <h2>Ground rules</h2>
+      <ul>
+        <li>$1,000 starting capital. No further deposits.</li>
+        <li>Goal: the highest 12-month return. It's an IRA, so taxes are ignored.</li>
+        <li>Maximum risk. The account is allowed to go to zero.</li>
+        <li>Claude makes the calls. I place the orders and report fills back.</li>
+        <li>I can only trade evenings and weekends, so every call has to work as an order placed the night before.</li>
+        <li>I don't steer the decisions. I do point out patterns. <span class="xp-tag">(made explicit 9/26)</span></li>
+        <li>Any asset is allowed. The first pick is not a mandate. <span class="xp-tag">(9/26)</span></li>
+        <li>Buy, sell and stop rules are written down before they can fire. A rule can be changed only before it fires, with the reason logged. <span class="xp-tag">(9/26)</span></li>
+        <li>Calls are judged on the reasoning at the time, not on how they turned out. <span class="xp-tag">(9/26)</span></li>
+        <li>Every call goes in as a standing order the same evening, and I confirm it was placed. <span class="xp-tag">(10/14, after three missed trades)</span></li>
+      </ul>
+
+      <h2>Where it stands</h2>
+      <table class="xp-table">
+        <tr><th>Date</th><th class="num">Account</th><th class="num">vs. $1,000</th><th>Position</th></tr>
+        <tr><td>Apr 19</td><td class="num">$1,000.00</td><td class="num">0%</td><td>Cash</td></tr>
+        <tr><td>May 29</td><td class="num">$1,803.54</td><td class="num">+80.4%</td><td>8 SOXL</td></tr>
+        <tr><td>Jun 22</td><td class="num">$2,414.98</td><td class="num">+141.5%</td><td>8 SOXL (peak)</td></tr>
+        <tr><td>Sep 14</td><td class="num">$817.86</td><td class="num">-18.2%</td><td>8 SOXL</td></tr>
+        <tr><td>Oct 16</td><td class="num">$768.82</td><td class="num">-23.1%</td><td>Cash (stopped out)</td></tr>
+        <tr><td>Nov 4</td><td class="num">$638.18</td><td class="num">-36.2%</td><td>Cash (stopped out again)</td></tr>
+        <tr><td>Nov 13</td><td class="num">$638.18</td><td class="num">-36.2%</td><td>Cash. Next decision Nov 18.</td></tr>
+      </table>
+      <p class="xp-note">Not investment advice. This is a log of one small experiment with a 3x leveraged fund, which can lose most of its value quickly.</p>
+
+      <h2>Log</h2>
+    </div>
+
+    <div class="blog-grid">
+
+      <div class="blog-card">
+        <a href="second-stop.html">
+          <div class="card-body">
+            <div class="card-meta">November 6, 2026</div>
+            <div class="card-title">Re-entry, Another Stop, and Then the Floor Fell Out</div>
+            <p class="card-excerpt">The re-entry rule fired on October 30. The stop fired on November 4. On November 5, SOXL fell 38.7%. We were in cash. We are also down 36%.</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="blog-card">
+        <a href="stopped-out.html">
+          <div class="card-body">
+            <div class="card-meta">October 16, 2026</div>
+            <div class="card-title">Stopped Out at $95</div>
+            <p class="card-excerpt">The September orders never got placed (my fault). The rules turned into standing orders at the broker, and the first stop fired on October 16.</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="blog-card">
+        <a href="five-months-of-hold.html">
+          <div class="card-body">
+            <div class="card-meta">September 26, 2026</div>
+            <div class="card-title">Five Months of HOLD</div>
+            <p class="card-excerpt">From +141% to -18% and back to +22%. The analyst called HOLD at every check-in. I gave it some feedback, and it wrote its first actual exit rules.</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="blog-card">
+        <a href="the-peak.html">
+          <div class="card-body">
+            <div class="card-meta">June 26, 2026</div>
+            <div class="card-title">The Peak (and a Day Where 30% Disappeared)</div>
+            <p class="card-excerpt">The account hit $2,414.98 on June 22. Seventeen days earlier SOXL fell 30.5% in one day. The call every single time was HOLD.</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="blog-card">
+        <a href="first-month.html">
+          <div class="card-body">
+            <div class="card-meta">May 29, 2026</div>
+            <div class="card-title">Month One: Up 80% Despite My Best Efforts</div>
+            <p class="card-excerpt">Two missed orders, one order I thought I had cancelled, and a fully invested position after Nvidia earnings. Up 80.4% at the end of May.</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="blog-card">
+        <a href="day-one.html">
+          <div class="card-body">
+            <div class="card-meta">April 19, 2026</div>
+            <div class="card-title">Day One: I Gave an AI $1,000</div>
+            <p class="card-excerpt">The setup: $1,000 in an IRA, Claude makes the calls, I place the orders. Its first pick was a 3x leveraged chip fund, which tells you a lot.</p>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2023–2026 Specified Behavior &mdash; Exploring the world of AI</p>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+<script src="../js/main.js"></script>
+</body>
+</html>
