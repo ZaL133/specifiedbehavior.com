@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Opus 5.5 Was the Critical Mass Point | Specified Behavior</title>
+  <meta name="description" content="Before: every new session felt like a brand new developer, and my codebase filled up with duplicates. After: I stopped writing the code. And a hand-written codebase started to look suspicious.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Specified Behavior">
+  <meta property="og:title" content="Opus 5.5 Was the Critical Mass Point">
+  <meta property="og:description" content="Before: every new session felt like a brand new developer, and my codebase filled up with duplicates. After: I stopped writing the code. And a hand-written codebase started to look suspicious.">
+  <meta property="og:url" content="https://specifiedbehavior.com/blog/the-critical-mass-point.html">
+  <meta property="og:image" content="https://specifiedbehavior.com/img/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Opus 5.5 Was the Critical Mass Point">
+  <meta name="twitter:description" content="Before: every new session felt like a brand new developer, and my codebase filled up with duplicates. After: I stopped writing the code. And a hand-written codebase started to look suspicious.">
+  <link rel="canonical" href="https://specifiedbehavior.com/blog/the-critical-mass-point.html">
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Opus 5.5 Was the Critical Mass Point", "description": "Before: every new session felt like a brand new developer, and my codebase filled up with duplicates. After: I stopped writing the code. And a hand-written codebase started to look suspicious.", "url": "https://specifiedbehavior.com/blog/the-critical-mass-point.html", "datePublished": "2026-11-04", "dateModified": "2026-11-04", "author": {"@type": "Person", "name": "Zeph"}, "publisher": {"@type": "Organization", "name": "Specified Behavior", "url": "https://specifiedbehavior.com"}, "isPartOf": {"@id": "https://specifiedbehavior.com/#website"}}
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMBY3P7BJ7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZMBY3P7BJ7',{'client_storage':'none'});</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">Specified<span class="accent"> Behavior</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="../ai-basics.html">AI Basics</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../experiment/">Experiment</a></li>
+      <li><a href="../blog/" class="active">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="article-header">
+      <p class="article-back"><a href="../blog/">← All posts</a></p>
+      <h1>Opus 5.5 Was the Critical Mass Point</h1>
+      <div class="article-meta">
+        <span>November 4, 2026</span>
+        <span class="sep">·</span>
+        <span>Zeph</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+<p>I'd been coding with Claude Code for a while before this. I honestly can't remember which model.</p>
+
+<p>It was good. But every time I started a new session, it felt like I was dealing with a brand new developer. Day one, every day. It didn't know what we'd already built, so it built it again. Helpers got rewritten. Logic got copied. Things were duplicated all over the place, and it was very, very hard to unwind. I had a coding style written down and everything. Didn't matter. Trying to refactor a big codebase to be DRY with it was miserable.</p>
+
+<p>That honestly scared me off a little. It felt like a real warning: maybe AI is a bridge too far right now. Maybe it's a liability that just creates mess faster than I can clean it up.</p>
+
+<p>Then Opus 5.5 came out, and it completely flipped.</p>
+
+<h2>What changed</h2>
+
+<p>It understands the code. Not "it can read a file." It gets how the thing fits together. I don't even need to write a big CLAUDE.md anymore. I start a new session and I don't worry that it's going to reinvent the wheel. I just let it cook.</p>
+
+<p>On a greenfield app, it bakes in all the stuff that makes a project hold up: structure, tests, efficiency. The stuff I know I should do and usually don't.</p>
+
+<p>The parts I love most, in no particular order:</p>
+<ol>
+  <li><strong>Unit tests.</strong> I never have time to write these. Now they just exist.</li>
+  <li><strong>Documentation.</strong> I never have time to write this either, and frankly, I suck at writing it. (Yes, on a blog. I'm aware.)</li>
+  <li><strong>Decisions.</strong> It keeps a record of why things were done the way they were. That's a huge bonus, and it's basically free.</li>
+  <li><strong>It gets the goal.</strong> It understood what I was trying to accomplish and pointed out better ways to do it than I'd pictured.</li>
+</ol>
+
+<p>It was jaw-dropping, in a "wow, this is never going to be the same" kind of way. I no longer need to write the code.</p>
+
+<h2>The moment it clicked</h2>
+
+<p>I'm building a personal finance app to replace a Google Sheet. It's hosted on Azure, and I noticed my bill was too high. So I asked something like: "Quick question: does the unauthenticated home page hit the database to log page views?"</p>
+
+<p>Its answer, paraphrasing: <em>Let me guess. You're hosting this on something like Azure with a database that goes to sleep to save money. Random traffic to the home page keeps waking it up, so you're effectively paying for an always-on database when you thought you had auto-pause. We can queue those writes in memory or on disk and flush them to the database when you log in.</em></p>
+
+<p>Which was exactly right. And exactly the fix I had in mind.</p>
+
+<p>Looking back at my question, sure, it's kind of obvious. But it went from "does this page hit the database" to "your serverless database can't pause and that's your bill" in one step.</p>
+
+<h2>The weird part</h2>
+
+<p>Since then I took on a legacy codebase for work: a WordPress site with a React theme and a decent amount of custom features. I'll leave it at that.</p>
+
+<p>Opening it, the feeling had flipped. I used to be cautious about code that was written by AI. Now I was cautious about code that wasn't. I could just imagine all the debugging that went into it by hand.</p>
+
+<p>It was built by a consulting company. And that "new developer every session" problem I had with Claude Code before 5.5? That was the reality here. Every new feature got assigned to a person who had never seen the codebase before.</p>
+
+<p>And guess what you get when that happens.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2023–2026 Specified Behavior &mdash; Exploring the world of AI</p>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+<script src="../js/main.js"></script>
+</body>
+</html>
